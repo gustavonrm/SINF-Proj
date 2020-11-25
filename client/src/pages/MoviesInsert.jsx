@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { NavBar } from "../components";
+import { NavBarExample } from "../components";
 import api from "../api";
 
 import styled from "styled-components";
@@ -85,7 +85,7 @@ class MoviesInsert extends Component {
     const { name, rating, time } = this.state;
     return (
       <>
-        <NavBar />
+        <NavBarExample />
         <Wrapper>
           <Title>Create Movie</Title>
 

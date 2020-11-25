@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import api from "../api";
-import { NavBar } from "../components";
+import { NavBarExample } from "../components";
 
 import styled from "styled-components";
 
@@ -128,7 +128,7 @@ class MoviesList extends Component {
 
     return (
       <>
-        <NavBar />
+        <NavBarExample />
         <Wrapper>
           {showTable && (
             <ReactTable

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import api from "../api";
 
+import { NavBar, SideNav } from "../components";
+
 class Overview extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,12 @@ class Overview extends Component {
     this.state = {};
   }
   render() {
-    return <>Overview</>;
+    return (
+      <>
+        <NavBar />
+        <SideNav />
+      </>
+    );
   }
 }
 
