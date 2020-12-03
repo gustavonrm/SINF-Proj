@@ -3,8 +3,8 @@ import axios, { interceptors, request } from "axios";
 const client_id     = "";                                                   // Name of the app
 const client_secret = "";                                                   // Secret
 const token_url     = "https://identity.primaverabss.com/connect/token";    // Primavera URL
-const account       = process.env.ACCOUNT;                                  //
-const subscription  = process.env.SUBSCRIPTION;                             // 
+const account       = "";                                                   //
+const subscription  = "";                                                   // 
 
 // Send http request
 const httpReq = (method, url, data) => {
@@ -28,8 +28,8 @@ const getAccessToken = () => {
 };
 
 // Send request to jasmin api
-const jasminReq = (method, url) => {
-    return axios({
+const jasminReq = (method, url) => (
+    axios({
         method: method,
         url: url,
         baseURL: "https://my.jasminsoftware.com/api/${account}/${subscription}/",
@@ -38,8 +38,8 @@ const jasminReq = (method, url) => {
             "Content-Type": "multipart/form-data",
             "Authorization": process.env.TOKEN,
         },
-    });
-};
+    }).then((res) => (res.data))
+);
 
 // In case of error check if token problem
 interceptors.response.use(null, (error) => {

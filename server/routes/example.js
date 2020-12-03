@@ -1,11 +1,22 @@
 import { Router } from 'express';
-import { getExample } from '../api/requests';
+import { jasminReq } from '../api/jasmin';
 const router = Router();
 
 const example = (req, res) => {
-    getExample().then((data) => {
+    jasminReq('get', 'url').then((data) => {
+        const response = {
 
-    })
+        };
+
+        res.json(response);
+    }).catch(() => {
+        const err = new Error("Failed");
+        err.status = 400;
+        res.status(400).json({
+            message: err.message,
+            error: err
+        });
+    });
 }
 
 router.get("/", example)
