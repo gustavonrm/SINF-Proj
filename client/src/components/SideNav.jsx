@@ -24,14 +24,14 @@ class SideNav extends Component {
               {this.props.page === "Overview" ? (
                 <a
                   className="nav-link active"
-                  href=""
+                  href="/"
                   style={{ backgroundColor: "#276eb9" }}
                 >
                   <FontAwesomeIcon icon={faHome} className="mr-2" />
                   Overview
                 </a>
               ) : (
-                <a className="nav-link active" href="">
+                <a className="nav-link active" href="/">
                   <FontAwesomeIcon icon={faHome} className="mr-2" />
                   Overview
                 </a>
