@@ -85,9 +85,17 @@ const capacity = (req, res) => {
     });
 };
 
+const period = () => {
+    //TODO: period value
+};
 
+const turnover = () => {
+    //TODO: turnover value
+};
 
 router.get("/stock", stock);
 router.get("/capacity", capacity);
+router.get("/period", period);
+router.get("/turnover", turnover);
 
 export default router;

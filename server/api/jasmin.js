@@ -1,8 +1,8 @@
 import axios, { interceptors, request } from "axios";
 
-const client_id     = "";                                                   // Name of the app
-const client_secret = "";                                                   // Secret
-const token_url     = "https://identity.primaverabss.com/connect/token";    // Primavera URL
+const clientId     = "";                                                   // Name of the app
+const clientSecret = "";                                                   // Secret
+const tokenUrl     = "https://identity.primaverabss.com/connect/token";    // Primavera URL
 const account       = "";                                                   //
 const subscription  = "";                                                   // 
 
@@ -18,13 +18,13 @@ const httpReq = (method, url, data) => {
 // Send request to primavera and retrieve access token
 const getAccessToken = () => {
     const data = {
-        "grant_type": "client_credentials",
-        "client_id": client_id,
-        "client_secret": client_secret,
+        "grantType": "clientCredentials",
+        "clientId": clientId,
+        "clientSecret": clientSecret,
         "scope": "application",
     };
 
-    return httpReq("post", token_url, data);
+    return httpReq("post", tokenUrl, data);
 };
 
 // Send request to jasmin api
@@ -48,7 +48,7 @@ interceptors.response.use(null, (error) => {
     // else get token and retry
     return getAccessToken().then((res) => {
         const config = error.config;
-        if(res.data.access_token) process.env.TOKEN = res.data.access_token;
+        if(res.data.accessToken) process.env.TOKEN = res.data.accessToken;
         return request(config);
     });
 });
