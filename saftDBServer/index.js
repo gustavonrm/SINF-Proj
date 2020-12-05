@@ -5,7 +5,7 @@ const parser = require('./parser.js')
  
 console.log("Beep boop I am a robot")
 
-fs.readFile('saft/saft3.xml', function(err, data) {
+fs.readFile('saft/saft4.xml', function(err, data) {
     var data = data.toString().replace("\ufeff", "");
 
     validator.validateXML(data, 'saft/saftSchema2.xsd', function(err, result) {
