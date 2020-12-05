@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts, MoviesList, MoviesInsert, MoviesUpdate } from '../pages'
+import { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts, MoviesList, MoviesInsert, MoviesUpdate} from '../pages'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 

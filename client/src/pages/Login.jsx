@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
-import { Logo } from "../components";
+import { Logo, Home } from "../components";
 import "../style/Login.css";
 
 class Login extends Component {
@@ -13,7 +13,7 @@ class Login extends Component {
     return (
       <>
         <Logo />
-
+        <Home />
         <form class="form-signin">
           <div class="text-center mb-4"></div>
 
