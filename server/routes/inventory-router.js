@@ -1,6 +1,6 @@
-const express = require('express')
-//const jasminReq = require('../api/jasmin');
-const router = express.Router();
+const { Router } = require('express');
+const { jasminReq } = require('../api/jasmin');
+const router =Router();
 
 const stock = (req, res) => {
     // Returns the list of all the entity records available.
@@ -98,4 +98,4 @@ router.get("/capacity", capacity);
 router.get("/period", period);
 router.get("/turnover", turnover);
 
-module.exports = router
+module.exports = router;
