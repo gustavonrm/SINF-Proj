@@ -15,17 +15,17 @@ const salesExpenses = (req, res) => {
         const [salesInvoices, expensesInvoices] = data;
 
         salesInvoices.forEach((invoice) => {
-            invoice.documentLines.forEach((product) => {
-                const month = parseInt(getTimestamp(product.deliveryDate));
-                const price = product.quantity * product.unitPrice;
+            invoice.documentLines.forEach((item) => {
+                const month = parseInt(getTimestamp(item.deliveryDate));
+                const price = item.quantity * item.unitPrice;
                 sales[month-1] += price;
             });
         });
 
         expensesInvoices.forEach((invoice) => {
-            invoice.documentLines.forEach((product) => {
-                const month = parseInt(getTimestamp(product.deliveryDate));
-                const price = product.quantity * product.unitPrice;
+            invoice.documentLines.forEach((item) => {
+                const month = parseInt(getTimestamp(item.deliveryDate));
+                const price = item.quantity * item.unitPrice;
                 expenses[month-1] += price;
             });
         });

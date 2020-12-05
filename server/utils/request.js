@@ -1,4 +1,4 @@
-const {axios, interceptors, request} = require('axios');
+const { axios, interceptors, request } = require('axios');
 global.TOKEN = '';
 
 // Send http request

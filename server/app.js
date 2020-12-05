@@ -2,7 +2,7 @@ const express = require('express');
 const { urlencoded, json } = require('body-parser');
 const cors = require('cors');
 
-const { on } = require('./db');
+const { on } = require('./db/db');
 const overview = require('./routes/overview');
 const sales = require('./routes/sales');
 const purchases = require('./routes/purchases');

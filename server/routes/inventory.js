@@ -39,12 +39,11 @@ const capacity = (req, res) => {
     jasminReq('get', '/materialsCore/materialsItems').then((data) => {
         const response = [];
 
-        const getKey = (item) => (
-            item.itemKey
+        const getKey = (item) => ( item.itemKey
         );
 
         const getName = (item) => (
-            item.description
+            item.purchasesItem
         );
 
         const getQuantity = (item) => (
@@ -71,7 +70,7 @@ const capacity = (req, res) => {
             const invPeriod = getInvPeriod(item);
             const turnover = getTurnover(item);
 
-            response.push({key: key, name: name, quantity: quantity, unitCost: unitCost, invPeriod: invPeriod, turnover: turnover});
+            response.push({ key: key, name: name, quantity: quantity, unitCost: unitCost, invPeriod: invPeriod, turnover: turnover });
         });
 
         res.json(response);
