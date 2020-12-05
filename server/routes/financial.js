@@ -1,26 +1,10 @@
 const { Router } = require('express');
-const { jasminReq } = require('../utils/request');
+const ctrl = require('../controllers/financial');
 const router = Router();
 
-const returnRatios = (req, res) => {
-    //TODO: returnRatios graph
-};
-
-const financialStability = (req, res) => {
-    //TODO: financialStability graph
-};
-
-const liquidity = (req, res) => {
-    //TODO: liquidity graph
-};
-
-const growthRatios = (req, res) => {
-    //TODO: growthRatios graph
-};
-
-router.get('/returnRatios', returnRatios);
-router.get('/financialStability', financialStability);
-router.get('/liquidity', liquidity);
-router.get('/growthRatios', growthRatios);
+router.get('/returnRatios',         ctrl.returnRatios);
+router.get('/financialStability',   ctrl.financialStability);
+router.get('/liquidity',            ctrl.liquidity);
+router.get('/growthRatios',         ctrl.growthRatios);
 
 module.exports = router;
