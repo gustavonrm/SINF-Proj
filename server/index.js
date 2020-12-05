@@ -25,3 +25,13 @@ app.use('/api/purchases', purchases);
 app.use('/api/financial', financial);
 app.use('/api/inventory', inventory);
 app.use('/api/accounts', accounts);
+app.use((req, res) => {
+    const err = new Error("Not Found");
+    err.status = 404;
+    res.status(404).json({
+        message: err.message,
+        error: err
+    });
+});
+
+module.exports = app;
