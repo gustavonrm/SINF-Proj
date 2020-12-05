@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { jasminReq } from '../api/jasmin';
+const { Router } = require('express');
+const { jasminReq } = require('../api/jasmin');
 const router = Router();
 
 const purchases = (req, res) => {
@@ -23,4 +23,4 @@ router.get("/totalPurchases", totalPurchases);
 router.get("/debts", debts);
 router.get("/totalDebts", totalDebts);
 
-export default router;
+module.exports = router;

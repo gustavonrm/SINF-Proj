@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { jasminReq } from '../api/jasmin';
+const { Router } = require('express');
+const { jasminReq } = require('../api/jasmin');
 const router = Router();
 
 const stock = (req, res) => {
@@ -98,4 +98,4 @@ router.get("/capacity", capacity);
 router.get("/period", period);
 router.get("/turnover", turnover);
 
-export default router;
+module.exports = router;

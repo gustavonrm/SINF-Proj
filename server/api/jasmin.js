@@ -1,4 +1,4 @@
-import axios, { interceptors, request } from "axios";
+const axios, { interceptors, request } = require("axios");
 
 const clientId     = "";                                                   // Name of the app
 const clientSecret = "";                                                   // Secret
@@ -53,4 +53,4 @@ interceptors.response.use(null, (error) => {
     });
 });
 
-export default jasminReq
+module.exports = jasminReq;
