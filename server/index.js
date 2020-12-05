@@ -10,14 +10,13 @@ const financial = require('./routes/financial');
 const inventory = require('./routes/inventory');
 const accounts = require('./routes/accounts');
 
-const app = express()
-const apiPort = 3000
+const app = express();
 
-app.use(urlencoded({ extended: true }))
-app.use(cors())
-app.use(json())
+app.use(urlencoded({ extended: true }));
+app.use(cors());
+app.use(json());
 
-on('error', console.error.bind(console, 'MongoDB connection error:'))
+on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use('/api/overview', overview);
 app.use('/api/sales', sales);
@@ -26,12 +25,16 @@ app.use('/api/financial', financial);
 app.use('/api/inventory', inventory);
 app.use('/api/accounts', accounts);
 app.use((req, res) => {
-    const err = new Error("Not Found");
+    const err = new Error('Not Found');
     err.status = 404;
     res.status(404).json({
         message: err.message,
         error: err
     });
 });
+
+const port = 3000;
+app.listen(port);
+console.log('Server started.');
 
 module.exports = app;

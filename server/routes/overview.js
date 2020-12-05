@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { jasminReq } = require('../api/jasmin');
+const { jasminReq } = require('../utils/request');
 const { getTimestamp } = require('../utils/util');
 const router = Router();
 
@@ -32,7 +32,7 @@ const salesExpenses = (req, res) => {
 
         res.json(response);
     }).catch(() => {
-        const err = new Error("Failed");
+        const err = new Error('Failed');
         err.status = 400;
         res.status(400).json({
             message: err.message,
@@ -53,7 +53,7 @@ const assetsDebts = (req, res) => {
 
         res.json(response);
     }).catch(() => {
-        const err = new Error("Failed");
+        const err = new Error('Failed');
         err.status = 400;
         res.status(400).json({
             message: err.message,
@@ -70,9 +70,9 @@ const totalDebts = (req, res) => {
     //TODO: totalDebts SAFT value
 };
 
-router.get("/salesExpenses", salesExpenses);
-router.get("/assetsDebts", assetsDebts);
-router.get("/totalAssets", totalAssets);
-router.get("/totalDebts", totalDebts);
+router.get('/salesExpenses', salesExpenses);
+router.get('/assetsDebts', assetsDebts);
+router.get('/totalAssets', totalAssets);
+router.get('/totalDebts', totalDebts);
 
 module.exports = router;

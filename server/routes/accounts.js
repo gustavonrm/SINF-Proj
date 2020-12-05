@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { jasminReq } = require('../api/jasmin');
+const { jasminReq } = require('../utils/request');
 const router = Router();
 
 const accountsReceivable = (req, res) => {
@@ -18,9 +18,9 @@ const payableGraph = (req, res) => {
     //TODO: payableGraph graph
 };
 
-router.get("/accountsReceivable", accountsReceivable);
-router.get("/receivableGraph", receivableGraph);
-router.get("/accountsPayable", accountsPayable);
-router.get("/payableGraph", payableGraph);
+router.get('/accountsReceivable', accountsReceivable);
+router.get('/receivableGraph', receivableGraph);
+router.get('/accountsPayable', accountsPayable);
+router.get('/payableGraph', payableGraph);
 
 module.exports = router;

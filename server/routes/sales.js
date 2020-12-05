@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { jasminReq } = require('../api/jasmin');
+const { jasminReq } = require('../utils/request');
 const router = Router();
 
 const profit = (req, res) => {
@@ -27,7 +27,7 @@ const totalSales = (req, res) => {
 
         res.json(response);
     }).catch(() => {
-        const err = new Error("Failed");
+        const err = new Error('Failed');
         err.status = 400;
         res.status(400).json({
             message: err.message,
@@ -36,8 +36,8 @@ const totalSales = (req, res) => {
     });
 };
 
-router.get("/profit", profit);
-router.get("/topProducts", topProducts);
-router.get("/totalSales", totalSales);
+router.get('/profit', profit);
+router.get('/topProducts', topProducts);
+router.get('/totalSales', totalSales);
 
 module.exports = router;

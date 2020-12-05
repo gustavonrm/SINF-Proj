@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { jasminReq } = require('../api/jasmin');
+const { jasminReq } = require('../utils/request');
 const router = Router();
 
 const purchases = (req, res) => {
@@ -18,9 +18,9 @@ const totalDebts = (req, res) => {
     //TODO: totalDebts value
 };
 
-router.get("/purchases", purchases);
-router.get("/totalPurchases", totalPurchases);
-router.get("/debts", debts);
-router.get("/totalDebts", totalDebts);
+router.get('/purchases', purchases);
+router.get('/totalPurchases', totalPurchases);
+router.get('/debts', debts);
+router.get('/totalDebts', totalDebts);
 
 module.exports = router;
