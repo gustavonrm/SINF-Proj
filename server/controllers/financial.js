@@ -1,21 +1,21 @@
-const { jasminReq } = require('../utils/request');
+const { jasminReq } = require("../utils/request");
 
 const Controller = {};
 
 Controller.returnRatios = (req, res) => {
-    //TODO: returnRatios graph
+  //TODO: returnRatios graph
 };
 
 Controller.financialStability = (req, res) => {
-    //TODO: financialStability graph
+  //TODO: financialStability graph
 };
 
 Controller.liquidity = (req, res) => {
-    //TODO: liquidity graph
+  //TODO: liquidity graph
 };
 
 Controller.growthRatios = (req, res) => {
-    //TODO: growthRatios graph
+  //TODO: growthRatios graph
 };
 
 module.exports = Controller;
