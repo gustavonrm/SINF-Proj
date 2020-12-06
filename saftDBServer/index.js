@@ -32,27 +32,23 @@ fs.readFile('saft/saft4.xml', function(err, data) {
                   }
               
                   console.log("JSON database created")
+                  
+                  const jsonServer = require('json-server')
+                  const server = jsonServer.create()
+                  const router = jsonServer.router('db.json')
+                  const middlewares = jsonServer.defaults()
+                  
+                  server.use(middlewares)
+
+
+                  server.use(router)
+
+                  //TODO Port should be changed to a different port
+                  server.listen(5432, () => {
+                    console.log('JSON Server is running on port 5432')
+                  })
                 })
               })
           }
         })
 })
-
- /*
-
-*/
-const jsonServer = require('json-server')
-const { jsonDB } = require('./parser.js')
-const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
- 
-server.use(middlewares)
-
-/*
-server.use(router)
-
-//TODO Port should be changed to a different port
-server.listen(3000, () => {
-  console.log('JSON Server is running')
-})*/
