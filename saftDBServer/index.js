@@ -24,9 +24,9 @@ fs.readFile('saft/saft4.xml', function(err, data) {
 
                 auditFile = result.AuditFile
 
-                parser.parseSAFT(auditFile)
+                let jsonResult = parser.parseSAFT(auditFile)
                               
-                fs.writeFile('db.json', JSON.stringify(result), function(err, result){
+                fs.writeFile('db.json', JSON.stringify(jsonResult), function(err, result){
                   if(err){
                       throw err;
                   }
@@ -42,6 +42,7 @@ fs.readFile('saft/saft4.xml', function(err, data) {
 
 */
 const jsonServer = require('json-server')
+const { jsonDB } = require('./parser.js')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()

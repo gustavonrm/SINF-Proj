@@ -19,6 +19,7 @@ module.exports = {
         let newArray = []
         newArray.length = 12
         newArray.fill(0)
+        return newArray
     },
 
     parseCustomers: function(req, res, next){
@@ -73,7 +74,7 @@ module.exports = {
             let account = {description: accountDescription, taxonomyCode: taxonomyCode,
                             openingDebit: openingDebit, openingCredit: openingCredit,
                             closingDebit: closingDebit, closingCredit: closingCredit,
-                            monthlyDebit: [], monthlyCredit: []}
+                            monthlyDebit: this.makeMonthlyArray(), monthlyCredit: this.makeMonthlyArray()}
 
             account.monthlyDebit[11] = closingDebit
             account.monthlyCredit[11] = closingCredit
@@ -87,7 +88,7 @@ module.exports = {
 
     parseGeneralLedgerAccounts: function(req, res, next){
         let ledgerAccounts = req[0].Account
-        console.log(ledgerAccounts)
+        //console.log(ledgerAccounts)
         ledgerAccounts.forEach(account => {
             this.parseLedgerAccount(account)
         });
@@ -262,7 +263,7 @@ module.exports = {
             this.jsonDB.accounts.accountsReceivable.percentage = (this.jsonDB.accounts.accountsReceivable.total - previousAccRec) / previousAccRec
 
         let previousAccPay = 0
-        console.log(this.auxDB.accountsPayable)
+        
         this.auxDB.accountsPayable.forEach(transaction => {
             if(transaction.monthlyBalance[10] != 0){
                 previousAccPay += transaction.monthlyBalance[10]
@@ -281,40 +282,129 @@ module.exports = {
     },
 
     createBalanceSheet: function(req, res, next){
-        let balanceSheet = {assets: this.makeMonthlyArray(), liabilities: this.makeMonthlyArray(), sales: this.makeMonthlyArray(), expenses: this.makeMonthlyArray()}
+        let balanceSheet = {assets: this.makeMonthlyArray(), liabilities: this.makeMonthlyArray(), sales: this.makeMonthlyArray(), expenses: this.makeMonthlyArray(),
+                            revenue: this.makeMonthlyArray(), interest: this.makeMonthlyArray(), cash: this.makeMonthlyArray(), currentAssets: this.makeMonthlyArray(), 
+                            currentLiabilities: this.makeMonthlyArray(), inventory: this.makeMonthlyArray(), startingRevenue: 0, startingExpenses: 0, startingLiabilities: 0,
+                            startingAssets: 0}
 
-        for(account in this.auxDB.accounts){
+        for(accountID in this.auxDB.accounts){
+            let account = this.auxDB.accounts[accountID]
             for(i = 0; i < 12; ++i){
-                let balance = monthlyDebit[i] - monthlyCredit[i]
+                let balance = account.monthlyDebit[i] - account.monthlyCredit[i]
 
                 switch(account.taxonomyCode[0]){
-                    case 6:{
+                    case 1:{
                         if(balance < 0){
-                            balanceSheet.expenses[i] -= balance
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                            }
                             balanceSheet.liabilities[i] -= balance
                         }
                         else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                            }
+                            balanceSheet.assets[i] += balance
+                            balanceSheet.inventory[i] += balance
+                            balanceSheet.currentAssets[i] += balance
+                        }
+                        break;
+                    }
+                    case 2:{
+                        if(balance < 0){
+                            if((account.taxonomyCode[1] == 2 && account.taxonomyCode[2] == 2) || (account.taxonomyCode[1] == 1 && account.taxonomyCode[2] == 8)
+                                || (account.taxonomyCode[1] == 7 && account.taxonomyCode[2] == 4) || (account.taxonomyCode[1] == 4)){
+                                balanceSheet.currentLiabilities[i] -= balance
+                            }
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                            }
+                            balanceSheet.liabilities[i] -= balance
+                        }
+                        else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                            }
+                            if((account.taxonomyCode[1] == 1 && account.taxonomyCode[2] == 2) || (account.taxonomyCode[1] == 2 && account.taxonomyCode[2] == 8)){
+                                balanceSheet.currentAssets[i] += balance
+                            }
+                            balanceSheet.assets[i] += balance
+                        }
+                        break;
+                    }
+                    case 3:
+                    case 5:{
+                        if(balance < 0){
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                            }
+                            balanceSheet.liabilities[i] -= balance
+                        }
+                        else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                            }
+                            balanceSheet.assets[i] += balance
+                            balanceSheet.cash[i] += balance
+                            balanceSheet.currentAssets[i] += balance
+                        }
+                        break;
+                    }
+                    case 6:{
+                        if(balance < 0){
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                                balanceSheet.startingExpenses -= account.openingDebit - account.openingCredit
+                            }
+                            balanceSheet.expenses[i] -= balance
+                            balanceSheet.liabilities[i] -= balance
+                            if(account.taxonomyCode[1] == 9){
+                                balanceSheet.interest[i] -= balance
+                                balanceSheet.currentLiabilities[i] -= balance
+                            }
+                        }
+                        else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                            }
                             balanceSheet.assets[i] += balance
                         }
                         break;
                     }
                     case 7:{
                         if(balance < 0){
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                            }
+                            if(account.taxonomyCode[1] == 9){
+                                balanceSheet.interest[i] -= balance
+                            }
                             balanceSheet.liabilities[i] -= balance
                         }
                         else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                                balanceSheet.startingRevenue += account.openingDebit - account.openingCredit
+                            }
                             if(account.taxonomyCode[1] == 1 || account.taxonomyCode[1] == 2){
                                 balanceSheet.sales[i] += balance
                             }
                             balanceSheet.assets[i] += balance
+                            balanceSheet.revenue[i] += balance
                         }
                         break;
                     }
                     default:{
                         if(balance < 0){
+                            if(i == 0){
+                                balanceSheet.startingLiabilities -= account.openingDebit - account.openingCredit
+                            }
                             balanceSheet.liabilities[i] -= balance
                         }
                         else{
+                            if(i == 0){
+                                balanceSheet.startingAssets += account.openingDebit - account.openingCredit
+                            }
                             balanceSheet.assets[i] += balance
                         }
                         break;
@@ -329,6 +419,16 @@ module.exports = {
         this.jsonDB.overview.debt = balanceSheet.liabilities
         this.jsonDB.overview.totalAssets = balanceSheet.assets.reduce((accumulator, currentValue) => {return accumulator + currentValue;})
         this.jsonDB.overview.totalDebt = balanceSheet.liabilities.reduce((accumulator, currentValue) => {return accumulator + currentValue;})
+        this.auxDB.financial.revenue = balanceSheet.revenue
+        this.auxDB.financial.interest = balanceSheet.interest
+        this.auxDB.financial.cash = balanceSheet.cash
+        this.auxDB.financial.inventory = balanceSheet.inventory
+        this.auxDB.financial.currentAssets = balanceSheet.currentAssets
+        this.auxDB.financial.currentLiabilities = balanceSheet.currentLiabilities
+        this.auxDB.financial.startingAssets = balanceSheet.startingAssets
+        this.auxDB.financial.startingLiabilities = balanceSheet.startingLiabilities
+        this.auxDB.financial.startingExpenses = balanceSheet.startingExpenses
+        this.auxDB.financial.startingRevenue = balanceSheet.startingRevenue
     },
     
     calculateFinancialData: function(req, res, next){
@@ -338,38 +438,54 @@ module.exports = {
             let expenses = this.jsonDB.overview.expenses[i]
             let liabilities = this.jsonDB.overview.debt[i]
 
-            this.jsonDB.financial.returnRatios.returnOnSales[i] = (sales - expenses) / sales
-            this.jsonDB.financial.returnRatios.returnOnAssets[i] = (sales - expenses) / assets
-            this.jsonDB.financial.returnRatios.returnOnEquity[i] = (sales - expenses) / (assets - liabilities)
+            let revenue = this.auxDB.financial.revenue[i]
+            let interest = this.auxDB.financial.interest[i]
+            let cash = this.auxDB.financial.cash[i]
+            let inventory = this.auxDB.financial.inventory[i]
+            let currentAssets = this.auxDB.financial.currentAssets[i]
+            let currentLiabilities = this.auxDB.financial.currentLiabilities[i]
 
-            this.jsonDB.stability.equityToAssets[i] = (assets - liabilities) / assets
-            this.jsonDB.stability.debtToEquity[i] = (assets - liabilities) / liabilities
-            //this.jsonDB.stability.interestCoverage[i] = 
+            let startingRevenue = i == 0 ? this.auxDB.financial.startingRevenue : this.auxDB.financial.revenue[i - 1]
+            let startingExpenses = i == 0 ? this.auxDB.financial.startingRevenue : this.jsonDB.overview.expenses[i - 1]
+            let startingLiabilities = i == 0 ? this.auxDB.financial.startingLiabilities : this.jsonDB.overview.debt[i - 1]
+            let startingAssets = i == 0 ? this.auxDB.financial.startingAssets : this.jsonDB.overview.assets[i - 1]
 
-            this.jsonDB.liquidity.current[i] = assets / liabilities
-            //this.jsonDB.liquidity.quick[i] = 
-            //this.jsonDB.liquidity.cash[i] = 
+            //aux vars
+            let ebit = revenue - expenses
+            let netIncome = sales - expenses
+            let equity = assets - liabilities
+            let startingProfit = startingRevenue - startingExpenses
+            let startingEquity = startingAssets - startingLiabilities
 
-            //this.jsonDB.growth.profit =
-            //this.jsonDB.growth.debt =
-            //this.jsonDB.growth.equity =
+            this.jsonDB.financial.returnRatios.returnOnSales[i] = ebit / sales
+            this.jsonDB.financial.returnRatios.returnOnAssets[i] = netIncome / assets
+            this.jsonDB.financial.returnRatios.returnOnEquity[i] = netIncome / equity
+
+            this.jsonDB.financial.stability.equityToAssets[i] = equity / assets
+            this.jsonDB.financial.stability.debtToEquity[i] = liabilities / equity
+            this.jsonDB.financial.stability.interestCoverage[i] = ebit / interest
+
+            this.jsonDB.financial.liquidity.current[i] = currentAssets / currentLiabilities
+            this.jsonDB.financial.liquidity.quick[i] = (currentAssets - inventory) / currentLiabilities
+            this.jsonDB.financial.liquidity.cash[i] = cash / currentLiabilities
+
+            this.jsonDB.financial.growth.profit = (ebit - startingProfit) / startingProfit
+            this.jsonDB.financial.growth.debt = (liabilities - startingLiabilities) / startingLiabilities
+            this.jsonDB.financial.growth.equity = (equity - startingEquity) / startingEquity
         }
     },
 
     parseSAFT: function(req, res, next){
-        //TODO parse xml
-        console.log(req)
-        
         //sales, expenses, assets, debt (every month) - Overview
         this.jsonDB.overview = {sales:this.makeMonthlyArray(), expenses:this.makeMonthlyArray(), assets:this.makeMonthlyArray(), debt:this.makeMonthlyArray(), totalAssets: 0, totalDebt: 0}
 
         this.jsonDB.accounts = {accountsReceivable: {total: 0, percentage: 0, accounts: []},
                                 accountsPayable: {total: 0, percentage: 0, accounts: []}}
 
-        this.jsonDB.purchases = {purchases: [], debt: {}}
+        this.jsonDB.purchases = {purchases: [], debt: {}, cash: {}}
 
         this.jsonDB.financial = {returnRatios: {returnOnSales: this.makeMonthlyArray(), returnOnAssets: this.makeMonthlyArray(), returnOnEquity: this.makeMonthlyArray()},
-                                stability: {equityToAssets: this.makeMonthlyArray(), debtToEquity: this.makeMonthlyArray(), /*coverageOnFixedInvestments ??,*/ interestCoverage: this.makeMonthlyArray()},
+                                stability: {equityToAssets: this.makeMonthlyArray(), debtToEquity: this.makeMonthlyArray(), coverageOnFixedInvestments: this.makeMonthlyArray(), interestCoverage: this.makeMonthlyArray()},
                                 liquidity: {current: this.makeMonthlyArray(), quick: this.makeMonthlyArray(), cash: this.makeMonthlyArray()},
                                 growth: {profit: this.makeMonthlyArray(), debt: this.makeMonthlyArray(), equity: this.makeMonthlyArray()}}
 
@@ -379,9 +495,9 @@ module.exports = {
         this.auxDB.accounts = {}
         this.auxDB.customers = {}
         this.auxDB.suppliers = {}
+        this.auxDB.financial = {revenue: [], interest: []}
 
         //average profit, top sold products, monthly sales value for each product - Sales
-        //TODO profit, as in net profit or just sales?
         let masterFiles = req.MasterFiles[0]
         this.parseMasterFiles(masterFiles)    
         
