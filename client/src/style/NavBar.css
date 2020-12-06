@@ -1,0 +1,20 @@
+nav.navbar {
+  color: #222222;
+  background-color: #ffffff;
+  font-size: 24px;
+  -webkit-box-shadow: 0px 10px 12px -3px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 10px 12px -3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 10px 12px -3px rgba(0, 0, 0, 0.4);
+}
+
+nav.navbar a {
+  color: #222222;
+}
+
+nav.navbar a:hover {
+  color: #1b4d81;
+}
+
+nav.fixed-top {
+  left: 16.7%;
+}

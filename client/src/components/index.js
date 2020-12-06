@@ -4,5 +4,8 @@ import NavBarExample from './NavBarExample'
 
 import NavBar from './NavBar'
 import SideNav from './SideNav'
+import Content from './Content'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav }
+import BarChart from './BarChart'
+
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart }

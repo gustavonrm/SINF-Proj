@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import api from "../api";
+import { Content, NavBar, SideNav } from "../components";
+import "../style/App.css";
 
 class Sales extends Component {
   constructor(props) {
@@ -8,7 +10,17 @@ class Sales extends Component {
     this.state = {};
   }
   render() {
-    return <>Sales</>;
+    return (
+      <>
+        <NavBar />
+        <div className="container-fluid">
+          <div className="row">
+            <SideNav page={"Sales"} />
+            <Content />
+          </div>
+        </div>
+      </>
+    );
   }
 }
 

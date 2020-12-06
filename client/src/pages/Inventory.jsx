@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import api from "../api";
+import { Content, NavBar, SideNav } from "../components";
+import "../style/App.css";
 
 class Inventory extends Component {
   constructor(props) {
@@ -8,7 +10,17 @@ class Inventory extends Component {
     this.state = {};
   }
   render() {
-    return <>Inventory</>;
+    return (
+      <>
+        <NavBar />
+        <div className="container-fluid">
+          <div className="row">
+            <SideNav page={"Inventory"} />
+            <Content />
+          </div>
+        </div>
+      </>
+    );
   }
 }
 
