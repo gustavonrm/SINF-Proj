@@ -2,14 +2,11 @@ const validator = require('xsd-schema-validator')
 const xml2js = require('xml2js')
 const fs = require('fs')
 const parser = require('./parser.js')
- 
-console.log("Beep boop I am a robot")
 
 fs.readFile('saft/saft4.xml', function(err, data) {
     var data = data.toString().replace("\ufeff", "");
 
     validator.validateXML(data, 'saft/saftSchema2.xsd', function(err, result) {
-        console.log("And I said heyheyhey it's just an ordinary day, and it's just your state of mind, at the end of the day you just gotta say it's alright")
           if (err) {
             throw err;
           }
