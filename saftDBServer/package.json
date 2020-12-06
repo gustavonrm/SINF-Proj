@@ -1,17 +1,16 @@
 {
   "name": "saftdbserver",
   "version": "1.0.0",
-  "description": "",
+  "description": "sinf saft db",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "echo \"Error: no script specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "fs": "0.0.1-security",
     "json-server": "^0.16.3",
     "xml2js": "^0.4.23",
     "xsd-schema-validator": "^0.6.0"
-  }
+  },
+  "license": "MIT"
 }
