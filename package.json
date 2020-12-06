@@ -1,0 +1,17 @@
+{
+  "name": "sinf-proj",
+  "version": "1.0.0",
+  "description": "sinf project",
+  "scripts": {
+    "start": "echo \"Error: no script specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavonrm/SINF-Proj.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gustavonrm/SINF-Proj/issues"
+  },
+  "homepage": "https://github.com/gustavonrm/SINF-Proj#readme"
+}

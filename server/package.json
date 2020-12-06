@@ -1,23 +1,21 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "sinf server",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js"
+    "start": "echo \"Error: no script specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.11",
-    "axios": "^0.20.0"
+    "jquery": "^3.5.1",
+    "mongoose": "^5.10.15",
+    "popper.js": "^1.16.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  }
+  "license": "MIT"
 }
