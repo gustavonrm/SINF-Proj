@@ -89,6 +89,7 @@ class Home extends Component {
 
   onSignUp() {
     // Grab state
+    /*
     const { signUpEmail, signUpPassword } = this.state;
     const payload = { signUpEmail, signUpPassword };
 
@@ -98,11 +99,18 @@ class Home extends Component {
 
     // Post request to backend
     api.signup(payload).then((res) => {
-      window.alert(`Signed up succesully`);
+      //window.alert(`Signed up succesully`);
+      console.log(res);
     });
+    */
 
-    /*
-    fetch("/api/auth/signup", {
+    // Grab state
+    const { signUpEmail, signUpPassword } = this.state;
+    this.setState({
+      isLoading: true,
+    });
+    // Post request to backend
+    fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +137,6 @@ class Home extends Component {
           });
         }
       });
-      */
   }
 
   onSignIn() {
@@ -141,7 +148,7 @@ class Home extends Component {
     });
 
     // Post request to backend
-    fetch("/api/auth/signin", {
+    fetch("http://localhost:3000/api/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -180,7 +187,7 @@ class Home extends Component {
     if (obj && obj.token) {
       const { token } = obj;
       // Verify token
-      fetch("/api/auth/logout?token=" + token)
+      fetch("http://localhost:3000/api/auth/logout?token=" + token)
         .then((res) => res.json())
         .then((json) => {
           if (json.success) {

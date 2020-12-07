@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const UserSession = require('../models/UserSession');
 
   signup = (req, res, next) => {
 
