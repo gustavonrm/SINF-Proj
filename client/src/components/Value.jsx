@@ -16,7 +16,7 @@ class Value extends Component {
 
             return (
                 <div className="d-flex font-weight-bold p-2 pl-4" style={{ fontSize: "4em" }}>
-                    €{' '}{this.props.value}
+                    {'€ '}{this.props.value}
                     <div className="d-flex align-items-center font-weight-normal pb-4" style={{ fontSize: "0.8em" }}>
                         {icon}
 

@@ -9,5 +9,6 @@ import ContentWIP from './ContentWIP'
 
 import BarChart from './BarChart'
 import Value from './Value'
+import InfoBox from './InfoBox'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, ContentWIP, Value }
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, ContentWIP, Value, InfoBox }
