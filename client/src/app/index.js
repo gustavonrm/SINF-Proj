@@ -15,7 +15,6 @@ function App() {
                 <Route path="/Financial" exact component={Financial} />
                 <Route path="/Inventory" exact component={Inventory} />
                 <Route path="/Accounts" exact component={Accounts} />
-                <Route path="/WIP" exact component={WIP} />
                 <Route path="/movies/list" exact component={MoviesList} />
                 <Route path="/movies/create" exact component={MoviesInsert} />
                 <Route

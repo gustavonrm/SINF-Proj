@@ -10,7 +10,6 @@ import Purchases from './Purchases'
 import Financial from './Financial'
 import Inventory from './Inventory'
 import Accounts from './Accounts'
-import WIP from './WIP'
 
 
-export { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts,MoviesList, MoviesInsert, MoviesUpdate, WIP }
+export { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts,MoviesList, MoviesInsert, MoviesUpdate }

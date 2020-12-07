@@ -6,11 +6,13 @@ class InfoBox extends Component {
 
     render() {
         return (
-            <section className="bg-light p-4 mb-4">
+            <div className="bg-light d-flex flex-column p-4 mb-4">
                 <h2>{this.props.title}</h2>
                 <h5 className="text-muted">{this.props.description}</h5>
-                <Value value="17000" growth="12.0" />
-            </section>
+                <div className="d-flex align-content-center flex-fill">
+                    <Value value="17000" growth="12.0" />
+                </div>
+            </div>
         );
     }
 }
