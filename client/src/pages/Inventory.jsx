@@ -34,10 +34,10 @@ class Inventory extends Component {
                   <div className="btn-group mr-2">
                     <button className="btn btn-sm btn-outline-secondary">
                       Share
-              </button>
+                    </button>
                     <button className="btn btn-sm btn-outline-secondary">
                       Export
-              </button>
+                    </button>
                   </div>
                   <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
                     <svg
@@ -57,8 +57,8 @@ class Inventory extends Component {
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-              This week
-            </button>
+                    This week
+                  </button>
                 </div>
               </div>
               <div className="d-flex">
