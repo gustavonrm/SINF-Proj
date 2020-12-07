@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Account from "./Account";
+import InfoBox from "./InfoBox";
 import { BarChart } from ".";
 
 class ContentWIP extends Component {
@@ -51,9 +51,57 @@ class ContentWIP extends Component {
             </button>
           </div>
         </div>
-        <div className="d-flex justify-content-between">
-          <Account title="Accounts Receivable" description="Accounts Receivable value and percentage in relation to last month"/>
-          <Account title="Accounts Payable" description="Accounts Payable value and percentage in relation to last month"/>
+        <div className="d-flex">
+          <div className="col-4 d-flex flex-column justify-content-between">
+            <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+            <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+            <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+          </div>
+          <div className="col-8 bg-light mb-4">
+            <section className="bg-light p-4 mb-4">
+              <h2>Number of Items in Stock</h2>
+              <h5 className="text-muted"></h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Average Cost per Item</th>
+                    <th scope="col">Average Inventory Period</th>
+                    <th scope="col">Inventory Turnover</th>
+                    <th scope="col">Total Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">ID_65421</th>
+                    <td>Ream of paper (Grade A)</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>1000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@fat</td>
+                    <td>1000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twitter</td>
+                    <td>1000</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </section>
+          </div>
         </div>
       </main>
     );
