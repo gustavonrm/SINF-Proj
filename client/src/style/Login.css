@@ -1,4 +1,5 @@
-html {
+html,
+#login-page {
   background-color: #1b4d81 !important;
 }
 
@@ -7,4 +8,16 @@ html {
   max-width: 420px;
   padding: 15px;
   margin: auto;
+  background-color: #eef5fb;
+  border-radius: 5%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+.form-label-group {
+  padding-bottom: 20px;
+}
+button.login-btn {
+  background-color: #1b4d81;
+  border-color: #1b4d81;
 }

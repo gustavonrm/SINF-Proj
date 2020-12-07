@@ -16,7 +16,7 @@ class NavBar extends Component {
           <div>360º DashBoard</div>
           <ul class="navbar-nav px-3">
             <li className="nav-item text-nowrap">
-              <button className="nav-link" onClick={this.logout}>
+              <button className="nav-link logout-btn" onClick={this.logout}>
                 Logout
                 <FontAwesomeIcon icon={faSignOutAlt} className="ml-2" />
               </button>

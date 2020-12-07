@@ -15,8 +15,14 @@ class Login extends Component {
     console.log("Storage" + getFromStorage("the_main_app"));
     return (
       <>
-        <Logo />
-        <Auth />
+        <div id="login-page">
+          <div className="container ">
+            <div class="row d-flex justify-content-center">
+              <Logo />
+            </div>
+          </div>
+          <Auth />
+        </div>
       </>
     );
   }

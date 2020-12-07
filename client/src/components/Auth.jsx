@@ -246,7 +246,7 @@ class Home extends Component {
 
               <button
                 onClick={this.onSignIn}
-                class="btn btn-lg btn-primary btn-block"
+                class="btn btn-lg btn-primary btn-block login-btn"
               >
                 Sign in
               </button>
