@@ -47,15 +47,9 @@ Controller.salesExpenses = (req, res) => {
 };
 
 Controller.assetsDebts = (req, res) => {
-  const assets = [];
-  assets.fill(0, 0, 11);
-  const debts = [];
-  debts.fill(0, 0, 11);
-  const response = { assets: assets, expenses: expenses };
-
-  Promise.all([])
+  Promise.all([saftReq("/overview/assets/"), saftReq("/overview/debt/")])
     .then((data) => {
-      res.json(response);
+      res.json({assets: data[0], debts: data[1]})
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -68,9 +62,9 @@ Controller.assetsDebts = (req, res) => {
 };
 
 Controller.totalAssets = (req, res) => {
-  Promise.all([saftReq("/overview/assets/")])
+  saftReq("/overview/totalAssets/")
     .then((data) => {
-      res.json(response);
+      res.json({value: data});
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -83,9 +77,9 @@ Controller.totalAssets = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  Promise.all([saftReq("/overview/debt/")])
+  saftReq("/overview/totalDebt/")
     .then((data) => {
-      res.json(response);
+      res.json({value: data});
     })
     .catch(() => {
       const err = new Error("Failed");

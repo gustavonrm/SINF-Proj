@@ -134,7 +134,6 @@ Controller.debts = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  //TODO: totalDebts value
   const response = {
     value: 0,
   };

@@ -3,9 +3,9 @@ const { jasminReq } = require("../utils/request");
 const Controller = {};
 
 Controller.returnRatios = (req, res) => {
-  Promise.all([saftReq("/financial/returnRatios/")])
+  saftReq("/financial/returnRatios/")
     .then((data) => {
-      res.json(response);
+      res.json(data);
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -18,9 +18,9 @@ Controller.returnRatios = (req, res) => {
 };
 
 Controller.financialStability = (req, res) => {
-  Promise.all([saftReq("/financial/stability/")])
+  saftReq("/financial/stability/")
     .then((data) => {
-      res.json(response);
+      res.json(data);
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -33,9 +33,9 @@ Controller.financialStability = (req, res) => {
 };
 
 Controller.liquidity = (req, res) => {
-  Promise.all([saftReq("/financial/liquidity/")])
+  saftReq("/financial/liquidity/")
     .then((data) => {
-      res.json(response);
+      res.json(data);
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -48,9 +48,9 @@ Controller.liquidity = (req, res) => {
 };
 
 Controller.growthRatios = (req, res) => {
-  Promise.all([saftReq("/financial/growth/")])
+  saftReq("/financial/growth/")
     .then((data) => {
-      res.json(response);
+      res.json(data);
     })
     .catch(() => {
       const err = new Error("Failed");

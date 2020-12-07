@@ -3,15 +3,36 @@ const { jasminReq } = require("../utils/request");
 const Controller = {};
 
 Controller.profit = (req, res) => {
-  //TODO: profit value
+  saftReq("/salesProfit/")
+    .then((data) => {
+      res.json({value: data});
+    })
+    .catch(() => {
+      const err = new Error("Failed");
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
+    });
 };
 
 Controller.topProducts = (req, res) => {
-  //TODO: topProducts table
+  saftReq("/products/")
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(() => {
+      const err = new Error("Failed");
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
+    });
 };
 
 Controller.totalSales = (req, res) => {
-  //TODO: totalSales graph
   const sales = [];
   sales.fill(0, 0, 11);
   const expenses = [];
