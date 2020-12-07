@@ -2,6 +2,7 @@ const User = require('../models/User');
 
 
   signup = (req, res, next) => {
+
     const { body } = req;
     const {
       password

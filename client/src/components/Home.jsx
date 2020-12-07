@@ -90,13 +90,17 @@ class Home extends Component {
   onSignUp() {
     // Grab state
     const { signUpEmail, signUpPassword } = this.state;
+    const payload = { signUpEmail, signUpPassword };
 
     this.setState({
       isLoading: true,
     });
 
     // Post request to backend
-    api.signup(signUpEmail, signUpEmail);
+    api.signup(payload).then((res) => {
+      window.alert(`Signed up succesully`);
+    });
+
     /*
     fetch("/api/auth/signup", {
       method: "POST",
