@@ -1,4 +1,5 @@
 const { jasminReq } = require("../utils/request");
+const saftReq = require("../utils/saftReq");
 
 const Controller = {};
 
@@ -40,7 +41,7 @@ Controller.stock = (req, res) => {
 
 Controller.capacity = (req, res) => {
   // Returns the list of all the entity records available.
-  jasminReq("get", "/materialsCore/materialsItems")
+  Promise.all([jasminReq("get", "/materialsCore/materialsItems"), saftReq("/products/")])
     .then((data) => {
       const response = [];
 
@@ -58,13 +59,19 @@ Controller.capacity = (req, res) => {
           (accumulator, currValue) => accumulator + currValue.calculatedUnitCost
         ) / item.materialsItemWarehouses.length;
 
-      const getInvPeriod = (item) =>
-        0; //TODO: use SAFT to get invPeriod
+      const getInvPeriod = (item) => 365 / getTurnover(item)
 
-      const getTurnover = (item) =>
-        0; //TODO: use SAFT
+      const getTurnover = (item) =>{
+        const totalStockValue = getQuantity(item) * getUnitCost(item)
+        const product = data[1][getKey(item)]
+        const sales = product.sales
+        let totalSales = 0
+        sales.forEach((month) => {totalSales += month})
 
-      data.forEach((item) => {
+        return totalSales / totalStockValue;
+      }
+
+      data[0].forEach((item) => {
         const key = getKey(item);
         const name = getName(item);
         const quantity = getQuantity(item);
@@ -95,11 +102,33 @@ Controller.capacity = (req, res) => {
 };
 
 Controller.period = (req, res) => {
-  //TODO: period value
+  Controller.turnover()
+    .then((result) => {
+      const turnover = result.value
+      const period = 365 / turnover
+      res.json({value: period})
+    });
 };
 
 Controller.turnover = (req, res) => {
-  //TODO: turnover value
+  Controller.capacity()
+    .then((data) => {
+      saftReq("/overview/sales/")
+        .then((monthlySales) => {
+          let totalStock = 0 
+          data.forEach((product) => {
+            totalStock += product.unitCost * product.quantity
+          })
+
+          let totalSales = 0
+          monthlySales.forEach((month) => {
+            totalSales += month
+          })
+
+          const turnover = totalSales / totalStock 
+          res.json({value: turnover})
+        });
+    });
 };
 
 module.exports = Controller;

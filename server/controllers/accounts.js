@@ -3,9 +3,9 @@ const { jasminReq } = require("../utils/request");
 const Controller = {};
 
 Controller.accountsReceivable = (req, res) => {
-  Promise.all([saftReq("/accounts/accountsReceivable/")])
+  saftReq("/accounts/accountsReceivable")
     .then((data) => {
-      res.json(response);
+      res.json({value: data.total, percentage: data.percentage});
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -18,13 +18,13 @@ Controller.accountsReceivable = (req, res) => {
 };
 
 Controller.receivableGraph = (req, res) => {
-  //TODO: receivableGraph graph
+  //TODO
 };
 
 Controller.accountsPayable = (req, res) => {
-  Promise.all([saftReq("/accounts/accountsPayable/")])
+  saftReq("/accounts/accountsPayable")
     .then((data) => {
-      res.json(response);
+      res.json({value: data.total, percentage: data.percentage});
     })
     .catch(() => {
       const err = new Error("Failed");
@@ -37,7 +37,7 @@ Controller.accountsPayable = (req, res) => {
 };
 
 Controller.payableGraph = (req, res) => {
-  //TODO: payableGraph graph
+  //TODO
 };
 
 module.exports = Controller;

@@ -564,6 +564,18 @@ module.exports = {
     }
   },
 
+  calculateSalesProfit: (req, res, next) => {
+    let netProfit = 0
+    for(i = 0; i < 12; ++i){
+      let sales = this.jsonDB.overview.sales[i]
+      let expenses = this.jsonDB.overview.expenses[i]
+
+      netProfit = netProfit + sales - expenses
+    }
+
+    this.jsonDB.salesProfit = netProfit;
+  },
+
   parseSAFT: (req, res, next) => {
     //sales, expenses, assets, debt (every month) - Overview
     this.jsonDB.overview = {
@@ -574,6 +586,8 @@ module.exports = {
       totalAssets: 0,
       totalDebt: 0,
     };
+
+    this.jsonDB.salesProfit = 0;
 
     this.jsonDB.accounts = {
       accountsReceivable: { total: 0, percentage: 0, accounts: [] },
@@ -631,6 +645,8 @@ module.exports = {
     this.createBalanceSheet();
 
     this.calculateFinancialData();
+
+    this.calculateSalesProfit();
 
     return this.jsonDB;
   },
