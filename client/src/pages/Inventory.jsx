@@ -29,7 +29,7 @@ class Inventory extends Component {
                 className="chartjs-size-monitor"
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Dashboard</h1>
+                <h1 className="h2">Inventory</h1>
                 <div className="btn-toolbar mb-2 mb-md-0">
                   <div className="btn-group mr-2">
                     <button className="btn btn-sm btn-outline-secondary">
@@ -68,7 +68,7 @@ class Inventory extends Component {
                   <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
                 </div>
                 <div className="col-8 bg-light mb-4">
-                  <section className="bg-light p-4 mb-4">
+                  <section className="p-4 mb-4">
                     <h2>Number of Items in Stock</h2>
                     <h5 className="text-muted"></h5>
                     <table class="table">

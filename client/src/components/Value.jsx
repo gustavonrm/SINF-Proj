@@ -15,8 +15,10 @@ class Value extends Component {
             } else icon = (<FontAwesomeIcon icon={faCaretDown} className="pt-1 ml-4" style={{color: "red"}} />);
 
             return (
-                <div className="d-flex font-weight-bold p-2 pl-4" style={{ fontSize: "4em" }}>
-                    {'€ '}{this.props.value}
+                <div className="d-flex align-items-center font-weight-bold p-2 pl-4" style={{ fontSize: "4em" }}>
+                    <div>
+                        {'€ '}{this.props.value}
+                    </div>
                     <div className="d-flex align-items-center font-weight-normal pb-4" style={{ fontSize: "0.8em" }}>
                         {icon}
 

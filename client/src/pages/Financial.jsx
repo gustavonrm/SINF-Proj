@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import api from '../api';
-import { Content, NavBar, SideNav } from '../components';
-import '../style/App.css';
+import React, { Component } from "react";
+import api from "../api";
+import { BarChart, Content, NavBar, SideNav } from "../components";
+import "../style/App.css";
 
 class Financial extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class Financial extends Component {
                 className="chartjs-size-monitor"
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Dashboard</h1>
+                <h1 className="h2">Financial</h1>
                 <div className="btn-toolbar mb-2 mb-md-0">
                   <div className="btn-group mr-2">
                     <button className="btn btn-sm btn-outline-secondary">
@@ -63,12 +63,28 @@ class Financial extends Component {
               </div>
               <section>
                 <div className="row justify-content-around">
-                  <article className="col-5 m-2 bg-dark">graph 1</article>
-                  <article className="col-5 m-2"> graph2</article>
+                  <article className="bg-light col-5 p-3 m-2">
+                    <h2>Return Ratios</h2>
+                    <h5 className="text-muted">Return on sales, assets and equity</h5>
+                    <BarChart />
+                  </article>
+                  <article className="bg-light col-5 p-3 m-2">
+                    <h2>Financial Stability</h2>
+                    <h5 className="text-muted">description</h5>
+                    <BarChart />
+                  </article>
                 </div>
                 <div className="row justify-content-around">
-                  <article className="col-5 m-2">graph3</article>
-                  <article className="col-5 m-2 bg-dark">graph4</article>
+                  <article className="bg-light col-5 p-3 m-2">
+                    <h2>Liquidity</h2>
+                    <h5 className="text-muted">description</h5>
+                    <BarChart />
+                  </article>
+                  <article className="bg-light col-5 p-3 m-2">
+                    <h2>Growth Ratios</h2>
+                    <h5 className="text-muted">description</h5>
+                    <BarChart />
+                  </article>
                 </div>
               </section>
             </main>

@@ -11,4 +11,4 @@ import Value from './Value'
 import InfoBox from './InfoBox'
 import Auth from './Auth'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, ContentWIP, Value, InfoBox, Auth }
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, Value, InfoBox, Auth }
