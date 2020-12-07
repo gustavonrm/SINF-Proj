@@ -1,5 +1,6 @@
 const { jasminReq } = require("../utils/request");
 const { getTimestamp } = require("../utils/util");
+const { saftReq } = require("../utils/saftReq");
 
 const Controller = {};
 
@@ -67,11 +68,33 @@ Controller.assetsDebts = (req, res) => {
 };
 
 Controller.totalAssets = (req, res) => {
-  //TODO: totalAssets SAFT value
+  Promise.all([saftReq("/overview/assets/")])
+    .then((data) => {
+      res.json(response);
+    })
+    .catch(() => {
+      const err = new Error("Failed");
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
+    });
 };
 
 Controller.totalDebts = (req, res) => {
-  //TODO: totalDebts SAFT value
+  Promise.all([saftReq("/overview/debt/")])
+    .then((data) => {
+      res.json(response);
+    })
+    .catch(() => {
+      const err = new Error("Failed");
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
+    });
 };
 
 module.exports = Controller;
