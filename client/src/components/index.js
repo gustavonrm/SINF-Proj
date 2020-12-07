@@ -5,10 +5,9 @@ import NavBarExample from './NavBarExample'
 import NavBar from './NavBar'
 import SideNav from './SideNav'
 import Content from './Content'
-import ContentWIP from './ContentWIP'
 
 import BarChart from './BarChart'
 import Value from './Value'
 import InfoBox from './InfoBox'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, ContentWIP, Value, InfoBox }
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, Value, InfoBox }

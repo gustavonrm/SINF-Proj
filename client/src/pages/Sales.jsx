@@ -65,7 +65,7 @@ class Sales extends Component {
                 <div className="px-4 py-2">
                   <div className="row justify-content-between px-2">
                     <InfoBox title="Profit" description="Average profit per sale"/>
-                    <div className="col-8 bg-light p-4">
+                    <article className="col-8 bg-light p-4">
                       <h2>Top Sold Products</h2>
                       <div className="row p-2">
                         <table class="col-6 table">
@@ -95,10 +95,10 @@ class Sales extends Component {
                           </tbody>
                         </table>
                       </div>
-                    </div>
+                    </article>
                   </div>
                 </div>
-                <div></div>
+                <article></article>
               </section>
             </main>
           </div>
