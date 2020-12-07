@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import "whatwg-fetch";
 
-import api from "../api";
 import { getFromStorage, setInStorage } from "../app/utils/storage";
 
 class Home extends Component {
@@ -89,22 +89,6 @@ class Home extends Component {
 
   onSignUp() {
     // Grab state
-    /*
-    const { signUpEmail, signUpPassword } = this.state;
-    const payload = { signUpEmail, signUpPassword };
-
-    this.setState({
-      isLoading: true,
-    });
-
-    // Post request to backend
-    api.signup(payload).then((res) => {
-      //window.alert(`Signed up succesully`);
-      console.log(res);
-    });
-    */
-
-    // Grab state
     const { signUpEmail, signUpPassword } = this.state;
     this.setState({
       isLoading: true,
@@ -170,6 +154,7 @@ class Home extends Component {
             signInEmail: "",
             token: json.token,
           });
+          window.location.href = "/";
         } else {
           this.setState({
             signInError: json.message,
@@ -230,34 +215,50 @@ class Home extends Component {
 
     if (!token) {
       return (
-        <div>
+        <>
           <div>
-            {signInError ? <p>{signInError}</p> : null}
-            <p>Sign In</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signInEmail}
-              onChange={this.onTextboxChangeSignInEmail}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signInPassword}
-              onChange={this.onTextboxChangeSignInPassword}
-            />
-            <br />
-            <button onClick={this.onSignIn}>Sign In</button>
+            <div class="form-signin">
+              {signInError ? <p>{signInError}</p> : null}
+              <div class="text-center mb-4"></div>
+              <p>Username</p>
+              <div class="form-label-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="User"
+                  value={signInEmail}
+                  onChange={this.onTextboxChangeSignInEmail}
+                  required=""
+                  autofocus=""
+                />
+              </div>
+              <p>Password</p>
+              <div class="form-label-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required=""
+                  value={signInPassword}
+                  onChange={this.onTextboxChangeSignInPassword}
+                />
+              </div>
+
+              <button
+                onClick={this.onSignIn}
+                class="btn btn-lg btn-primary btn-block"
+              >
+                Sign in
+              </button>
+            </div>
           </div>
-          <br />
-          <br />
+
           <div>
             {signUpError ? <p>{signUpError}</p> : null}
-            <p>Sign Up</p>
+            <p>Username</p>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Username"
               value={signUpEmail}
               onChange={this.onTextboxChangeSignUpEmail}
             />
@@ -271,14 +272,13 @@ class Home extends Component {
             <br />
             <button onClick={this.onSignUp}>Sign Up</button>
           </div>
-        </div>
+        </>
       );
     }
 
     return (
       <div>
-        <p>Account</p>
-        <button onClick={this.logout}>Logout</button>
+        <p>Signed in...</p>
       </div>
     );
   }

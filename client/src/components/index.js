@@ -8,6 +8,6 @@ import Content from './Content'
 
 import BarChart from './BarChart'
 
-import Home from './Home'
+import Auth from './Auth'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart,Home }
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart,Auth }
