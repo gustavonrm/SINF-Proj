@@ -3,7 +3,7 @@ const { jasminReq } = require('../utils/request');
 const Controller = {};
 
 Controller.profit = (req, res) => {
-  saftReq('/salesProfit/')
+  saftReq('/salesProfit/value/')
     .then((data) => {
       res.json({value: data});
     })
@@ -61,4 +61,4 @@ Controller.totalSales = (req, res) => {
     });
 };
 
-module.exports = Controller;
+module.exports = router;

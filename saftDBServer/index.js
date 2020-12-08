@@ -39,7 +39,6 @@ fs.readFile('saft/saft4.xml', (err, data) => {
 
           server.use(router);
 
-          //TODO Port should be changed to a different port
           server.listen(5432, () => {
             console.log('JSON Server is running on port 5432');
           });

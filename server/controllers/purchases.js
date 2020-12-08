@@ -4,7 +4,6 @@ const { getTimestamp } = require('../utils/util');
 const Controller = {};
 
 Controller.purchases = (req, res) => {
-  //TODO: purchases table
   const response = [];
 
   jasminReq('get', '/invoiceReceipt/invoices')
@@ -57,7 +56,6 @@ Controller.purchases = (req, res) => {
 };
 
 Controller.totalPurchases = (req, res) => {
-  //TODO: totalPurchases value
   const response = {
     value: 0,
   };
@@ -81,13 +79,12 @@ Controller.totalPurchases = (req, res) => {
 };
 
 Controller.debts = (req, res) => {
-  //TODO: debts table
   const response = [];
 
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        //if (invoice.cashInvoice) continue; //todo fix 
+        if (invoice.cashInvoice) continue;
         const supplier =
           invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
 
@@ -137,7 +134,6 @@ Controller.debts = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  //TODO: totalDebts value
   const response = {
     value: 0,
   };
@@ -145,7 +141,7 @@ Controller.totalDebts = (req, res) => {
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        //if (invoice.cashInvoice) continue; //todo fix 
+        if (invoice.cashInvoice) continue;
         response.value += invoice.payableAmount;
       });
 
