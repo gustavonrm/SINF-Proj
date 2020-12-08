@@ -1,14 +1,14 @@
-const { jasminReq } = require("../utils/request");
+const { jasminReq } = require('../utils/request');
 
 const Controller = {};
 
 Controller.accountsReceivable = (req, res) => {
-  saftReq("/accounts/accountsReceivable")
+  saftReq('/accounts/accountsReceivable')
     .then((data) => {
       res.json({ value: data.total, percentage: data.percentage });
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -20,7 +20,7 @@ Controller.accountsReceivable = (req, res) => {
 Controller.receivableTable = (req, res) => {
   const response = [];
 
-  jasminReq("get", "/billing/invoices")
+  jasminReq('get', '/billing/invoices')
     .then((data) => {
       const getKey = (item) => item.itemKey;
       const getName = (item) => item.salesItem;
@@ -62,7 +62,7 @@ Controller.receivableTable = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -72,12 +72,12 @@ Controller.receivableTable = (req, res) => {
 };
 
 Controller.accountsPayable = (req, res) => {
-  saftReq("/accounts/accountsPayable")
+  saftReq('/accounts/accountsPayable')
     .then((data) => {
       res.json({ value: data.total, percentage: data.percentage });
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -89,7 +89,7 @@ Controller.accountsPayable = (req, res) => {
 Controller.payableTable = (req, res) => {
   const response = [];
 
-  jasminReq("get", "/invoiceReceipt/invoices")
+  jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       const getKey = (item) => item.itemKey;
       const getName = (item) => item.purchasesItem;
@@ -131,7 +131,7 @@ Controller.payableTable = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,

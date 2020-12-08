@@ -1,11 +1,11 @@
 // Send request to jasmin api
 const saftReq = (url) => {  
     return axios({
-      method: "get",
+      method: 'get',
       url: url,
-      baseURL: "https://127.0.0.1:5432",
+      baseURL: 'https://127.0.0.1:5432',
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
       },
     }).then((res) => res.data);
   };

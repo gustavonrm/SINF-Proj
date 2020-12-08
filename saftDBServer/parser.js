@@ -4,7 +4,7 @@ module.exports = {
   auxDB: {},
 
   parseMonth: (req, res, next) => {
-    elements = req.split("-");
+    elements = req.split('-');
     return Number(elements[1]);
   },
 
@@ -69,7 +69,7 @@ module.exports = {
     let accountDescription = req.AccountDescription[0];
     let taxonomyCode = req.TaxonomyCode;
     if (Array.isArray(taxonomyCode)) {
-      taxonomyCode = taxonomyCode[0].split("");
+      taxonomyCode = taxonomyCode[0].split('');
       taxonomyCode = taxonomyCode.map(Number);
 
       let openingDebit = Number(req.OpeningDebitBalance[0]);
@@ -285,7 +285,7 @@ module.exports = {
       }
     });
     if (previousAccRec == 0) {
-      module.exports.jsonDB.accounts.accountsReceivable.percentage = "-";
+      module.exports.jsonDB.accounts.accountsReceivable.percentage = '-';
     } else
       module.exports.jsonDB.accounts.accountsReceivable.percentage =
         (module.exports.jsonDB.accounts.accountsReceivable.total - previousAccRec) /
@@ -308,7 +308,7 @@ module.exports = {
       }
     });
     if (previousAccPay == 0) {
-      module.exports.jsonDB.accounts.accountsPayable.percentage = "-";
+      module.exports.jsonDB.accounts.accountsPayable.percentage = '-';
     } else
       module.exports.jsonDB.accounts.accountsPayable.percentage =
         (module.exports.jsonDB.accounts.accountsPayable.total - previousAccPay) /

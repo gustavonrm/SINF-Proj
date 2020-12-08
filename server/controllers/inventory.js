@@ -1,11 +1,11 @@
-const { jasminReq } = require("../utils/request");
-const saftReq = require("../utils/saftReq");
+const { jasminReq } = require('../utils/request');
+const saftReq = require('../utils/saftReq');
 
 const Controller = {};
 
 Controller.stock = (req, res) => {
   // Returns the list of all the entity records available.
-  jasminReq("get", "/materialsCore/materialsItems")
+  jasminReq('get', '/materialsCore/materialsItems')
     .then((data) => {
       const response = {
         value: 0,
@@ -30,7 +30,7 @@ Controller.stock = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -41,7 +41,7 @@ Controller.stock = (req, res) => {
 
 Controller.capacity = (req, res) => {
   // Returns the list of all the entity records available.
-  Promise.all([jasminReq("get", "/materialsCore/materialsItems"), saftReq("/products/")])
+  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products/')])
     .then((data) => {
       const response = [];
 
@@ -92,7 +92,7 @@ Controller.capacity = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -113,7 +113,7 @@ Controller.period = (req, res) => {
 Controller.turnover = (req, res) => {
   Controller.capacity()
     .then((data) => {
-      saftReq("/overview/sales/")
+      saftReq('/overview/sales/')
         .then((monthlySales) => {
           let totalStock = 0 
           data.forEach((product) => {

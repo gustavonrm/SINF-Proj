@@ -1,12 +1,12 @@
-const { jasminReq } = require("../utils/request");
-const { getTimestamp } = require("../utils/util");
+const { jasminReq } = require('../utils/request');
+const { getTimestamp } = require('../utils/util');
 
 const Controller = {};
 
 Controller.purchases = (req, res) => {
   const response = [];
 
-  jasminReq("get", "/invoiceReceipt/invoices")
+  jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         const supplier =
@@ -46,7 +46,7 @@ Controller.purchases = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -60,7 +60,7 @@ Controller.totalPurchases = (req, res) => {
     value: 0,
   };
 
-  jasminReq("get", "/invoiceReceipt/invoices")
+  jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         response.value += invoice.payableAmount;
@@ -69,7 +69,7 @@ Controller.totalPurchases = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -81,7 +81,7 @@ Controller.totalPurchases = (req, res) => {
 Controller.debts = (req, res) => {
   const response = [];
 
-  jasminReq("get", "/invoiceReceipt/invoices")
+  jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) continue;
@@ -124,7 +124,7 @@ Controller.debts = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -138,7 +138,7 @@ Controller.totalDebts = (req, res) => {
     value: 0,
   };
 
-  jasminReq("get", "/invoiceReceipt/invoices")
+  jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) continue;
@@ -148,7 +148,7 @@ Controller.totalDebts = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
