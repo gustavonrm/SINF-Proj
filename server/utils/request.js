@@ -1,5 +1,5 @@
-const { axios, interceptors, request } = require("axios");
-global.TOKEN = "";
+const { axios, interceptors, request } = require('axios');
+global.TOKEN = '';
 
 // Send http request
 const httpReq = (method, url, data) => {
@@ -12,33 +12,33 @@ const httpReq = (method, url, data) => {
 
 // Send request to primavera and retrieve access token
 const getAccessToken = () => {
-  const clientId = "SINF2021-GH-APP"; // Name of the app
-  const clientSecret = "6ebbdc1c-bd26-45ce-b8ab-4acbdcfecb7d"; // Secret
-  const tokenUrl = "https://identity.primaverabss.com/connect/token"; // Primavera URL
+  const clientId = 'SINF2021-GH-APP'; // Name of the app
+  const clientSecret = '6ebbdc1c-bd26-45ce-b8ab-4acbdcfecb7d'; // Secret
+  const tokenUrl = 'https://identity.primaverabss.com/connect/token'; // Primavera URL
 
   const data = {
-    grantType: "clientCredentials",
+    grantType: 'clientCredentials',
     clientId: clientId,
     clientSecret: clientSecret,
-    scope: "application",
+    scope: 'application',
   };
 
-  return httpReq("post", tokenUrl, data);
+  return httpReq('post', tokenUrl, data);
 };
 
 // Send request to jasmin api
 const jasminReq = (method, url) => {
   // TODO: add account and subscription
-  const account = ""; //
-  const subscription = ""; //
+  const account = ''; //
+  const subscription = ''; //
 
   return axios({
     method: method,
     url: url,
     baseURL: "https://my.jasminsoftware.com/api/${account}/${subscription}/",
     headers: {
-      Accept: "application/json",
-      "Content-Type": "multipart/form-data",
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
       Authorization: TOKEN,
     },
   }).then((res) => res.data);

@@ -1,18 +1,18 @@
-const validator = require("xsd-schema-validator");
-const xml2js = require("xml2js");
-const fs = require("fs");
-const parser = require("./parser.js");
+const validator = require('xsd-schema-validator');
+const xml2js = require('xml2js');
+const fs = require('fs');
+const parser = require('./parser.js');
 
-fs.readFile("saft/saft4.xml", (err, data) => {
-  var data = data.toString().replace("\ufeff", "");
+fs.readFile('saft/saft4.xml', (err, data) => {
+  var data = data.toString().replace('\ufeff', '');
 
-  validator.validateXML(data, "saft/saftSchema2.xsd", (err, result) => {
+  validator.validateXML(data, 'saft/saftSchema2.xsd', (err, result) => {
     if (err) {
       throw err;
     }
 
     if (result.valid) {
-      console.log("XML file was valid");
+      console.log('XML file was valid');
 
       xml2js.parseString(data, (err, result) => {
         if (err) {
@@ -23,16 +23,16 @@ fs.readFile("saft/saft4.xml", (err, data) => {
 
         let jsonResult = parser.parseSAFT(auditFile);
 
-        fs.writeFile("db.json", JSON.stringify(jsonResult), (err, result) => {
+        fs.writeFile('db.json', JSON.stringify(jsonResult), (err, result) => {
           if (err) {
             throw err;
           }
 
-          console.log("JSON database created");
+          console.log('JSON database created');
 
-          const jsonServer = require("json-server");
+          const jsonServer = require('json-server');
           const server = jsonServer.create();
-          const router = jsonServer.router("db.json");
+          const router = jsonServer.router('db.json');
           const middlewares = jsonServer.defaults();
 
           server.use(middlewares);
@@ -40,7 +40,7 @@ fs.readFile("saft/saft4.xml", (err, data) => {
           server.use(router);
 
           server.listen(5432, () => {
-            console.log("JSON Server is running on port 5432");
+            console.log('JSON Server is running on port 5432');
           });
         });
       });

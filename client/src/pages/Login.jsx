@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import api from "../api";
-import { Logo } from "../components";
-import "../style/Login.css";
+import React, { Component } from 'react';
+import { Logo, Auth } from '../components';
+import '../style/Login.css';
+
+import { getFromStorage } from '../app/utils/storage';
 
 class Login extends Component {
   constructor(props) {
@@ -9,39 +10,19 @@ class Login extends Component {
 
     this.state = {};
   }
+
   render() {
+    console.log('Storage' + getFromStorage('the_main_app'));
     return (
       <>
-        <Logo />
-
-        <form class="form-signin">
-          <div class="text-center mb-4"></div>
-
-          <div class="form-label-group">
-            <input
-              type="email"
-              id="inputEmail"
-              class="form-control"
-              placeholder="Email address"
-              required=""
-              autofocus=""
-            />
+        <div id='login-page'>
+          <div className='container '>
+            <div class='row d-flex justify-content-center'>
+              <Logo />
+            </div>
           </div>
-
-          <div class="form-label-group">
-            <input
-              type="password"
-              id="inputPassword"
-              class="form-control"
-              placeholder="Password"
-              required=""
-            />
-          </div>
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
-          </button>
-        </form>
+          <Auth />
+        </div>
       </>
     );
   }

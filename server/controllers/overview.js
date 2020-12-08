@@ -1,6 +1,6 @@
-const { jasminReq } = require("../utils/request");
-const { getTimestamp } = require("../utils/util");
-const { saftReq } = require("../utils/saftReq");
+const { jasminReq } = require('../utils/request');
+const { getTimestamp } = require('../utils/util');
+const { saftReq } = require('../utils/saftReq');
 
 const Controller = {};
 
@@ -12,8 +12,8 @@ Controller.salesExpenses = (req, res) => {
   const response = { sales: sales, expenses: expenses };
 
   Promise.all([
-    jasminReq("get", "/billing/invoices"),
-    jasminReq("get", "/invoiceReceipt/invoices"),
+    jasminReq('get', '/billing/invoices'),
+    jasminReq('get', '/invoiceReceipt/invoices'),
   ])
     .then((data) => {
       const [salesInvoices, expensesInvoices] = data;
@@ -37,7 +37,7 @@ Controller.salesExpenses = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -47,12 +47,12 @@ Controller.salesExpenses = (req, res) => {
 };
 
 Controller.assetsDebts = (req, res) => {
-  Promise.all([saftReq("/overview/assets/"), saftReq("/overview/debt/")])
+  Promise.all([saftReq('/overview/assets/'), saftReq('/overview/debt/')])
     .then((data) => {
       res.json({assets: data[0], debts: data[1]})
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -62,12 +62,12 @@ Controller.assetsDebts = (req, res) => {
 };
 
 Controller.totalAssets = (req, res) => {
-  saftReq("/overview/totalAssets/")
+  saftReq('/overview/totalAssets/')
     .then((data) => {
       res.json({value: data});
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -77,12 +77,12 @@ Controller.totalAssets = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  saftReq("/overview/totalDebt/")
+  saftReq('/overview/totalDebt/')
     .then((data) => {
       res.json({value: data});
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,

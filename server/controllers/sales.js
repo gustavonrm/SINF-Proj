@@ -1,14 +1,14 @@
-const { jasminReq } = require("../utils/request");
+const { jasminReq } = require('../utils/request');
 
 const Controller = {};
 
 Controller.profit = (req, res) => {
-  saftReq("/salesProfit/value/")
+  saftReq('/salesProfit/value/')
     .then((data) => {
       res.json({value: data});
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -18,12 +18,12 @@ Controller.profit = (req, res) => {
 };
 
 Controller.topProducts = (req, res) => {
-  saftReq("/products/")
+  saftReq('/products/')
     .then((data) => {
       res.json(data);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -39,7 +39,7 @@ Controller.totalSales = (req, res) => {
   expenses.fill(0, 0, 11);
   const response = { sales: sales, expenses: expenses };
 
-  jasminReq("get", "/billing/invoices")
+  jasminReq('get', '/billing/invoices')
     .then((data) => {
       date.forEach((invoice) => {
         invoice.documentLines.forEach((item) => {
@@ -52,7 +52,7 @@ Controller.totalSales = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
