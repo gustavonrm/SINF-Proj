@@ -28,9 +28,8 @@ const getAccessToken = () => {
 
 // Send request to jasmin api
 const jasminReq = (method, url) => {
-  // TODO: add account and subscription
-  const account = ""; //
-  const subscription = ""; //
+  const account = '243432';           //
+  const subscription = '243432-0001'; //
 
   return axios({
     method: method,
