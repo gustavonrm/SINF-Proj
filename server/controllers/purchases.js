@@ -87,7 +87,7 @@ Controller.debts = (req, res) => {
   jasminReq("get", "/invoiceReceipt/invoices")
     .then((data) => {
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) continue;
+        //if (invoice.cashInvoice) continue; //todo fix 
         const supplier =
           invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
 
@@ -145,7 +145,7 @@ Controller.totalDebts = (req, res) => {
   jasminReq("get", "/invoiceReceipt/invoices")
     .then((data) => {
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) continue;
+        //if (invoice.cashInvoice) continue; //todo fix 
         response.value += invoice.payableAmount;
       });
 
