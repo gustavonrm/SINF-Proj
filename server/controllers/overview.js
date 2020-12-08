@@ -1,6 +1,6 @@
-const { jasminReq } = require("../utils/request");
-const { getTimestamp } = require("../utils/util");
-const { saftReq } = require("../utils/saftReq");
+const { jasminReq } = require('../utils/request');
+const { getTimestamp } = require('../utils/util');
+const { saftReq } = require('../utils/saftReq');
 
 const Controller = {};
 
@@ -12,8 +12,8 @@ Controller.salesExpenses = (req, res) => {
   const response = { sales: sales, expenses: expenses };
 
   Promise.all([
-    jasminReq("get", "/billing/invoices"),
-    jasminReq("get", "/invoiceReceipt/invoices"),
+    jasminReq('get', '/billing/invoices'),
+    jasminReq('get', '/invoiceReceipt/invoices'),
   ])
     .then((data) => {
       const [salesInvoices, expensesInvoices] = data;
@@ -37,7 +37,7 @@ Controller.salesExpenses = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -58,7 +58,7 @@ Controller.assetsDebts = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -68,12 +68,12 @@ Controller.assetsDebts = (req, res) => {
 };
 
 Controller.totalAssets = (req, res) => {
-  Promise.all([saftReq("/overview/assets/")])
+  Promise.all([saftReq('/overview/assets/')])
     .then((data) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -83,12 +83,12 @@ Controller.totalAssets = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  Promise.all([saftReq("/overview/debt/")])
+  Promise.all([saftReq('/overview/debt/')])
     .then((data) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,

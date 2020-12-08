@@ -1,10 +1,10 @@
-const { jasminReq } = require("../utils/request");
+const { jasminReq } = require('../utils/request');
 
 const Controller = {};
 
 Controller.stock = (req, res) => {
   // Returns the list of all the entity records available.
-  jasminReq("get", "/materialsCore/materialsItems")
+  jasminReq('get', '/materialsCore/materialsItems')
     .then((data) => {
       const response = {
         value: 0,
@@ -29,7 +29,7 @@ Controller.stock = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,
@@ -40,7 +40,7 @@ Controller.stock = (req, res) => {
 
 Controller.capacity = (req, res) => {
   // Returns the list of all the entity records available.
-  jasminReq("get", "/materialsCore/materialsItems")
+  jasminReq('get', '/materialsCore/materialsItems')
     .then((data) => {
       const response = [];
 
@@ -85,7 +85,7 @@ Controller.capacity = (req, res) => {
       res.json(response);
     })
     .catch(() => {
-      const err = new Error("Failed");
+      const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
         message: err.message,

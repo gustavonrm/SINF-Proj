@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import api from "../api";
+import React, { Component } from 'react';
+import api from '../api';
 
-import "../style/App.css";
+import '../style/App.css';
 
-import { Content, NavBar, SideNav } from "../components";
+import { Content, NavBar, SideNav } from '../components';
 
 class Overview extends Component {
   constructor(props) {
@@ -15,9 +15,9 @@ class Overview extends Component {
     return (
       <>
         <NavBar />
-        <div className="container-fluid">
-          <div className="row">
-            <SideNav page={"Overview"} />
+        <div className='container-fluid'>
+          <div className='row'>
+            <SideNav page={'Overview'} />
             <Content />
           </div>
         </div>
