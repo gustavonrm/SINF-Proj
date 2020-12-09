@@ -14,7 +14,6 @@ const getAccessToken = () => {
   };
   let formData = new FormData();
   for(const key in data) formData.append(key, data[key]);
-  console.log("HEY");
   return axios({
     method: 'post',
     url: tokenUrl,
@@ -31,11 +30,11 @@ const jasminReq = (method, url) => {
   return axios({
     method: method,
     url: url,
-    baseURL: "https://my.jasminsoftware.com/api/${account}/${subscription}/",
+    baseURL: 'https://my.jasminsoftware.com/api/' + account + '/' + subscription + '/',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'multipart/form-data',
-      Authorization: "Bearer ${global.TOKEN}",
+      Authorization: 'Bearer ' + global.TOKEN,
     },
   }).then((res) => res.data);
 };
@@ -45,9 +44,8 @@ axios.interceptors.response.use(null, (error) => {
   if (error.response.status != 401) return Promise.reject(error);
   return getAccessToken().then((res) => {
     if (res.data.access_token) global.TOKEN = res.data.access_token;
-    const config = error.config;
-    config.headers['Authorization'] = "Bearer ${global.TOKEN}";
-    return axios.request(config);
+    error.config.headers['Authorization'] = 'Bearer ' + global.TOKEN;
+    return axios.request(error.config);
   });
 });
 
