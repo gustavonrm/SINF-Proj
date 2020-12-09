@@ -1,4 +1,4 @@
-const { axios, interceptors, request } = require('axios');
+const axios = require('axios');
 global.TOKEN = '';
 
 // Send http request
@@ -44,14 +44,14 @@ const jasminReq = (method, url) => {
 };
 
 // In case of error check if token problem
-interceptors.response.use(null, (error) => {
+axios.interceptors.response.use(null, (error) => {
   // If token not problem, return
   if (error.response.status != 401) return Promise.reject(error);
   // else get token and retry
   return getAccessToken().then((res) => {
     const config = error.config;
     if (res.data.accessToken) global.TOKEN = res.data.accessToken;
-    return request(config);
+    return axios.request(config);
   });
 });
 

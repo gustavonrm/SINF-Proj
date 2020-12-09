@@ -85,10 +85,8 @@ Controller.debts = (req, res) => {
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) return; //TODO REVE ISTO PF - se isto é jQuery continue nao existe, comporta-se como return
-        const supplier =
-          invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
-
+        if (invoice.cashInvoice) return;
+        const supplier = invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
         invoice.documentLines.forEach((item) => {
           const getKey = (item) => item.itemKey;
           const getName = (item) => item.purchasesItem;
@@ -142,7 +140,7 @@ Controller.totalDebts = (req, res) => {
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) return; //TODO REVE ISTO PF - se isto é jQuery continue nao existe, comporta-se como return
+        if (invoice.cashInvoice) return;
         response.value += invoice.payableAmount;
       });
 

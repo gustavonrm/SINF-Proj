@@ -37,10 +37,8 @@ Controller.receivableTable = (req, res) => {
 
       const dueDate = getDueDate(invoice);
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) return; //TODO REVE ISTO PF - se isto é jQuery continue nao existe, comporta-se como return
-        const supplier =
-          invoice.buyerCustomerPartyName || invoice.buyerCustomerParty;
-
+        if (invoice.cashInvoice) return;
+        const supplier = invoice.buyerCustomerPartyName || invoice.buyerCustomerParty;
         invoice.documentLines.forEach((item) => {
           const key = getKey(item);
           const name = getName(item);
@@ -105,10 +103,8 @@ Controller.payableTable = (req, res) => {
         ) / item.materialsItemWarehouses.length;
 
       data.forEach((invoice) => {
-        if (invoice.cashInvoice) return; //TODO REVE ISTO PF - se isto é jQuery continue nao existe, comporta-se como return
-        const supplier =
-          invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
-
+        if (invoice.cashInvoice) return;
+        const supplier = invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
         const dueDate = getDueDate(invoice);
         invoice.documentLines.forEach((item) => {
           const key = getKey(item);
