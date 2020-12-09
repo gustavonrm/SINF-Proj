@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 // Send request to jasmin api
 const saftReq = (url) => {  
     return axios({
