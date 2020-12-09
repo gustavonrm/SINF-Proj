@@ -47,7 +47,7 @@ Controller.salesExpenses = (req, res) => {
 };
 
 Controller.assetsDebts = (req, res) => {
-  Promise.all([saftReq('/overview/assets/'), saftReq('/overview/debt/')])
+  Promise.all([saftReq('/overview/assets'), saftReq('/overview/debt')])
     .then((data) => {
       res.json({assets: data[0], debts: data[1]})
     })
@@ -62,7 +62,7 @@ Controller.assetsDebts = (req, res) => {
 };
 
 Controller.totalAssets = (req, res) => {
-  saftReq('/overview/totalAssets/')
+  saftReq('/overview/totalAssets')
     .then((data) => {
       res.json({value: data});
     })
@@ -77,7 +77,7 @@ Controller.totalAssets = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  saftReq('/overview/totalDebt/')
+  saftReq('/overview/totalDebt')
     .then((data) => {
       res.json({value: data});
     })

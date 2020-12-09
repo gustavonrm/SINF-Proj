@@ -4,11 +4,9 @@ const saftReq = require('../utils/saftReq');
 const Controller = {};
 
 Controller.profit = (req, res) => {
-  saftReq('/salesProfit/value/')
-    .then((data) => {
-      res.json({value: data});
-    })
-    .catch(() => {
+  saftReq('/salesProfit').then((data) => {
+      res.json({value: data.value});
+    }).catch(() => {
       const err = new Error('Failed');
       err.status = 400;
       res.status(400).json({
@@ -19,7 +17,7 @@ Controller.profit = (req, res) => {
 };
 
 Controller.topProducts = (req, res) => {
-  saftReq('/products/')
+  saftReq('/products')
     .then((data) => {
       res.json(data);
     })
