@@ -61,4 +61,4 @@ Controller.totalSales = (req, res) => {
     });
 };
 
-module.exports = router;
+module.exports = Controller;
