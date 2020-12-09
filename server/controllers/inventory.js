@@ -1,4 +1,4 @@
-const { jasminReq } = require('../utils/request');
+const jasminReq = require('../utils/request');
 const saftReq = require('../utils/saftReq');
 
 const Controller = {};

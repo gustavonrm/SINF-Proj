@@ -1,6 +1,6 @@
-const { jasminReq } = require('../utils/request');
+const jasminReq = require('../utils/request');
 const { getTimestamp } = require('../utils/util');
-const { saftReq } = require('../utils/saftReq');
+const saftReq = require('../utils/saftReq');
 
 const Controller = {};
 
