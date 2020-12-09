@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
-import { Content, NavBar, SideNav } from "../components";
+import { Content, InfoBox, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
 class Purchase extends Component {
@@ -62,7 +62,97 @@ class Purchase extends Component {
                 </div>
               </div>
               <section>
-                
+                <div className="d-flex justify-content-around mb-4">
+                  <article className="col-8 bg-light p-4">
+                    <h2>Purchases</h2>
+                    <h5 className="text-muted">{this.props.description}</h5>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Purchase</th>
+                          <th scope="col">Supplier</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Total Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">ID_65421</th>
+                          <td>Ream of paper (Grade A)</td>
+                          <td>@mdo</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>1000</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th scope="col">Total</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col">Total Amount</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+
+                  </article>
+                  <InfoBox title="Total Purchases" description="Value of purchases in selected period" />
+                </div>
+                <div className="d-flex justify-content-around">
+                  <article className="col-8 bg-light p-4">
+                    <h2>Debt to suppliers</h2>
+                    <h5 className="text-muted"></h5>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Purchase</th>
+                          <th scope="col">Supplier</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Total Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">ID_65421</th>
+                          <td>Ream of paper (Grade A)</td>
+                          <td>@mdo</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>1000</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th scope="col">Total</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col">Total Amount</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </article>
+                  <InfoBox title="Total Debt" description="Value of debt in selected period" />
+                </div>
               </section>
             </main>
           </div>
