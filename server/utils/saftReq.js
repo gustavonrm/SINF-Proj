@@ -1,3 +1,6 @@
+const axios = require('axios');
+
+// Send request to saft database
 const saftReq = (url) => {  
     return axios({
       method: 'get',

@@ -41,7 +41,7 @@ Controller.stock = (req, res) => {
 
 Controller.capacity = (req, res) => {
   // Returns the list of all the entity records available.
-  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products/')])
+  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products')])
     .then((data) => {
       const response = [];
 
@@ -113,7 +113,7 @@ Controller.period = (req, res) => {
 Controller.turnover = (req, res) => {
   Controller.capacity()
     .then((data) => {
-      saftReq('/overview/sales/')
+      saftReq('/overview/sales')
         .then((monthlySales) => {
           let totalStock = 0 
           data.forEach((product) => {
