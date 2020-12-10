@@ -1,3 +1,5 @@
+const taxonomy = require("./taxonomy.js")
+
 module.exports = {
   jsonDB: {},
 
@@ -69,8 +71,7 @@ module.exports = {
     let accountDescription = req.AccountDescription[0];
     let taxonomyCode = req.TaxonomyCode;
     if (Array.isArray(taxonomyCode)) {
-      taxonomyCode = taxonomyCode[0].split('');
-      taxonomyCode = taxonomyCode.map(Number);
+      taxonomyCode = Number(taxonomyCode[0]);
 
       let openingDebit = Number(req.OpeningDebitBalance[0]);
       let openingCredit = Number(req.OpeningCreditBalance[0]);
@@ -112,27 +113,12 @@ module.exports = {
     module.exports.parseCustomers(masterFiles.Customer);
     module.exports.parseSuppliers(masterFiles.Supplier);
     module.exports.parseProducts(masterFiles.Product);
-    module.exports.parseGeneralLedgerAccounts(masterFiles.GeneralLedgerAccounts);
+    if(masterFiles.GeneralLedgerAccounts)
+      module.exports.parseGeneralLedgerAccounts(masterFiles.GeneralLedgerAccounts);
   },
 
   parseTransaction: (req, res, next) => {
     let lines = req.Lines[0];
-    /*
-        let transaction = {credit: [], debit: []}
-        transaction.credit.length = 12
-        transaction.debit.length = 12
-        transaction.credit.fill(0)
-        transaction.debit.fill(0)
-        */
-
-    let supplier = req.SupplierID;
-    let customer = req.CustomerID;
-
-    let transaction = {
-      monthlyBalance: module.exports.makeMonthlyArray(),
-      date: req.TransactionDate[0],
-      value: 0,
-    };
 
     let creditLines = lines.CreditLine;
     if (creditLines) {
@@ -144,16 +130,12 @@ module.exports = {
 
         //transaction.credit[periodIndex] += value
         let account = module.exports.auxDB.accounts[accountID];
-        for (i = periodIndex; i < 12; ++i) {
-          if (account) {
+        if (account) {
+          for (i = periodIndex; i < 12; ++i) {
             module.exports.auxDB.accounts[accountID].monthlyCredit[i] += value;
           }
-          transaction.monthlyBalance[i] -= value;
         }
       });
-
-      if (transaction.value == 0)
-        transaction.value = -transaction.monthlyBalance[11];
     }
 
     let debitLines = lines.DebitLine;
@@ -166,46 +148,12 @@ module.exports = {
 
         //transaction.debit[periodIndex] += value
         let account = module.exports.auxDB.accounts[accountID];
-        for (i = periodIndex; i < 12; ++i) {
-          if (account) {
+        if (account) {
+          for (i = periodIndex; i < 12; ++i) {
             module.exports.auxDB.accounts[accountID].monthlyDebit[i] += value;
           }
-          transaction.monthlyBalance[i] += value;
         }
       });
-
-    transaction.monthlyBalance = transaction.monthlyBalance.map((x) => -x);
-    transaction.monthlyBalance = module.exports.flattenArray(transaction.monthlyBalance);
-
-    if (customer) {
-      customerObject = module.exports.auxDB.customers[customer[0]];
-      if (customerObject) {
-        transaction.account = customerObject.accountID;
-        module.exports.auxDB.accountsReceivable.push(transaction);
-      }
-    } else if (supplier) {
-      supplierObject = module.exports.auxDB.suppliers[supplier[0]];
-      if (supplierObject) {
-        transaction.account = supplierObject.accountID;
-        module.exports.auxDB.accountsPayable.push(transaction);
-
-        if (transaction.monthlyBalance[11] == 0) {
-          module.exports.jsonDB.purchases.purchases.push({
-            supplier: supplierObject.companyName,
-            value: transaction.value,
-          });
-        } else {
-          if (module.exports.jsonDB.purchases.debt[supplierObject.accountID])
-            module.exports.jsonDB.purchases.debt[supplierObject.accountID] +=
-              transaction.value;
-          else
-            module.exports.jsonDB.purchases.debt[supplierObject.accountID] = {
-              supplier: supplierObject.companyName,
-              value: transaction.value,
-            };
-        }
-      }
-    }
   },
 
   parseGeneralLedgerEntries: (req, res, next) => {
@@ -227,7 +175,6 @@ module.exports = {
       if (invoices)
         invoices.forEach((invoice) => {
           let periodIndex = parseInt(invoice.Period[0]) - 1;
-          //module.exports.jsonDB.overview.sales[periodIndex] += Number(invoice.DocumentTotals[0].NetTotal[0])
 
           let lines = invoice.Line;
           if (lines)
@@ -250,7 +197,6 @@ module.exports = {
       if (workDocuments)
         workDocuments.forEach((workDocument) => {
           let periodIndex = parseInt(workDocument.Period[0]) - 1;
-          //module.exports.jsonDB.overview.sales[periodIndex] += Number(workDocument.DocumentTotals[0].NetTotal[0])
 
           let lines = workDocument.Line;
           if (lines)
@@ -268,315 +214,138 @@ module.exports = {
     }
   },
 
-  createAccountsObject: (req, res, next) => {
-    let previousAccRec = 0;
-    module.exports.auxDB.accountsReceivable.forEach((transaction) => {
-      if (transaction.monthlyBalance[10] != 0) {
-        previousAccRec += transaction.monthlyBalance[10];
-      }
-      let currentBalance = transaction.monthlyBalance[11];
-      if (currentBalance != 0) {
-        module.exports.jsonDB.accounts.accountsReceivable.total += currentBalance;
-        module.exports.jsonDB.accounts.accountsReceivable.accounts.push({
-          account: transaction.account,
-          date: transaction.date,
-          value: currentBalance,
-        });
-      }
-    });
-    if (previousAccRec == 0) {
-      module.exports.jsonDB.accounts.accountsReceivable.percentage = '-';
-    } else
-      module.exports.jsonDB.accounts.accountsReceivable.percentage =
-        (module.exports.jsonDB.accounts.accountsReceivable.total - previousAccRec) /
-        previousAccRec;
+  generateAuxValues: (req, res, next) => {
+    let auxValues = {
+      Inventory: [0].concat(module.exports.makeMonthlyArray()),
+      CashEquivalents: [0].concat(module.exports.makeMonthlyArray()),
+      AccountsReceivable: [0].concat(module.exports.makeMonthlyArray()),
+      CurrentAssets: [0].concat(module.exports.makeMonthlyArray()),
+      NonCurrentAssets: [0].concat(module.exports.makeMonthlyArray()),
+      Equity: [0].concat(module.exports.makeMonthlyArray()),
+      AccountsPayable: [0].concat(module.exports.makeMonthlyArray()),
+      CurrentLiabilities: [0].concat(module.exports.makeMonthlyArray()),
+      NonCurrentLiabilities: [0].concat(module.exports.makeMonthlyArray()),
+      Taxes: [0].concat(module.exports.makeMonthlyArray()),
+      Interest: [0].concat(module.exports.makeMonthlyArray()),
+      Revenue: [0].concat(module.exports.makeMonthlyArray()),
+      Expenses: [0].concat(module.exports.makeMonthlyArray())
+    }
 
-    let previousAccPay = 0;
+    for(accountID in module.exports.auxDB.accounts){
+      let account = module.exports.auxDB.accounts[accountID]
+      let balance = account.openingDebit - account.openingCredit
+      
+      for(let i = -1; i < 12; ++i){
+        if(i >= 0){
+          balance = account.monthlyDebit[i] - account.monthlyCredit[i]
+        }
 
-    module.exports.auxDB.accountsPayable.forEach((transaction) => {
-      if (transaction.monthlyBalance[10] != 0) {
-        previousAccPay += transaction.monthlyBalance[10];
-      }
-      let currentBalance = transaction.monthlyBalance[11];
-      if (currentBalance != 0) {
-        module.exports.jsonDB.accounts.accountsPayable.total += currentBalance;
-        module.exports.jsonDB.accounts.accountsPayable.accounts.push({
-          account: transaction.account,
-          date: transaction.date,
-          value: currentBalance,
-        });
-      }
-    });
-    if (previousAccPay == 0) {
-      module.exports.jsonDB.accounts.accountsPayable.percentage = '-';
-    } else
-      module.exports.jsonDB.accounts.accountsPayable.percentage =
-        (module.exports.jsonDB.accounts.accountsPayable.total - previousAccPay) /
-        previousAccPay;
-  },
+        let accountTypes = taxonomy.getAccountTypes(account.taxonomyCode, balance)
+        if(Array.isArray(accountTypes)){
+          accountTypes.forEach((operation) => {
+            auxValues[operation.type][i + 1] += operation.value;
 
-  createBalanceSheet: (req, res, next) => {
-    let balanceSheet = {
-      assets: module.exports.makeMonthlyArray(),
-      liabilities: module.exports.makeMonthlyArray(),
-      sales: module.exports.makeMonthlyArray(),
-      expenses: module.exports.makeMonthlyArray(),
-      revenue: module.exports.makeMonthlyArray(),
-      interest: module.exports.makeMonthlyArray(),
-      cash: module.exports.makeMonthlyArray(),
-      currentAssets: module.exports.makeMonthlyArray(),
-      currentLiabilities: module.exports.makeMonthlyArray(),
-      inventory: module.exports.makeMonthlyArray(),
-      startingRevenue: 0,
-      startingExpenses: 0,
-      startingLiabilities: 0,
-      startingAssets: 0,
-    };
-
-    for (accountID in module.exports.auxDB.accounts) {
-      let account = module.exports.auxDB.accounts[accountID];
-      for (i = 0; i < 12; ++i) {
-        let balance = account.monthlyDebit[i] - account.monthlyCredit[i];
-
-        switch (account.taxonomyCode[0]) {
-          case 1: {
-            if (balance < 0) {
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
+            switch(operation.type){
+              case "Inventory":
+              case "CashEquivalents":
+              case "AccountsReceivable":{
+                auxValues.CurrentAssets[i + 1] += operation.value;
               }
-              balanceSheet.liabilities[i] -= balance;
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
+              case "AccountsPayable":{
+                auxValues.CurrentLiabilities[i + 1] += operation.value;
               }
-              balanceSheet.assets[i] += balance;
-              balanceSheet.inventory[i] += balance;
-              balanceSheet.currentAssets[i] += balance;
+              default: break;
             }
-            break;
-          }
-          case 2: {
-            if (balance < 0) {
-              if (
-                (account.taxonomyCode[1] == 2 &&
-                  account.taxonomyCode[2] == 2) ||
-                (account.taxonomyCode[1] == 1 &&
-                  account.taxonomyCode[2] == 8) ||
-                (account.taxonomyCode[1] == 7 &&
-                  account.taxonomyCode[2] == 4) ||
-                account.taxonomyCode[1] == 4
-              ) {
-                balanceSheet.currentLiabilities[i] -= balance;
-              }
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.liabilities[i] -= balance;
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
-              }
-              if (
-                (account.taxonomyCode[1] == 1 &&
-                  account.taxonomyCode[2] == 2) ||
-                (account.taxonomyCode[1] == 2 && account.taxonomyCode[2] == 8)
-              ) {
-                balanceSheet.currentAssets[i] += balance;
-              }
-              balanceSheet.assets[i] += balance;
-            }
-            break;
-          }
-          case 3:
-          case 5: {
-            if (balance < 0) {
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.liabilities[i] -= balance;
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.assets[i] += balance;
-              balanceSheet.cash[i] += balance;
-              balanceSheet.currentAssets[i] += balance;
-            }
-            break;
-          }
-          case 6: {
-            if (balance < 0) {
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
-                balanceSheet.startingExpenses -=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.expenses[i] -= balance;
-              balanceSheet.liabilities[i] -= balance;
-              if (account.taxonomyCode[1] == 9) {
-                balanceSheet.interest[i] -= balance;
-                balanceSheet.currentLiabilities[i] -= balance;
-              }
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.assets[i] += balance;
-            }
-            break;
-          }
-          case 7: {
-            if (balance < 0) {
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
-              }
-              if (account.taxonomyCode[1] == 9) {
-                balanceSheet.interest[i] -= balance;
-              }
-              balanceSheet.liabilities[i] -= balance;
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
-                balanceSheet.startingRevenue +=
-                  account.openingDebit - account.openingCredit;
-              }
-              if (
-                account.taxonomyCode[1] == 1 ||
-                account.taxonomyCode[1] == 2
-              ) {
-                balanceSheet.sales[i] += balance;
-              }
-              balanceSheet.assets[i] += balance;
-              balanceSheet.revenue[i] += balance;
-            }
-            break;
-          }
-          default: {
-            if (balance < 0) {
-              if (i == 0) {
-                balanceSheet.startingLiabilities -=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.liabilities[i] -= balance;
-            } else {
-              if (i == 0) {
-                balanceSheet.startingAssets +=
-                  account.openingDebit - account.openingCredit;
-              }
-              balanceSheet.assets[i] += balance;
-            }
-            break;
-          }
+          })
         }
       }
     }
 
-    module.exports.jsonDB.overview.sales = balanceSheet.sales;
-    module.exports.jsonDB.overview.assets = balanceSheet.assets;
-    module.exports.jsonDB.overview.expenses = balanceSheet.expenses;
-    module.exports.jsonDB.overview.debt = balanceSheet.liabilities;
-    module.exports.jsonDB.overview.totalAssets = balanceSheet.assets.reduce(
-      (accumulator, currentValue) => accumulator + currentValue
-    );
-    module.exports.jsonDB.overview.totalDebt = balanceSheet.liabilities.reduce(
-      (accumulator, currentValue) => accumulator + currentValue
-    );
-    module.exports.auxDB.financial.revenue = balanceSheet.revenue;
-    module.exports.auxDB.financial.interest = balanceSheet.interest;
-    module.exports.auxDB.financial.cash = balanceSheet.cash;
-    module.exports.auxDB.financial.inventory = balanceSheet.inventory;
-    module.exports.auxDB.financial.currentAssets = balanceSheet.currentAssets;
-    module.exports.auxDB.financial.currentLiabilities = balanceSheet.currentLiabilities;
-    module.exports.auxDB.financial.startingAssets = balanceSheet.startingAssets;
-    module.exports.auxDB.financial.startingLiabilities = balanceSheet.startingLiabilities;
-    module.exports.auxDB.financial.startingExpenses = balanceSheet.startingExpenses;
-    module.exports.auxDB.financial.startingRevenue = balanceSheet.startingRevenue;
+    return auxValues;
   },
 
   calculateFinancialData: (req, res, next) => {
-    for (i = 0; i < 12; ++i) {
-      let sales = module.exports.jsonDB.overview.sales[i];
-      let assets = module.exports.jsonDB.overview.assets[i];
-      let expenses = module.exports.jsonDB.overview.expenses[i];
-      let liabilities = module.exports.jsonDB.overview.debt[i];
+    for (i = 1; i <= 12; ++i) {
+      let revenue = module.exports.auxDB.auxValues.Revenue[i];
 
-      let revenue = module.exports.auxDB.financial.revenue[i];
-      let interest = module.exports.auxDB.financial.interest[i];
-      let cash = module.exports.auxDB.financial.cash[i];
-      let inventory = module.exports.auxDB.financial.inventory[i];
-      let currentAssets = module.exports.auxDB.financial.currentAssets[i];
-      let currentLiabilities = module.exports.auxDB.financial.currentLiabilities[i];
+      let currentAssets = module.exports.auxDB.auxValues.CurrentAssets[i];
+      let totalAssets = currentAssets + module.exports.auxDB.auxValues.NonCurrentAssets[i];
 
-      let startingRevenue =
-        i == 0
-          ? module.exports.auxDB.financial.startingRevenue
-          : module.exports.auxDB.financial.revenue[i - 1];
-      let startingExpenses =
-        i == 0
-          ? module.exports.auxDB.financial.startingRevenue
-          : module.exports.jsonDB.overview.expenses[i - 1];
-      let startingLiabilities =
-        i == 0
-          ? module.exports.auxDB.financial.startingLiabilities
-          : module.exports.jsonDB.overview.debt[i - 1];
-      let startingAssets =
-        i == 0
-          ? module.exports.auxDB.financial.startingAssets
-          : module.exports.jsonDB.overview.assets[i - 1];
+      let expenses = module.exports.auxDB.auxValues.Expenses[i];
+
+      let currentLiabilities = module.exports.auxDB.auxValues.CurrentLiabilities[i];
+      let totalLiabilities = currentLiabilities + module.exports.auxDB.auxValues.NonCurrentLiabilities[i];
+      
+      let equity = module.exports.auxDB.auxValues.Equity[i];
+
+      let interest = module.exports.auxDB.auxValues.Interest[i];
+
+      let taxes = module.exports.auxDB.auxValues.Taxes[i];
+
+      let cash = module.exports.auxDB.auxValues.CashEquivalents[i];
+
+      let inventory = module.exports.auxDB.auxValues.Inventory[i];
+
+      let startingRevenue = module.exports.auxDB.auxValues.Revenue[i - 1];
+
+      let startingExpenses = module.exports.auxDB.auxValues.Expenses[i - 1];
+      
+      let startingLiabilities = module.exports.auxDB.auxValues.CurrentLiabilities[i - 1] +  module.exports.auxDB.auxValues.NonCurrentLiabilities[i - 1];
+
+      let startingEquity = module.exports.auxDB.auxValues.Equity[i - 1];
 
       //aux vars
       let ebit = revenue - expenses;
-      let netIncome = sales - expenses;
-      let equity = assets - liabilities;
+      let netIncome = ebit - interest - taxes;
       let startingProfit = startingRevenue - startingExpenses;
-      let startingEquity = startingAssets - startingLiabilities;
 
-      module.exports.jsonDB.financial.returnRatios.returnOnSales[i] = ebit / sales;
-      module.exports.jsonDB.financial.returnRatios.returnOnAssets[i] = netIncome / assets;
-      module.exports.jsonDB.financial.returnRatios.returnOnEquity[i] = netIncome / equity;
+      module.exports.jsonDB.financial.returnRatios.returnOnSales[i - 1] = ebit / revenue;
+      module.exports.jsonDB.financial.returnRatios.returnOnAssets[i - 1] = netIncome / totalAssets;
+      module.exports.jsonDB.financial.returnRatios.returnOnEquity[i - 1] = netIncome / equity;
 
-      module.exports.jsonDB.financial.stability.equityToAssets[i] = equity / assets;
-      module.exports.jsonDB.financial.stability.debtToEquity[i] = liabilities / equity;
-      module.exports.jsonDB.financial.stability.interestCoverage[i] = ebit / interest;
+      module.exports.jsonDB.financial.stability.equityToAssets[i - 1] = equity / totalAssets;
+      module.exports.jsonDB.financial.stability.debtToEquity[i - 1] = totalLiabilities / equity;
+      module.exports.jsonDB.financial.stability.interestCoverage[i - 1] = ebit / interest;
 
-      module.exports.jsonDB.financial.liquidity.current[i] =
-        currentAssets / currentLiabilities;
-      module.exports.jsonDB.financial.liquidity.quick[i] =
-        (currentAssets - inventory) / currentLiabilities;
-      module.exports.jsonDB.financial.liquidity.cash[i] = cash / currentLiabilities;
+      module.exports.jsonDB.financial.liquidity.current[i - 1] = currentAssets / currentLiabilities;
+      module.exports.jsonDB.financial.liquidity.quick[i - 1] = (currentAssets - inventory) / currentLiabilities;
+      module.exports.jsonDB.financial.liquidity.cash[i - 1] = cash / currentLiabilities;
 
-      module.exports.jsonDB.financial.growth.profit =
-        (ebit - startingProfit) / startingProfit;
-      module.exports.jsonDB.financial.growth.debt =
-        (liabilities - startingLiabilities) / startingLiabilities;
-      module.exports.jsonDB.financial.growth.equity =
-        (equity - startingEquity) / startingEquity;
+      module.exports.jsonDB.financial.growth.profit[i - 1] = (ebit - startingProfit) / startingProfit;
+      module.exports.jsonDB.financial.growth.debt[i - 1] = (totalLiabilities - startingLiabilities) / startingLiabilities;
+      module.exports.jsonDB.financial.growth.equity[i - 1] = (equity - startingEquity) / startingEquity;
     }
   },
 
-  calculateSalesProfit: (req, res, next) => {
-    let netProfit = 0
-    for(i = 0; i < 12; ++i){
-      let sales = module.exports.jsonDB.overview.sales[i]
-      let expenses = module.exports.jsonDB.overview.expenses[i]
+  setJSONDBvalues: (req, res, next) => {
+    //Overview
+    module.exports.jsonDB.overview.sales = module.exports.auxDB.auxValues.Revenue.slice(1);
+    module.exports.jsonDB.overview.expenses = module.exports.auxDB.auxValues.Expenses.slice(1);
+    
+    for(let i = 0; i < 12; ++i){
+      module.exports.jsonDB.overview.assets[i] = module.exports.auxDB.auxValues.CurrentAssets[i + 1] + module.exports.auxDB.auxValues.NonCurrentAssets[i + 1]; 
+      module.exports.jsonDB.overview.debt[i] = module.exports.auxDB.auxValues.CurrentLiabilities[i + 1] + module.exports.auxDB.auxValues.NonCurrentLiabilities[i + 1]; 
 
-      netProfit = netProfit + sales - expenses
+      module.exports.jsonDB.overview.totalAssets += module.exports.jsonDB.overview.assets[i];
+      module.exports.jsonDB.overview.totalDebt += module.exports.jsonDB.overview.debt[i];
+
+      //Accounts
+      let receivableTotal = module.exports.auxDB.auxValues.AccountsReceivable[i + 1];
+      let payableTotal = module.exports.auxDB.auxValues.AccountsPayable[i + 1];
+      let startingReceivableTotal = module.exports.auxDB.auxValues.AccountsReceivable[i];
+      let startingPayableTotal = module.exports.auxDB.auxValues.AccountsPayable[i];
+
+      module.exports.jsonDB.accounts.accountsReceivable.total += receivableTotal;
+      module.exports.jsonDB.accounts.accountsPayable.total += payableTotal;
+
+      module.exports.jsonDB.accounts.accountsReceivable.percentage += (receivableTotal - startingReceivableTotal) / startingReceivableTotal;
+      module.exports.jsonDB.accounts.accountsPayable.percentage += (payableTotal - startingPayableTotal) / startingPayableTotal;
+
+
     }
-
-    module.exports.jsonDB.salesProfit = {value: netProfit};
   },
 
-  parseSAFT: (req, res, next) => {
+  parseSAFTAccounting: (req, res, next) => {
     //sales, expenses, assets, debt (every month) - Overview
     module.exports.jsonDB.overview = {
       sales: module.exports.makeMonthlyArray(),
@@ -587,7 +356,7 @@ module.exports = {
       totalDebt: 0,
     };
 
-    module.exports.jsonDB.salesProfit = 0;
+    module.exports.jsonDB.salesProfit = {value: 0};
 
     module.exports.jsonDB.accounts = {
       accountsReceivable: { total: 0, percentage: 0, accounts: [] },
@@ -620,13 +389,9 @@ module.exports = {
       },
     };
 
-    module.exports.auxDB.accountsReceivable = [];
-    module.exports.auxDB.accountsPayable = [];
-
     module.exports.auxDB.accounts = {};
     module.exports.auxDB.customers = {};
     module.exports.auxDB.suppliers = {};
-    module.exports.auxDB.financial = { revenue: [], interest: [] };
 
     //average profit, top sold products, monthly sales value for each product - Sales
     let masterFiles = req.MasterFiles[0];
@@ -635,19 +400,18 @@ module.exports = {
     let ledgerEntries = req.GeneralLedgerEntries[0];
     module.exports.parseGeneralLedgerEntries(ledgerEntries);
 
-    if (req.SourceDocuments) {
-      let sourceDocuments = req.SourceDocuments[0];
-      module.exports.parseSourceDocuments(sourceDocuments);
-    }
-
-    module.exports.createAccountsObject();
-
-    module.exports.createBalanceSheet();
+    module.exports.auxDB.auxValues = module.exports.generateAuxValues();
 
     module.exports.calculateFinancialData();
 
-    module.exports.calculateSalesProfit();
-
-    return module.exports.jsonDB;
+    module.exports.setJSONDBvalues();
   },
+
+  parseSAFTInvoice: (req, res, next) => {
+    let masterFiles = req.MasterFiles[0];
+    module.exports.parseMasterFiles(masterFiles);
+
+    let sourceDocuments = req.SourceDocuments[0];
+    module.exports.parseSourceDocuments(sourceDocuments);
+  }
 };

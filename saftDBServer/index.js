@@ -3,7 +3,7 @@ const xml2js = require('xml2js');
 const fs = require('fs');
 const parser = require('./parser.js');
 
-fs.readFile('saft/saft4.xml', (err, data) => {
+fs.readFile('saft/saft_accounting.xml', (err, data) => {
   var data = data.toString().replace('\ufeff', '');
 
   validator.validateXML(data, 'saft/saftSchema2.xsd', (err, result) => {
@@ -12,7 +12,7 @@ fs.readFile('saft/saft4.xml', (err, data) => {
     }
 
     if (result.valid) {
-      console.log('XML file was valid');
+      console.log('Accounting XML file was valid');
 
       xml2js.parseString(data, (err, result) => {
         if (err) {
@@ -21,27 +21,51 @@ fs.readFile('saft/saft4.xml', (err, data) => {
 
         auditFile = result.AuditFile;
 
-        let jsonResult = parser.parseSAFT(auditFile);
+        parser.parseSAFTAccounting(auditFile);
 
-        fs.writeFile('db.json', JSON.stringify(jsonResult), (err, result) => {
-          if (err) {
-            throw err;
-          }
+        fs.readFile('saft/saft_01-01-2020_31-12-2020.xml', (err, data) => {
+          var data = data.toString().replace('\ufeff', '');
+        
+          validator.validateXML(data, 'saft/saftSchema2.xsd', (err, result) => {
+            if (err) {
+              throw err;
+            }
+        
+            if (result.valid) {
+              console.log('Accounting XML file was valid');
+        
+              xml2js.parseString(data, (err, result) => {
+                if (err) {
+                  throw err;
+                }
+        
+                invoiceFile = result.AuditFile;
+        
+                parser.parseSAFTInvoice(invoiceFile);
 
-          console.log('JSON database created');
+                fs.writeFile('db.json', JSON.stringify(parser.jsonDB), (err, result) => {
+                  if (err) {
+                    throw err;
+                  }
 
-          const jsonServer = require('json-server');
-          const server = jsonServer.create();
-          const router = jsonServer.router('db.json');
-          const middlewares = jsonServer.defaults();
+                  console.log('JSON database created');
 
-          server.use(middlewares);
+                  const jsonServer = require('json-server');
+                  const server = jsonServer.create();
+                  const router = jsonServer.router('db.json');
+                  const middlewares = jsonServer.defaults();
 
-          server.use(router);
+                  server.use(middlewares);
 
-          server.listen(5432, () => {
-            console.log('JSON Server is running on port 5432');
-          });
+                  server.use(router);
+
+                  server.listen(5432, () => {
+                    console.log('JSON Server is running on port 5432');
+                  });
+                });
+              });
+            }
+          })
         });
       });
     }
