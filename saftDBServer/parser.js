@@ -101,7 +101,6 @@ module.exports = {
 
   parseGeneralLedgerAccounts: (req, res, next) => {
     let ledgerAccounts = req[0].Account;
-    //console.log(ledgerAccounts)
     ledgerAccounts.forEach((account) => {
       module.exports.parseLedgerAccount(account);
     });
@@ -123,7 +122,6 @@ module.exports = {
     let creditLines = lines.CreditLine;
     if (creditLines) {
       creditLines.forEach((credit) => {
-        //console.log(credit)
         let accountID = credit.AccountID[0];
         let periodIndex = module.exports.parseMonth(credit.SystemEntryDate[0]) - 1;
         let value = Number(credit.CreditAmount[0]);
@@ -141,7 +139,6 @@ module.exports = {
     let debitLines = lines.DebitLine;
     if (debitLines)
       debitLines.forEach((debit) => {
-        //console.log(debit)
         let accountID = debit.AccountID[0];
         let periodIndex = module.exports.parseMonth(debit.SystemEntryDate[0]) - 1;
         let value = Number(debit.DebitAmount[0]);
@@ -321,6 +318,8 @@ module.exports = {
     //Overview
     module.exports.jsonDB.overview.sales = module.exports.auxDB.auxValues.Revenue.slice(1);
     module.exports.jsonDB.overview.expenses = module.exports.auxDB.auxValues.Expenses.slice(1);
+
+    let netProfit = 0
     
     for(let i = 0; i < 12; ++i){
       module.exports.jsonDB.overview.assets[i] = module.exports.auxDB.auxValues.CurrentAssets[i + 1] + module.exports.auxDB.auxValues.NonCurrentAssets[i + 1]; 
@@ -342,7 +341,15 @@ module.exports = {
       module.exports.jsonDB.accounts.accountsPayable.percentage += (payableTotal - startingPayableTotal) / startingPayableTotal;
 
 
+      let sales = module.exports.jsonDB.overview.sales[i]
+      let expenses = module.exports.jsonDB.overview.expenses[i]
+      let taxes = module.exports.auxDB.auxValues.Taxes[i + 1]
+      let interest = module.exports.auxDB.auxValues.Taxes[i + 1]
+
+      netProfit = netProfit + sales - expenses - taxes - interest
     }
+
+    module.exports.jsonDB.salesProfit.value = netProfit
   },
 
   parseSAFTAccounting: (req, res, next) => {
