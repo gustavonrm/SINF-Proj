@@ -6,4 +6,4 @@ import Financial from './Financial'
 import Inventory from './Inventory'
 import Accounts from './Accounts'
 
-export { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts}
+export { Login, Overview, Sales, Purchases, Financial, Inventory, Accounts }

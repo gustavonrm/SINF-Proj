@@ -4,7 +4,7 @@ const saftReq = require('../utils/saftReq');
 const Controller = {};
 
 Controller.returnRatios = (req, res) => {
-  saftReq('/financial/returnRatios')
+  saftReq('/returnRatios')
     .then((data) => {
       res.json(data);
     })
@@ -19,7 +19,7 @@ Controller.returnRatios = (req, res) => {
 };
 
 Controller.financialStability = (req, res) => {
-  saftReq('/financial/stability')
+  saftReq('/stability')
     .then((data) => {
       res.json(data);
     })
@@ -34,7 +34,7 @@ Controller.financialStability = (req, res) => {
 };
 
 Controller.liquidity = (req, res) => {
-  saftReq('/financial/liquidity')
+  saftReq('/liquidity')
     .then((data) => {
       res.json(data);
     })
@@ -49,7 +49,7 @@ Controller.liquidity = (req, res) => {
 };
 
 Controller.growthRatios = (req, res) => {
-  saftReq('/financial/growth')
+  saftReq('/growth')
     .then((data) => {
       res.json(data);
     })

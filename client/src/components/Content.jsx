@@ -5,7 +5,7 @@ class Content extends Component {
   state = {};
   render() {
     return (
-      <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-4'>
+      <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4" style={{ minHeight: "100vh" }}>
         <div
           style={{
             position: 'absolute',

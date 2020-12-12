@@ -39,6 +39,7 @@
       "react-app/jest"
     ]
   },
+  "license": "MIT",
   "browserslist": {
     "production": [
       ">0.2%",

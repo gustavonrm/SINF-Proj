@@ -4,6 +4,6 @@ const router = Router();
 
 router.get('/profit', ctrl.profit);
 router.get('/topProducts', ctrl.topProducts);
-router.get('/totalSales', ctrl.totalSales);
+router.get('/totalSales', ctrl.totalSales); //fix 
 
 module.exports = router;
