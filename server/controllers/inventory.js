@@ -113,7 +113,7 @@ Controller.period = (req, res) => {
 Controller.turnover = (req, res) => {
   Controller.capacity()
     .then((data) => {
-      saftReq('/overview/sales')
+      saftReq('/sales')
         .then((monthlySales) => {
           let totalStock = 0 
           data.forEach((product) => {

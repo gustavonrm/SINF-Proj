@@ -258,6 +258,20 @@ module.exports = {
       }
     }
 
+    auxValues.Inventory = module.exports.flattenArray(auxValues.Inventory);
+    auxValues.CashEquivalents = module.exports.flattenArray(auxValues.CashEquivalents);
+    auxValues.AccountsReceivable = module.exports.flattenArray(auxValues.AccountsReceivable);
+    auxValues.CurrentAssets = module.exports.flattenArray(auxValues.CurrentAssets);
+    auxValues.NonCurrentAssets = module.exports.flattenArray(auxValues.NonCurrentAssets);
+    auxValues.Equity = module.exports.flattenArray(auxValues.Equity);
+    auxValues.AccountsPayable = module.exports.flattenArray(auxValues.AccountsPayable);
+    auxValues.CurrentLiabilities = module.exports.flattenArray(auxValues.CurrentLiabilities);
+    auxValues.NonCurrentLiabilities = module.exports.flattenArray(auxValues.NonCurrentLiabilities);
+    auxValues.Taxes = module.exports.flattenArray(auxValues.Taxes);
+    auxValues.Interest = module.exports.flattenArray(auxValues.Interest);
+    auxValues.Revenue = module.exports.flattenArray(auxValues.Revenue);
+    auxValues.Expenses = module.exports.flattenArray(auxValues.Expenses);
+
     return auxValues;
   },
 
@@ -296,37 +310,37 @@ module.exports = {
       let netIncome = ebit - interest - taxes;
       let startingProfit = startingRevenue - startingExpenses;
 
-      module.exports.jsonDB.financial.returnRatios.returnOnSales[i - 1] = ebit / revenue;
-      module.exports.jsonDB.financial.returnRatios.returnOnAssets[i - 1] = netIncome / totalAssets;
-      module.exports.jsonDB.financial.returnRatios.returnOnEquity[i - 1] = netIncome / equity;
+      module.exports.jsonDB.returnRatios.returnOnSales[i - 1] = revenue != 0 ? ebit / revenue : 0;
+      module.exports.jsonDB.returnRatios.returnOnAssets[i - 1] = totalAssets != 0 ? netIncome / totalAssets : 0;
+      module.exports.jsonDB.returnRatios.returnOnEquity[i - 1] = equity != 0 ? netIncome / equity : 0;
 
-      module.exports.jsonDB.financial.stability.equityToAssets[i - 1] = equity / totalAssets;
-      module.exports.jsonDB.financial.stability.debtToEquity[i - 1] = totalLiabilities / equity;
-      module.exports.jsonDB.financial.stability.interestCoverage[i - 1] = ebit / interest;
+      module.exports.jsonDB.stability.equityToAssets[i - 1] = totalAssets != 0 ? equity / totalAssets : 0;
+      module.exports.jsonDB.stability.debtToEquity[i - 1] = equity != 0 ? totalLiabilities / equity : 0;
+      module.exports.jsonDB.stability.interestCoverage[i - 1] = interest != 0 ? ebit / interest : 0;
 
-      module.exports.jsonDB.financial.liquidity.current[i - 1] = currentAssets / currentLiabilities;
-      module.exports.jsonDB.financial.liquidity.quick[i - 1] = (currentAssets - inventory) / currentLiabilities;
-      module.exports.jsonDB.financial.liquidity.cash[i - 1] = cash / currentLiabilities;
+      module.exports.jsonDB.liquidity.current[i - 1] = currentLiabilities != 0 ? currentAssets / currentLiabilities : 0;
+      module.exports.jsonDB.liquidity.quick[i - 1] = currentLiabilities != 0 ? (currentAssets - inventory) / currentLiabilities : 0;
+      module.exports.jsonDB.liquidity.cash[i - 1] = currentLiabilities != 0 ? cash / currentLiabilities : 0;
 
-      module.exports.jsonDB.financial.growth.profit[i - 1] = (ebit - startingProfit) / startingProfit;
-      module.exports.jsonDB.financial.growth.debt[i - 1] = (totalLiabilities - startingLiabilities) / startingLiabilities;
-      module.exports.jsonDB.financial.growth.equity[i - 1] = (equity - startingEquity) / startingEquity;
+      module.exports.jsonDB.growth.profit[i - 1] = startingProfit != 0 ? (ebit - startingProfit) / startingProfit : 0;
+      module.exports.jsonDB.growth.debt[i - 1] = startingLiabilities != 0 ? (totalLiabilities - startingLiabilities) / startingLiabilities : 0;
+      module.exports.jsonDB.growth.equity[i - 1] = startingEquity != 0 ? (equity - startingEquity) / startingEquity : 0;
     }
   },
 
   setJSONDBvalues: (req, res, next) => {
     //Overview
-    module.exports.jsonDB.overview.sales = module.exports.auxDB.auxValues.Revenue.slice(1);
-    module.exports.jsonDB.overview.expenses = module.exports.auxDB.auxValues.Expenses.slice(1);
+    module.exports.jsonDB.sales = module.exports.auxDB.auxValues.Revenue.slice(1);
+    module.exports.jsonDB.expenses = module.exports.auxDB.auxValues.Expenses.slice(1);
 
     let netProfit = 0
     
     for(let i = 0; i < 12; ++i){
-      module.exports.jsonDB.overview.assets[i] = module.exports.auxDB.auxValues.CurrentAssets[i + 1] + module.exports.auxDB.auxValues.NonCurrentAssets[i + 1]; 
-      module.exports.jsonDB.overview.debt[i] = module.exports.auxDB.auxValues.CurrentLiabilities[i + 1] + module.exports.auxDB.auxValues.NonCurrentLiabilities[i + 1]; 
+      module.exports.jsonDB.assets[i] = module.exports.auxDB.auxValues.CurrentAssets[i + 1] + module.exports.auxDB.auxValues.NonCurrentAssets[i + 1]; 
+      module.exports.jsonDB.debt[i] = module.exports.auxDB.auxValues.CurrentLiabilities[i + 1] + module.exports.auxDB.auxValues.NonCurrentLiabilities[i + 1]; 
 
-      module.exports.jsonDB.overview.totalAssets += module.exports.jsonDB.overview.assets[i];
-      module.exports.jsonDB.overview.totalDebt += module.exports.jsonDB.overview.debt[i];
+      module.exports.jsonDB.totalAssets.value += module.exports.jsonDB.assets[i];
+      module.exports.jsonDB.totalDebt.value += module.exports.jsonDB.debt[i];
 
       //Accounts
       let receivableTotal = module.exports.auxDB.auxValues.AccountsReceivable[i + 1];
@@ -334,15 +348,15 @@ module.exports = {
       let startingReceivableTotal = module.exports.auxDB.auxValues.AccountsReceivable[i];
       let startingPayableTotal = module.exports.auxDB.auxValues.AccountsPayable[i];
 
-      module.exports.jsonDB.accounts.accountsReceivable.total += receivableTotal;
-      module.exports.jsonDB.accounts.accountsPayable.total += payableTotal;
+      module.exports.jsonDB.accountsReceivable.total += receivableTotal;
+      module.exports.jsonDB.accountsPayable.total += payableTotal;
 
-      module.exports.jsonDB.accounts.accountsReceivable.percentage += (receivableTotal - startingReceivableTotal) / startingReceivableTotal;
-      module.exports.jsonDB.accounts.accountsPayable.percentage += (payableTotal - startingPayableTotal) / startingPayableTotal;
+      module.exports.jsonDB.accountsReceivable.percentage += startingReceivableTotal != 0 ? (receivableTotal - startingReceivableTotal) / startingReceivableTotal : 0;
+      module.exports.jsonDB.accountsPayable.percentage += startingPayableTotal != 0 ? (payableTotal - startingPayableTotal) / startingPayableTotal : 0;
 
 
-      let sales = module.exports.jsonDB.overview.sales[i]
-      let expenses = module.exports.jsonDB.overview.expenses[i]
+      let sales = module.exports.jsonDB.sales[i]
+      let expenses = module.exports.jsonDB.expenses[i]
       let taxes = module.exports.auxDB.auxValues.Taxes[i + 1]
       let interest = module.exports.auxDB.auxValues.Taxes[i + 1]
 
@@ -354,47 +368,47 @@ module.exports = {
 
   parseSAFTAccounting: (req, res, next) => {
     //sales, expenses, assets, debt (every month) - Overview
-    module.exports.jsonDB.overview = {
-      sales: module.exports.makeMonthlyArray(),
-      expenses: module.exports.makeMonthlyArray(),
-      assets: module.exports.makeMonthlyArray(),
-      debt: module.exports.makeMonthlyArray(),
-      totalAssets: 0,
-      totalDebt: 0,
-    };
+    module.exports.jsonDB.sales = module.exports.makeMonthlyArray()
+    module.exports.jsonDB.expenses = module.exports.makeMonthlyArray()
+    module.exports.jsonDB.assets = module.exports.makeMonthlyArray()
+    module.exports.jsonDB.debt = module.exports.makeMonthlyArray()
+    module.exports.jsonDB.totalAssets = {value: 0}
+    module.exports.jsonDB.totalDebt = {value: 0}
 
     module.exports.jsonDB.salesProfit = {value: 0};
 
-    module.exports.jsonDB.accounts = {
-      accountsReceivable: { total: 0, percentage: 0, accounts: [] },
-      accountsPayable: { total: 0, percentage: 0, accounts: [] },
-    };
+    module.exports.jsonDB.accountsReceivable = { total: 0, percentage: 0, accounts: [] }
+    module.exports.jsonDB.accountsPayable = { total: 0, percentage: 0, accounts: [] }
 
-    module.exports.jsonDB.purchases = { purchases: [], debt: {}, cash: {} };
+    module.exports.jsonDB.purchases = []
+    module.exports.jsonDB.purchasesDebt = {}
+    module.exports.jsonDB.purchasesCash = {}
 
-    module.exports.jsonDB.financial = {
-      returnRatios: {
+    module.exports.jsonDB.returnRatios = {
         returnOnSales: module.exports.makeMonthlyArray(),
         returnOnAssets: module.exports.makeMonthlyArray(),
         returnOnEquity: module.exports.makeMonthlyArray(),
-      },
-      stability: {
+    }
+      
+    module.exports.jsonDB.stability = {
         equityToAssets: module.exports.makeMonthlyArray(),
         debtToEquity: module.exports.makeMonthlyArray(),
         coverageOnFixedInvestments: module.exports.makeMonthlyArray(),
         interestCoverage: module.exports.makeMonthlyArray(),
-      },
-      liquidity: {
+    }
+
+    module.exports.jsonDB.liquidity = {
         current: module.exports.makeMonthlyArray(),
         quick: module.exports.makeMonthlyArray(),
         cash: module.exports.makeMonthlyArray(),
-      },
-      growth: {
+    }
+      
+    module.exports.jsonDB.growth = {
         profit: module.exports.makeMonthlyArray(),
         debt: module.exports.makeMonthlyArray(),
         equity: module.exports.makeMonthlyArray(),
-      },
-    };
+    }
+    
 
     module.exports.auxDB.accounts = {};
     module.exports.auxDB.customers = {};

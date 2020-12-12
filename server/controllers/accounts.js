@@ -4,7 +4,7 @@ const saftReq = require('../utils/saftReq');
 const Controller = {};
 
 Controller.accountsReceivable = (req, res) => {
-  saftReq('/accounts/accountsReceivable')
+  saftReq('/accountsReceivable')
     .then((data) => {
       res.json({ value: data.total, percentage: data.percentage });
     })
@@ -71,7 +71,7 @@ Controller.receivableTable = (req, res) => {
 };
 
 Controller.accountsPayable = (req, res) => {
-  saftReq('/accounts/accountsPayable')
+  saftReq('/accountsPayable')
     .then((data) => {
       res.json({ value: data.total, percentage: data.percentage });
     })

@@ -32,7 +32,7 @@ fs.readFile('saft/saft_accounting.xml', (err, data) => {
             }
         
             if (result.valid) {
-              console.log('Accounting XML file was valid');
+              console.log('Billing XML file was valid');
         
               xml2js.parseString(data, (err, result) => {
                 if (err) {
