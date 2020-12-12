@@ -62,10 +62,10 @@ class Sales extends Component {
                 </div>
               </div>
               <section>
-                <div className="px-4 py-2">
-                  <div className="row justify-content-between px-2">
+                <div className="px-4">
+                  <div className="row px-2">
                     <InfoBox title="Profit" description="Average profit per sale"/>
-                    <article className="col-8 bg-light pl-4 pt-4">
+                    <article className="flex-fill bg-light pl-4 pt-4 ml-4">
                       <h2>Top Sold Products</h2>
                       <div className="row justify-content-around p-2">
                         <table class="col-7 table">
@@ -109,8 +109,9 @@ class Sales extends Component {
                     </article>
                   </div>
                 </div>
-                <article className="bg-light mx-3 py-3">
-                  <LineChart />
+                <article className="bg-light px-4 py-3 mx-3 mt-4">
+                  <h2>Total Sales Volume</h2>
+                  <LineChart height={300}/>
                 </article>
               </section>
             </main>

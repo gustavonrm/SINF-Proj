@@ -62,25 +62,25 @@ class Financial extends Component {
                 </div>
               </div>
               <section>
-                <div className="row justify-content-around">
-                  <article className="bg-light col-5 p-3 m-2">
+                <div className="row justify-content-around mx-3">
+                  <article className="bg-light p-3 mb-4">
                     <h2>Return Ratios</h2>
                     <h5 className="text-muted">Return on sales, assets and equity</h5>
                     <BarChart />
                   </article>
-                  <article className="bg-light col-5 p-3 m-2">
+                  <article className="bg-light p-3 mb-4">
                     <h2>Financial Stability</h2>
                     <h5 className="text-muted">description</h5>
                     <BarChart />
                   </article>
                 </div>
-                <div className="row justify-content-around">
-                  <article className="bg-light col-5 p-3 m-2">
+                <div className="row justify-content-around mx-3">
+                  <article className="bg-light p-3 mb-4">
                     <h2>Liquidity</h2>
                     <h5 className="text-muted">description</h5>
                     <BarChart />
                   </article>
-                  <article className="bg-light col-5 p-3 m-2">
+                  <article className="bg-light p-3 mb-4">
                     <h2>Growth Ratios</h2>
                     <h5 className="text-muted">description</h5>
                     <BarChart />

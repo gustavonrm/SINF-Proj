@@ -2,9 +2,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const LineChart = () => {
+const LineChart = (props) => {
+	
 	const data = {
-		labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+		labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 		datasets: [
 			{
 				label: 'My First dataset',
@@ -33,8 +34,8 @@ const LineChart = () => {
 		<div>
 			<Line
 				data={data}
-				height={250}
-				width={350}
+				height={props.height}
+				width={props.width}
 				options={{
 					maintainAspectRatio: false
 				}}

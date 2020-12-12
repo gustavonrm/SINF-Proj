@@ -62,7 +62,7 @@ class Accounts extends Component {
             </button>
                 </div>
               </div>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex mx-3">
                 <Account title="Accounts Receivable" description="Accounts Receivable value and percentage in relation to last month" />
                 <Account title="Accounts Payable" description="Accounts Payable value and percentage in relation to last month" />
               </div>

@@ -10,7 +10,7 @@ const PieChart = () => {
 			'Yellow'
 		],
 		datasets: [{
-			data: [300, 50, 100],
+			data: [300, 50, 100000],
 			backgroundColor: [
 				'#FF6384',
 				'#36A2EB',

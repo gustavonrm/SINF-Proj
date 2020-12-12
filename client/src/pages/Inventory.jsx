@@ -62,12 +62,18 @@ class Inventory extends Component {
                 </div>
               </div>
               <div className="d-flex">
-                <div className="col-4 d-flex flex-column justify-content-between">
-                  <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
-                  <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
-                  <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
-                </div>
-                <div className="col-8 bg-light mb-4">
+                <section className="col-4 d-flex flex-column mr-2">
+                  <div className="mb-4">
+                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+                  </div>
+                  <div className="mb-4">
+                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+                  </div>
+                  <div className="">
+                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+                  </div>  
+                </section>
+                <div className="col-8 bg-light">
                   <section className="p-4 mb-4">
                     <h2>Number of Items in Stock</h2>
                     <h5 className="text-muted"></h5>

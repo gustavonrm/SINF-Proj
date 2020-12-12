@@ -6,7 +6,7 @@ class Account extends Component {
 
     render() {
         return (
-            <section className="bg-light" style={{width: "48%"}}>
+            <section className="bg-light mr-4" style={{width: "48%"}}>
                 <article className="p-2 pb-3 mr-4 mb-4 border-bottom w-100">
                     <h2>{this.props.title}</h2>
                     <h5 className="text-muted">{this.props.description}</h5>

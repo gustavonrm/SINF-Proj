@@ -61,9 +61,9 @@ class Purchase extends Component {
                   </button>
                 </div>
               </div>
-              <section>
-                <div className="d-flex justify-content-around mb-4">
-                  <article className="col-8 bg-light p-4">
+              <section >
+                <div className="d-flex mx-3 mb-4">
+                  <article className="col-8 bg-light pt-4 px-4 mr-4">
                     <h2>Purchases</h2>
                     <h5 className="text-muted">{this.props.description}</h5>
                     <table class="table">
@@ -102,14 +102,20 @@ class Purchase extends Component {
                           <th scope="col"></th>
                           <th scope="col">Total Amount</th>
                         </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>1000</td>
+                        </tr>
                       </tfoot>
                     </table>
 
                   </article>
                   <InfoBox title="Total Purchases" description="Value of purchases in selected period" />
                 </div>
-                <div className="d-flex justify-content-around">
-                  <article className="col-8 bg-light p-4">
+                <div className="d-flex mx-3">
+                  <article className="col-8 bg-light pt-4 px-4 mr-4">
                     <h2>Debt to suppliers</h2>
                     <h5 className="text-muted"></h5>
                     <table class="table">
@@ -132,6 +138,12 @@ class Purchase extends Component {
                           <th scope="row">2</th>
                           <td>Jacob</td>
                           <td>Thornton</td>
+                          <td>1000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
                           <td>1000</td>
                         </tr>
                         <tr>

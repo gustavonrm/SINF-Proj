@@ -63,17 +63,21 @@ class Overview extends Component {
                   </button>
                 </div>
               </div>
-              <section>
-                <div className="bg-light mb-4">
-                  <LineChart />
+              <section className="mx-3">
+                <div className="bg-light px-4 py-2 mb-4">
+                  <h2>Sales vs Expenses</h2>
+                  <LineChart height={260}/>
                 </div>
                 <div className="d-flex justify-content-around">
                   <div>
-                    <InfoBox title="Total Debt" />
+                    <div className="pb-4">
+                      <InfoBox title="Total Debt" />
+                    </div>
                     <InfoBox title="Total Debt" />
                   </div>
-                  <div className="col-8 bg-light">
-                    <LineChart />
+                  <div className="col-8 bg-light px-4 py-2">
+                    <h2>Assets vs Debt</h2>
+                    <LineChart height={350}/>
                   </div>
                 </div>
               </section>
