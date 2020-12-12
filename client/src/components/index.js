@@ -7,8 +7,9 @@ import SideNav from './SideNav'
 import Content from './Content'
 
 import BarChart from './BarChart'
+import PieChart from './PieChart'
 import Value from './Value'
 import InfoBox from './InfoBox'
 import Auth from './Auth'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, Value, InfoBox, Auth }
+export { Links, Logo, NavBarExample, NavBar, SideNav, Content, BarChart, PieChart, Value, InfoBox, Auth }
