@@ -3,7 +3,7 @@ import api from '../api';
 
 import '../style/App.css';
 
-import { BarChart, InfoBox, NavBar, SideNav } from "../components";
+import { LineChart, InfoBox, NavBar, SideNav } from "../components";
 
 class Overview extends Component {
   constructor(props) {
@@ -65,7 +65,7 @@ class Overview extends Component {
               </div>
               <section>
                 <div className="bg-light mb-4">
-                  <BarChart />
+                  <LineChart />
                 </div>
                 <div className="d-flex justify-content-around">
                   <div>
@@ -73,7 +73,7 @@ class Overview extends Component {
                     <InfoBox title="Total Debt" />
                   </div>
                   <div className="col-8 bg-light">
-                    <BarChart />
+                    <LineChart />
                   </div>
                 </div>
               </section>

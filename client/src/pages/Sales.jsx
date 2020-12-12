@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
-import { BarChart, PieChart, InfoBox, NavBar, SideNav } from "../components";
+import { LineChart, PieChart, InfoBox, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
 class Sales extends Component {
@@ -110,7 +110,7 @@ class Sales extends Component {
                   </div>
                 </div>
                 <article className="bg-light mx-3 py-3">
-                  <BarChart />
+                  <LineChart />
                 </article>
               </section>
             </main>
