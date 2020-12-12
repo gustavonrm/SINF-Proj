@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
-import { BarChart, InfoBox, NavBar, SideNav } from "../components";
+import { BarChart, PieChart, InfoBox, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
 class Sales extends Component {
@@ -65,10 +65,10 @@ class Sales extends Component {
                 <div className="px-4 py-2">
                   <div className="row justify-content-between px-2">
                     <InfoBox title="Profit" description="Average profit per sale"/>
-                    <article className="col-8 bg-light p-4">
+                    <article className="col-8 bg-light pl-4 pt-4">
                       <h2>Top Sold Products</h2>
-                      <div className="row p-2">
-                        <table class="col-6 table">
+                      <div className="row justify-content-around p-2">
+                        <table class="col-7 table">
                           <thead>
                             <tr>
                               <th scope="col">Item</th>
@@ -92,8 +92,19 @@ class Sales extends Component {
                               <td>Larry</td>
                               <td>the Bird</td>
                             </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>Larry</td>
+                              <td>the Bird</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>Larry</td>
+                              <td>the Bird</td>
+                            </tr>
                           </tbody>
                         </table>
+                        <PieChart />
                       </div>
                     </article>
                   </div>
