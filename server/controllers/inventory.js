@@ -1,5 +1,6 @@
 const jasminReq = require('../utils/request');
 const saftReq = require('../utils/saftReq');
+const { getQuantityMaterial, getUnitCostMaterial } = require('../utils/util');
 
 const Controller = {};
 
@@ -7,26 +8,14 @@ Controller.stock = (req, res) => {
   // Returns the list of all the entity records available.
   jasminReq('get', '/materialsCore/materialsItems')
     .then((data) => {
-      const response = {
+      let response = {
         value: 0,
       };
-
-      const getQuantity = (item) =>
-        item.materialsItemWarehouses.reduce(
-          (accumulator, currValue) => accumulator + currValue.stockBalance
-        );
-
-      const getUnitCost = (item) =>
-        item.materialsItemWarehouses.reduce(
-          (accumulator, currValue) => accumulator + currValue.calculatedUnitCost
-        ) / item.materialsItemWarehouses.length;
-
       data.forEach((item) => {
-        const quantity = getQuantity(item);
-        const unitCost = getUnitCost(item);
+        const quantity = getQuantityMaterial(item);
+        const unitCost = getUnitCostMaterial(item);
         response.value += quantity * unitCost;
       });
-
       res.json(response);
     })
     .catch(() => {
@@ -44,40 +33,20 @@ Controller.capacity = (req, res) => {
   Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products')])
     .then((data) => {
       const response = [];
-
-      const getKey = (item) => item.itemKey;
-
-      const getName = (item) => item.purchasesItem;
-
-      const getQuantity = (item) =>
-        item.materialsItemWarehouses.reduce(
-          (accumulator, currValue) => accumulator + currValue.stockBalance
-        );
-
-      const getUnitCost = (item) =>
-        item.materialsItemWarehouses.reduce(
-          (accumulator, currValue) => accumulator + currValue.calculatedUnitCost
-        ) / item.materialsItemWarehouses.length;
-
-      const getInvPeriod = (item) => 365 / getTurnover(item)
-
-      const getTurnover = (item) =>{
-        const totalStockValue = getQuantity(item) * getUnitCost(item)
-        const product = data[1][getKey(item)]
-        const sales = product.sales
-        let totalSales = 0
-        sales.forEach((month) => {totalSales += month})
-
-        return totalSales / totalStockValue;
-      }
+      const getTurnover = (key, quantity, unitCost) =>{
+        const sales = data[1][key].sales;
+        const totalSales = sales.reduce((a,c) => a + c);
+        return totalSales / (quantity * unitCost);
+      };
 
       data[0].forEach((item) => {
-        const key = getKey(item);
-        const name = getName(item);
-        const quantity = getQuantity(item);
-        const unitCost = getUnitCost(item);
-        const invPeriod = getInvPeriod(item);
-        const turnover = getTurnover(item);
+        const key = item.itemKey;
+        const name = item.purchasesItem;
+        const quantity = getQuantityMaterial(item);
+        const unitCost = getUnitCostMaterial(item);
+        const turnover = getTurnover(key, quantity, unitCost);
+        const invPeriod = 365 / turnover;
+        console.log("pos");
 
         response.push({
           key: key,
@@ -88,7 +57,6 @@ Controller.capacity = (req, res) => {
           turnover: turnover,
         });
       });
-
       res.json(response);
     })
     .catch(() => {

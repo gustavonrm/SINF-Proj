@@ -19,12 +19,11 @@ Controller.purchases = (req, res) => {
           const getDate = (item) => getTimestamp(item.deliveryDate);
           const getQuantity = (item) =>
             item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.stockBalance
+              (accumulator, currValue) => accumulator + currValue.stockBalance, 0
             );
           const getUnitCost = (item) =>
             item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) =>
-                accumulator + currValue.calculatedUnitCost
+              (accumulator, currValue) => accumulator + currValue.calculatedUnitCost.amount, 0
             ) / item.materialsItemWarehouses.length;
 
           const key = getKey(item);
@@ -93,12 +92,11 @@ Controller.debts = (req, res) => {
           const getDueDate = (item) => getTimestamp(item.dueDate);
           const getQuantity = (item) =>
             item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.stockBalance
+              (accumulator, currValue) => accumulator + currValue.stockBalance, 0
             );
           const getUnitCost = (item) =>
             item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) =>
-                accumulator + currValue.calculatedUnitCost
+              (accumulator, currValue) => accumulator + currValue.calculatedUnitCost.amount, 0
             ) / item.materialsItemWarehouses.length;
 
           const key = getKey(item);

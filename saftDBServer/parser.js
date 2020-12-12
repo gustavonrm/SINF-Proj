@@ -1,4 +1,4 @@
-const taxonomy = require("./taxonomy.js")
+const taxonomy = require('./taxonomy.js')
 
 module.exports = {
   jsonDB: {},
@@ -246,12 +246,12 @@ module.exports = {
             auxValues[operation.type][i + 1] += operation.value;
 
             switch(operation.type){
-              case "Inventory":
-              case "CashEquivalents":
-              case "AccountsReceivable":{
+              case 'Inventory':
+              case 'CashEquivalents':
+              case 'AccountsReceivable':{
                 auxValues.CurrentAssets[i + 1] += operation.value;
               }
-              case "AccountsPayable":{
+              case 'AccountsPayable':{
                 auxValues.CurrentLiabilities[i + 1] += operation.value;
               }
               default: break;
