@@ -30,8 +30,9 @@ Controller.capacity = (req, res) => {
   Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products')])
     .then((data) => {
       const getTurnover = (key, quantity, unitCost) =>{
+        if(data[1][key] == undefined) return 0;
         const sales = data[1][key].sales;
-        const totalSales = sales.reduce((a,c) => a + c);
+        const totalSales = sales.reduce((a,c) => a + c, 0);
         return totalSales / (quantity * unitCost);
       };
 
@@ -64,32 +65,54 @@ Controller.capacity = (req, res) => {
 };
 
 Controller.period = (req, res) => {
-  Controller.turnover()
-    .then((result) => {
-      const turnover = result.value
-      const period = 365 / turnover
-      res.json({value: period})
+  const response = { value: 0 };
+  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/sales')])
+    .then((data) => {
+      let totalStock = 0, totalSales = 0;
+      data[0].forEach((item) => {
+        const quantity = getQuantityMaterial(item);
+        const unitCost = getUnitCostMaterial(item);
+        totalStock += quantity * unitCost;
+      });
+      data[1].forEach((month) => {
+        totalSales += month;
+      });
+      response.value = 365 / (totalSales / totalStock);
+      res.json(response);
+    })
+    .catch(() => {
+      const err = new Error('Failed');
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
     });
 };
 
 Controller.turnover = (req, res) => {
-  Controller.capacity()
+  const response = { value: 0 };
+  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/sales')])
     .then((data) => {
-      saftReq('/sales')
-        .then((monthlySales) => {
-          let totalStock = 0 
-          data.forEach((product) => {
-            totalStock += product.unitCost * product.quantity
-          })
-
-          let totalSales = 0
-          monthlySales.forEach((month) => {
-            totalSales += month
-          })
-
-          const turnover = totalSales / totalStock 
-          res.json({value: turnover})
-        });
+      let totalStock = 0, totalSales = 0;
+      data[0].forEach((item) => {
+        const quantity = getQuantityMaterial(item);
+        const unitCost = getUnitCostMaterial(item);
+        totalStock += quantity * unitCost;
+      });
+      data[1].forEach((month) => {
+        totalSales += month;
+      });
+      response.value = totalSales / totalStock;
+      res.json(response);
+    })
+    .catch(() => {
+      const err = new Error('Failed');
+      err.status = 400;
+      res.status(400).json({
+        message: err.message,
+        error: err,
+      });
     });
 };
 
