@@ -1,7 +1,7 @@
 const getTimestamp = (date) => {
   // YYYY-DD-MM
   const match = date.match(/(\d{4})-(\d{2})-(\d{2})/);
-  return { year: match[0], month: match[1], day: match[2] };
+  return { year: match[1], month: match[2], day: match[3] };
 };
 
 const getQuantityMaterial = (item) =>

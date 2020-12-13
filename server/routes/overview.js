@@ -3,8 +3,8 @@ const ctrl = require('../controllers/overview');
 const router = Router();
 
 router.get('/salesExpenses', ctrl.salesExpenses);
-router.get('/assetsDebts', ctrl.assetsDebts); //fix saft
-router.get('/totalAssets', ctrl.totalAssets); //fix saft
-router.get('/totalDebts', ctrl.totalDebts);//fix saft
+router.get('/assetsDebts', ctrl.assetsDebts);
+router.get('/totalAssets', ctrl.totalAssets);
+router.get('/totalDebts', ctrl.totalDebts);
 
 module.exports = router;

@@ -73,7 +73,6 @@ Controller.payableTable = (req, res) => {
   const response = [];
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
-      for(const k in data) console.log(k + "  " + data[k]);
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
         const dueDate = getTimestamp(invoice.dueDate);

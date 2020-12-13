@@ -5,12 +5,9 @@ const { getQuantityMaterial, getUnitCostMaterial } = require('../utils/util');
 const Controller = {};
 
 Controller.stock = (req, res) => {
-  // Returns the list of all the entity records available.
+  const response = { value: 0 };
   jasminReq('get', '/materialsCore/materialsItems')
     .then((data) => {
-      let response = {
-        value: 0,
-      };
       data.forEach((item) => {
         const quantity = getQuantityMaterial(item);
         const unitCost = getUnitCostMaterial(item);
@@ -29,10 +26,9 @@ Controller.stock = (req, res) => {
 };
 
 Controller.capacity = (req, res) => {
-  // Returns the list of all the entity records available.
+  const response = [];
   Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products')])
     .then((data) => {
-      const response = [];
       const getTurnover = (key, quantity, unitCost) =>{
         const sales = data[1][key].sales;
         const totalSales = sales.reduce((a,c) => a + c);
@@ -46,8 +42,6 @@ Controller.capacity = (req, res) => {
         const unitCost = getUnitCostMaterial(item);
         const turnover = getTurnover(key, quantity, unitCost);
         const invPeriod = 365 / turnover;
-        console.log("pos");
-
         response.push({
           key: key,
           name: name,

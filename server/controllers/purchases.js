@@ -6,43 +6,26 @@ const Controller = {};
 
 Controller.purchases = (req, res) => {
   const response = [];
-
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        const supplier =
-          invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
-
+        const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
-          const getKey = (item) => item.itemKey;
-          const getName = (item) => item.purchasesItem;
-          const getDate = (item) => getTimestamp(item.deliveryDate);
-          const getQuantity = (item) =>
-            item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.stockBalance, 0
-            );
-          const getUnitCost = (item) =>
-            item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.calculatedUnitCost.amount, 0
-            ) / item.materialsItemWarehouses.length;
-
-          const key = getKey(item);
-          const name = getName(item);
-          const date = getDate(item);
-          const quantity = getQuantity(item);
-          const unitCost = getUnitCost(item);
-
+          const name = item.purchasesItem;
+          const date = getTimestamp(item.deliveryDate);
+          const quantity = item.quantity;
+          const unitCost = item.unitPrice.amount;
+          const totalCost = quantity * unitCost;
           response.push({
-            key: key,
             name: name,
             supplier: supplier,
             date: date,
             quantity: quantity,
             unitCost: unitCost,
+            totalCost: totalCost,
           });
         });
       });
-
       res.json(response);
     })
     .catch(() => {
@@ -56,16 +39,12 @@ Controller.purchases = (req, res) => {
 };
 
 Controller.totalPurchases = (req, res) => {
-  const response = {
-    value: 0,
-  };
-
+  const response = { value: 0 };
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         response.value += invoice.payableAmount;
       });
-
       res.json(response);
     })
     .catch(() => {
@@ -80,34 +59,18 @@ Controller.totalPurchases = (req, res) => {
 
 Controller.debts = (req, res) => {
   const response = [];
-
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
-        const supplier = invoice.sellerSupplierPartyName || invoice.sellerSupplierParty;
+        const dueDate = getTimestamp(item.dueDate);
+        const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
-          const getKey = (item) => item.itemKey;
-          const getName = (item) => item.purchasesItem;
-          const getDueDate = (item) => getTimestamp(item.dueDate);
-          const getQuantity = (item) =>
-            item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.stockBalance, 0
-            );
-          const getUnitCost = (item) =>
-            item.materialsItemWarehouses.reduce(
-              (accumulator, currValue) => accumulator + currValue.calculatedUnitCost.amount, 0
-            ) / item.materialsItemWarehouses.length;
-
-          const key = getKey(item);
-          const name = getName(item);
-          const dueDate = getDueDate(item);
-          const quantity = getQuantity(item);
-          const unitCost = getUnitCost(item);
+          const name = item.purchasesItem;
+          const quantity = item.quantity;
+          const unitCost = item.unitPrice.amount;
           const totalCost = quantity * unitCost;
-
           response.push({
-            key: key,
             name: name,
             supplier: supplier,
             dueDate: dueDate,
@@ -117,7 +80,6 @@ Controller.debts = (req, res) => {
           });
         });
       });
-
       res.json(response);
     })
     .catch(() => {
@@ -131,17 +93,13 @@ Controller.debts = (req, res) => {
 };
 
 Controller.totalDebts = (req, res) => {
-  const response = {
-    value: 0,
-  };
-
+  const response = { value: 0 };
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
         response.value += invoice.payableAmount;
       });
-
       res.json(response);
     })
     .catch(() => {

@@ -2,9 +2,9 @@ const { Router } = require('express');
 const ctrl = require('../controllers/financial');
 const router = Router();
 
-router.get('/returnRatios', ctrl.returnRatios); //fix - saft 
-router.get('/financialStability', ctrl.financialStability); //fix - saft 
-router.get('/liquidity', ctrl.liquidity); //fix - saft 
-router.get('/growthRatios', ctrl.growthRatios); //fix - saft 
+router.get('/returnRatios', ctrl.returnRatios); 
+router.get('/financialStability', ctrl.financialStability);
+router.get('/liquidity', ctrl.liquidity);
+router.get('/growthRatios', ctrl.growthRatios);
 
 module.exports = router;

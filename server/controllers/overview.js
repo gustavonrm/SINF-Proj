@@ -5,35 +5,27 @@ const saftReq = require('../utils/saftReq');
 const Controller = {};
 
 Controller.salesExpenses = (req, res) => {
-  const sales = [];
-  sales.fill(0, 0, 11);
-  const expenses = [];
-  expenses.fill(0, 0, 11);
-  const response = { sales: sales, expenses: expenses };
-
+  const response = { sales: [0,0,0,0,0,0,0,0,0,0,0,0], expenses: [0,0,0,0,0,0,0,0,0,0,0,0] };
   Promise.all([
     jasminReq('get', '/billing/invoices'),
     jasminReq('get', '/invoiceReceipt/invoices'),
   ])
     .then((data) => {
       const [salesInvoices, expensesInvoices] = data;
-
       salesInvoices.forEach((invoice) => {
         invoice.documentLines.forEach((item) => {
-          const month = parseInt(getTimestamp(item.deliveryDate));
-          const price = item.quantity * item.unitPrice;
-          sales[month - 1] += price;
+          const month = parseInt(getTimestamp(item.deliveryDate).month);
+          const price = item.quantity * item.unitPrice.amount;
+          response.sales[month - 1] += price;
         });
       });
-
       expensesInvoices.forEach((invoice) => {
         invoice.documentLines.forEach((item) => {
-          const month = parseInt(getTimestamp(item.deliveryDate));
-          const price = item.quantity * item.unitPrice;
-          expenses[month - 1] += price;
+          const month = parseInt(getTimestamp(item.deliveryDate).month);
+          const price = item.quantity * item.unitPrice.amount;
+          response.expenses[month - 1] += price;
         });
       });
-
       res.json(response);
     })
     .catch(() => {
