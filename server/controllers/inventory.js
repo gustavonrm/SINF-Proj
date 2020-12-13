@@ -1,6 +1,5 @@
 const jasminReq = require('../utils/request');
-const saftReq = require('../utils/saftReq');
-const { getQuantityMaterial, getUnitCostMaterial } = require('../utils/util');
+const { getTurnover, getQuantityMaterial, getUnitCostMaterial } = require('../utils/util');
 
 const Controller = {};
 
@@ -27,25 +26,19 @@ Controller.stock = (req, res) => {
 
 Controller.capacity = (req, res) => {
   const response = [];
-  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/products')])
+  Promise.all([
+    jasminReq('get', '/materialsCore/materialsItems'),
+    jasminReq('get', '/billing/invoices'),
+  ])
     .then((data) => {
-      const getTurnover = (key, quantity, unitCost) =>{
-        if(data[1][key] == undefined) return 0;
-        const sales = data[1][key].sales;
-        const totalSales = sales.reduce((a,c) => a + c, 0);
-        return totalSales / (quantity * unitCost);
-      };
-
       data[0].forEach((item) => {
         const key = item.itemKey;
-        const name = item.purchasesItem;
         const quantity = getQuantityMaterial(item);
         const unitCost = getUnitCostMaterial(item);
         const turnover = getTurnover(key, quantity, unitCost);
-        const invPeriod = 365 / turnover;
+        const invPeriod = (turnover === 0) ? (-1) : (365/turnover);
         response.push({
           key: key,
-          name: name,
           quantity: quantity,
           unitCost: unitCost,
           invPeriod: invPeriod,
@@ -66,7 +59,10 @@ Controller.capacity = (req, res) => {
 
 Controller.period = (req, res) => {
   const response = { value: 0 };
-  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/sales')])
+  Promise.all([
+    jasminReq('get', '/materialsCore/materialsItems'),
+    jasminReq('get', '/billing/invoices'),
+  ])
     .then((data) => {
       let totalStock = 0, totalSales = 0;
       data[0].forEach((item) => {
@@ -74,8 +70,11 @@ Controller.period = (req, res) => {
         const unitCost = getUnitCostMaterial(item);
         totalStock += quantity * unitCost;
       });
-      data[1].forEach((month) => {
-        totalSales += month;
+      data[1].forEach((invoice) => {
+        invoice.documentLines.forEach((item) => {
+          const price = item.quantity * item.unitPrice.amount;
+          totalSales += price;
+        });
       });
       response.value = 365 / (totalSales / totalStock);
       res.json(response);
@@ -92,7 +91,10 @@ Controller.period = (req, res) => {
 
 Controller.turnover = (req, res) => {
   const response = { value: 0 };
-  Promise.all([jasminReq('get', '/materialsCore/materialsItems'), saftReq('/sales')])
+  Promise.all([
+    jasminReq('get', '/materialsCore/materialsItems'),
+    jasminReq('get', '/billing/invoices'),
+  ])
     .then((data) => {
       let totalStock = 0, totalSales = 0;
       data[0].forEach((item) => {
@@ -100,8 +102,11 @@ Controller.turnover = (req, res) => {
         const unitCost = getUnitCostMaterial(item);
         totalStock += quantity * unitCost;
       });
-      data[1].forEach((month) => {
-        totalSales += month;
+      data[1].forEach((invoice) => {
+        invoice.documentLines.forEach((item) => {
+          const price = item.quantity * item.unitPrice.amount;
+          totalSales += price;
+        });
       });
       response.value = totalSales / totalStock;
       res.json(response);
