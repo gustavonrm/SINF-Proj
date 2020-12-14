@@ -35,7 +35,7 @@ Controller.capacity = (req, res) => {
         const key = item.itemKey;
         const quantity = getQuantityMaterial(item);
         const unitCost = getUnitCostMaterial(item);
-        const turnover = getTurnover(key, quantity, unitCost);
+        const turnover = getTurnover(key, quantity, unitCost, data[1]);
         const invPeriod = (turnover === 0) ? (-1) : (365/turnover);
         response.push({
           key: key,

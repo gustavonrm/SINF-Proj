@@ -14,9 +14,9 @@ const getUnitCostMaterial = (item) =>
       accumulator + currValue.calculatedUnitCost.amount, 0
   ) / item.materialsItemWarehouses.length;
 
-const getTurnover = (key, quantity, unitCost) => {
+const getTurnover = (key, quantity, unitCost, invoices) => {
   let totalSales = 0;
-  data[1].forEach((invoice) => {
+  invoices.forEach((invoice) => {
     invoice.documentLines.forEach((item) => {
       if(key != item.salesItem) return;
       const price = item.quantity * item.unitPrice.amount;
