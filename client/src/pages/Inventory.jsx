@@ -7,8 +7,42 @@ class Inventory extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      inventory: 0,
+      inventoryGrowth: 0.0,
+      period: 0,
+      periodGrowth: 0.0,
+      turnover: 0,
+      turnoverGrowth: 0.0,
+    };
   }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/api/inventory/stock")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          inventory: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/inventory/period")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          period: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/inventory/turnover")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          turnover: json.value.toFixed(2),
+        });
+      });
+  }
+
   render() {
     return (
       <>
@@ -16,7 +50,11 @@ class Inventory extends Component {
         <div className="container-fluid">
           <div className="row">
             <SideNav page={"Inventory"} />
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4" style={{ minHeight: "100vh" }}>
+            <main
+              role="main"
+              className="col-md-9 ml-sm-auto col-lg-10 px-4"
+              style={{ minHeight: "100vh" }}
+            >
               <div
                 style={{
                   position: "absolute",
@@ -52,7 +90,14 @@ class Inventory extends Component {
                       stroke-linejoin="round"
                       className="feather feather-calendar"
                     >
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <rect
+                        x="3"
+                        y="4"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
                       <line x1="16" y1="2" x2="16" y2="6"></line>
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -64,14 +109,29 @@ class Inventory extends Component {
               <div className="d-flex">
                 <section className="col-4 d-flex flex-column mr-2">
                   <div className="mb-4">
-                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+                    <InfoBox
+                      title="Inventory in Stock"
+                      description="Inventory in Stock and relation to last month"
+                      value={this.state.inventory}
+                      growth={this.state.inventoryGrowth}
+                    />
                   </div>
                   <div className="mb-4">
-                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
+                    <InfoBox
+                      title="Inventory Period"
+                      description="Average time period in inventory"
+                      value={this.state.period}
+                      growth={this.state.periodGrowth}
+                    />
                   </div>
                   <div className="">
-                    <InfoBox title="Assets in Stock" description="Assets in Stock and relation to last month" />
-                  </div>  
+                    <InfoBox
+                      title="Turnover"
+                      description="Inventory replacement ratio"
+                      value={this.state.turnover}
+                      growth={this.state.turnoverGrowth}
+                    />
+                  </div>
                 </section>
                 <div className="col-8 bg-light">
                   <section className="p-4 mb-4">
@@ -113,7 +173,6 @@ class Inventory extends Component {
                           <td>@twitter</td>
                           <td>1000</td>
                         </tr>
-
                       </tbody>
                     </table>
                   </section>

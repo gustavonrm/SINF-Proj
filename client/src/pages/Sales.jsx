@@ -7,8 +7,21 @@ class Sales extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      profit: 0,
+    };
   }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/api/sales/profit")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          profit: json.value.toFixed(2),
+        });
+      });
+  }
+
   render() {
     return (
       <>
@@ -16,7 +29,11 @@ class Sales extends Component {
         <div className="container-fluid">
           <div className="row">
             <SideNav page={"Sales"} />
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4" style={{ minHeight: "100vh" }}>
+            <main
+              role="main"
+              className="col-md-9 ml-sm-auto col-lg-10 px-4"
+              style={{ minHeight: "100vh" }}
+            >
               <div
                 style={{
                   position: "absolute",
@@ -52,7 +69,14 @@ class Sales extends Component {
                       stroke-linejoin="round"
                       className="feather feather-calendar"
                     >
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <rect
+                        x="3"
+                        y="4"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
                       <line x1="16" y1="2" x2="16" y2="6"></line>
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -64,7 +88,11 @@ class Sales extends Component {
               <section>
                 <div className="px-4">
                   <div className="row px-2">
-                    <InfoBox title="Profit" description="Average profit per sale"/>
+                    <InfoBox
+                      title="Profit"
+                      description="Average profit per sale"
+                      value={this.state.profit}
+                    />
                     <article className="flex-fill bg-light pl-4 pt-4 ml-4">
                       <h2>Top Sold Products</h2>
                       <div className="row justify-content-around p-2">
@@ -111,7 +139,7 @@ class Sales extends Component {
                 </div>
                 <article className="bg-light px-4 py-3 mx-3 mt-4">
                   <h2>Total Sales Volume</h2>
-                  <LineChart height={300}/>
+                  <LineChart height={300} />
                 </article>
               </section>
             </main>
