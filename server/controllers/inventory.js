@@ -32,13 +32,16 @@ Controller.capacity = (req, res) => {
   ])
     .then((data) => {
       data[0].forEach((item) => {
+        
         const key = item.itemKey;
+        const description = item.description; 
         const quantity = getQuantityMaterial(item);
         const unitCost = getUnitCostMaterial(item);
         const turnover = getTurnover(key, quantity, unitCost, data[1]);
         const invPeriod = (turnover === 0) ? (-1) : (365/turnover);
         response.push({
           key: key,
+          description: description,
           quantity: quantity,
           unitCost: unitCost,
           invPeriod: invPeriod,

@@ -9,6 +9,7 @@ class Sales extends Component {
 
     this.state = {
       profit: 0,
+      topProducts: {},
     };
   }
 
@@ -18,6 +19,14 @@ class Sales extends Component {
       .then((json) => {
         this.setState({
           profit: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/sales/topProducts")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          topProducts: json,
         });
       });
   }
@@ -105,31 +114,21 @@ class Sales extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">ID_65421</th>
-                              <td>Ream of paper (Grade A)</td>
-                              <td>Otto</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                            </tr>
+                            {Object.entries(this.state.topProducts).map(
+                              ([key, value]) => (
+                                <tr>
+                                  <th scope="row">{key}</th>
+                                  <td>{value.name}</td>
+                                  <td>
+                                    {(
+                                      value.sales.reduce(function (a, b) {
+                                        return a + b;
+                                      }, 0) / value.unitsSold
+                                    ).toFixed(2)}
+                                  </td>
+                                </tr>
+                              )
+                            )}
                           </tbody>
                         </table>
                         <PieChart />

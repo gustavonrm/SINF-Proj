@@ -14,6 +14,7 @@ class Inventory extends Component {
       periodGrowth: 0.0,
       turnover: 0,
       turnoverGrowth: 0.0,
+      capacity: [],
     };
   }
 
@@ -39,6 +40,14 @@ class Inventory extends Component {
       .then((json) => {
         this.setState({
           turnover: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/inventory/capacity")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          capacity: json.sort((a, b) => (a.quantity > b.quantity ? -1 : 1)),
         });
       });
   }
@@ -149,30 +158,16 @@ class Inventory extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">ID_65421</th>
-                          <td>Ream of paper (Grade A)</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>1000</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td>@fat</td>
-                          <td>1000</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                          <td>@twitter</td>
-                          <td>1000</td>
-                        </tr>
+                        {this.state.capacity.map((item) => (
+                          <tr>
+                            <th scope="row">{item.key}</th>
+                            <td>{item.description}</td>
+                            <td>{item.unitCost}</td>
+                            <td>{item.invPeriod.toFixed(2)}</td>
+                            <td>{item.turnover.toFixed(2)}</td>
+                            <td>{item.quantity}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </section>

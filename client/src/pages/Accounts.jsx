@@ -13,6 +13,8 @@ class Accounts extends Component {
       receivableGrowth: 0,
       payable: 0,
       payableGrowth: 0,
+      receivableTable: [],
+      payableTable: [],
     };
   }
 
@@ -32,6 +34,22 @@ class Accounts extends Component {
         this.setState({
           payable: json.value.toFixed(2),
           payableGrowth: json.percentage.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/accounts/payableTable")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          payableTable: json,
+        });
+      });
+
+    fetch("http://localhost:3000/api/accounts/receivableTable")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          receivableTable: json,
         });
       });
   }
@@ -105,12 +123,14 @@ class Accounts extends Component {
                   description="Accounts Receivable value and percentage in relation to last month"
                   value={this.state.receivable}
                   growth={this.state.receivableGrowth}
+                  table={this.state.receivableTable}
                 />
                 <Account
                   title="Accounts Payable"
                   description="Accounts Payable value and percentage in relation to last month"
                   value={this.state.payable}
                   growth={this.state.payableGrowth}
+                  table={this.state.payableTable}
                 />
               </div>
             </main>
