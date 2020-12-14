@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import 'whatwg-fetch';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import "whatwg-fetch";
 
-import { getFromStorage, setInStorage } from '../app/utils/storage';
+import { getFromStorage, setInStorage } from "../app/utils/storage";
 
-class Home extends Component {
+class Auth extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true,
-      token: '',
-      signUpError: '',
-      signInError: '',
-      signInEmail: '',
-      signInPassword: '',
-      signUpEmail: '',
-      signUpPassword: '',
+      token: "",
+      signUpError: "",
+      signInError: "",
+      signInEmail: "",
+      signInPassword: "",
+      signUpEmail: "",
+      signUpPassword: "",
     };
 
     this.onTextboxChangeSignInEmail = this.onTextboxChangeSignInEmail.bind(
@@ -38,11 +38,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const obj = getFromStorage('the_main_app');
+    const obj = getFromStorage("the_main_app");
     if (obj && obj.token) {
       const { token } = obj;
       // Verify token
-      fetch('/api/auth/verify?token=' + token)
+      fetch("http://localhost:3000/api/auth/verify?token=" + token)
         .then((res) => res.json())
         .then((json) => {
           if (json.success) {
@@ -94,10 +94,10 @@ class Home extends Component {
       isLoading: true,
     });
     // Post request to backend
-    fetch('http://localhost:3000/api/auth/signup', {
-      method: 'POST',
+    fetch("http://localhost:3000/api/auth/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: signUpEmail,
@@ -106,13 +106,13 @@ class Home extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log('json', json);
+        console.log("json", json);
         if (json.success) {
           this.setState({
             signUpError: json.message,
             isLoading: false,
-            signUpEmail: '',
-            signUpPassword: '',
+            signUpEmail: "",
+            signUpPassword: "",
           });
         } else {
           this.setState({
@@ -132,10 +132,10 @@ class Home extends Component {
     });
 
     // Post request to backend
-    fetch('http://localhost:3000/api/auth/signin', {
-      method: 'POST',
+    fetch("http://localhost:3000/api/auth/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: signInEmail,
@@ -144,17 +144,17 @@ class Home extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log('json', json);
+        console.log("json", json);
         if (json.success) {
-          setInStorage('the_main_app', { token: json.token });
+          setInStorage("the_main_app", { token: json.token });
           this.setState({
             signInError: json.message,
             isLoading: false,
-            signInPassword: '',
-            signInEmail: '',
+            signInPassword: "",
+            signInEmail: "",
             token: json.token,
           });
-          window.location.href = '/';
+          window.location.href = "/";
         } else {
           this.setState({
             signInError: json.message,
@@ -168,16 +168,16 @@ class Home extends Component {
     this.setState({
       isLoading: true,
     });
-    const obj = getFromStorage('the_main_app');
+    const obj = getFromStorage("the_main_app");
     if (obj && obj.token) {
       const { token } = obj;
       // Verify token
-      fetch('http://localhost:3000/api/auth/logout?token=' + token)
+      fetch("http://localhost:3000/api/auth/logout?token=" + token)
         .then((res) => res.json())
         .then((json) => {
           if (json.success) {
             this.setState({
-              token: '',
+              token: "",
               isLoading: false,
             });
           } else {
@@ -217,28 +217,28 @@ class Home extends Component {
       return (
         <>
           <div>
-            <div class='form-signin'>
+            <div class="form-signin">
               {signInError ? <p>{signInError}</p> : null}
-              <div class='text-center mb-4'></div>
+              <div class="text-center mb-4"></div>
               <p>Username</p>
-              <div class='form-label-group'>
+              <div class="form-label-group">
                 <input
-                  type='email'
-                  class='form-control'
-                  placeholder='User'
+                  type="email"
+                  class="form-control"
+                  placeholder="User"
                   value={signInEmail}
                   onChange={this.onTextboxChangeSignInEmail}
-                  required=''
-                  autofocus=''
+                  required=""
+                  autofocus=""
                 />
               </div>
               <p>Password</p>
-              <div class='form-label-group'>
+              <div class="form-label-group">
                 <input
-                  type='password'
-                  class='form-control'
-                  placeholder='Password'
-                  required=''
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required=""
                   value={signInPassword}
                   onChange={this.onTextboxChangeSignInPassword}
                 />
@@ -246,7 +246,7 @@ class Home extends Component {
 
               <button
                 onClick={this.onSignIn}
-                class='btn btn-lg btn-primary btn-block login-btn'
+                class="btn btn-lg btn-primary btn-block login-btn"
               >
                 Sign in
               </button>
@@ -257,15 +257,15 @@ class Home extends Component {
             {signUpError ? <p>{signUpError}</p> : null}
             <p>Username</p>
             <input
-              type='email'
-              placeholder='Username'
+              type="email"
+              placeholder="Username"
               value={signUpEmail}
               onChange={this.onTextboxChangeSignUpEmail}
             />
             <br />
             <input
-              type='password'
-              placeholder='Password'
+              type="password"
+              placeholder="Password"
               value={signUpPassword}
               onChange={this.onTextboxChangeSignUpPassword}
             />
@@ -284,4 +284,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Auth;

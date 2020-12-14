@@ -7,7 +7,28 @@ class Purchase extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      totalPurchases: 0,
+      totalDebts: 0,
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/api/purchases/totalPurchases")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          totalPurchases: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/purchases/totalDebts")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          totalDebts: json.value.toFixed(2),
+        });
+      });
   }
   render() {
     return (
@@ -16,7 +37,11 @@ class Purchase extends Component {
         <div className="container-fluid">
           <div className="row">
             <SideNav page={"Purchases"} />
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4" style={{ minHeight: "100vh" }}>
+            <main
+              role="main"
+              className="col-md-9 ml-sm-auto col-lg-10 px-4"
+              style={{ minHeight: "100vh" }}
+            >
               <div
                 style={{
                   position: "absolute",
@@ -52,7 +77,14 @@ class Purchase extends Component {
                       stroke-linejoin="round"
                       className="feather feather-calendar"
                     >
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <rect
+                        x="3"
+                        y="4"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                      ></rect>
                       <line x1="16" y1="2" x2="16" y2="6"></line>
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -61,7 +93,7 @@ class Purchase extends Component {
                   </button>
                 </div>
               </div>
-              <section >
+              <section>
                 <div className="d-flex mx-3 mb-4">
                   <article className="col-8 bg-light pt-4 px-4 mr-4">
                     <h2>Purchases</h2>
@@ -110,9 +142,12 @@ class Purchase extends Component {
                         </tr>
                       </tfoot>
                     </table>
-
                   </article>
-                  <InfoBox title="Total Purchases" description="Value of purchases in selected period" />
+                  <InfoBox
+                    title="Total Purchases"
+                    description="Value of purchases in selected period"
+                    value={this.state.totalPurchases}
+                  />
                 </div>
                 <div className="d-flex mx-3">
                   <article className="col-8 bg-light pt-4 px-4 mr-4">
@@ -163,7 +198,11 @@ class Purchase extends Component {
                       </tfoot>
                     </table>
                   </article>
-                  <InfoBox title="Total Debt" description="Value of debt in selected period" />
+                  <InfoBox
+                    title="Total Debts"
+                    description="Value of debt in selected period"
+                    value={this.state.totalDebts}
+                  />
                 </div>
               </section>
             </main>

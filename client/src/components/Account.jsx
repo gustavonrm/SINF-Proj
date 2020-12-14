@@ -1,67 +1,64 @@
-import React , {Component} from "react";
+import React, { Component } from "react";
 
 import Value from "./Value";
 
 class Account extends Component {
+  totalCost = 0.0;
+  totalAmmount = 0.0;
 
-    render() {
-        return (
-            <section className="bg-light mr-4" style={{width: "48%"}}>
-                <article className="p-2 pb-3 mr-4 mb-4 border-bottom w-100">
-                    <h2>{this.props.title}</h2>
-                    <h5 className="text-muted">{this.props.description}</h5>
-                    <Value value="17000" growth="12.0"/>
-                </article>
-                <article>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Account</th>
-                                <th scope="col">Due Date</th>
-                                <th scope="col">Cost Of Goods</th>
-                                <th scope="col">Interest</th>
-                                <th scope="col">Total Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                            </tr>
-                            
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">Total</th>
-                                <th scope="col"></th>
-                                <th scope="col">Cost Of Goods</th>
-                                <th scope="col">Interest</th>
-                                <th scope="col">Total Amount</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                </article>
-            </section>
-        );
-    }
+  render() {
+    return (
+      <section className="bg-light mr-4" style={{ width: "48%" }}>
+        <article className="p-2 pb-3 mr-4 mb-4 border-bottom w-100">
+          <h2>{this.props.title}</h2>
+          <h5 className="text-muted">{this.props.description}</h5>
+          <Value value={this.props.value} growth={this.props.growth} />
+        </article>
+        <article>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Account</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Cost Of Goods</th>
+                <th scope="col">Interest</th>
+                <th scope="col">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.table.map(
+                (item) => (
+                  (this.totalCost += item.unitCost),
+                  (this.totalAmmount += item.totalCost),
+                  (
+                    <tr>
+                      <th scope="row">{item.supplier}</th>
+                      <td>
+                        {item.dueDate.year}-{item.dueDate.month}-
+                        {item.dueDate.day}
+                      </td>
+                      <td>{item.unitCost}</td>
+                      <td>sei la</td>
+                      <td>{item.totalCost}</td>
+                    </tr>
+                  )
+                )
+              )}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+                <th scope="col">{this.totalCost.toFixed(2)}</th>
+                <th scope="col"></th>
+                <th scope="col">{this.totalAmmount.toFixed(2)}</th>
+              </tr>
+            </tfoot>
+          </table>
+        </article>
+      </section>
+    );
+  }
 }
 
 export default Account;
