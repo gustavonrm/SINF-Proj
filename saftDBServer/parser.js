@@ -52,17 +52,16 @@ module.exports = {
 
   parseProducts: (req, res, next) => {
     let products = req;
-
-    module.exports.jsonDB.products = {};
-
+    module.exports.jsonDB.products = [];
     if (products)
       products.forEach((product) => {
-        let code = product.ProductCode[0];
-        module.exports.jsonDB.products[code] = {
+        // TODO: see if this works xd
+        module.exports.jsonDB.products.push({
+          key: product.ProductCode[0],
           name: product.ProductDescription[0],
           unitsSold: 0,
           sales: module.exports.makeMonthlyArray(),
-        };
+        });
       });
   },
 
