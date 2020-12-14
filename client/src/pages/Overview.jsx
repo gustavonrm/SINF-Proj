@@ -14,6 +14,8 @@ class Overview extends Component {
       totalDebts: 0,
       assetsGrowth: 0.0,
       debtsGrowth: 0.0,
+      salesExpenses: {},
+      assetsDebts: {},
     };
   }
 
@@ -31,6 +33,22 @@ class Overview extends Component {
       .then((json) => {
         this.setState({
           totalDebts: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/overview/assetsDebts")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          assetsDebts: json,
+        });
+      });
+
+    fetch("http://localhost:3000/api/overview/salesExpenses")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          salesExpenses: json,
         });
       });
   }
@@ -101,7 +119,13 @@ class Overview extends Component {
               <section className="mx-3">
                 <div className="bg-light px-4 py-2 mb-4">
                   <h2>Sales vs Expenses</h2>
-                  <LineChart height={260} />
+                  <LineChart
+                    height={260}
+                    title1={"Sales"}
+                    title2={"Expenses"}
+                    data1={this.state.salesExpenses.sales}
+                    data2={this.state.salesExpenses.expenses}
+                  />
                 </div>
                 <div className="d-flex justify-content-around">
                   <div>
@@ -120,7 +144,13 @@ class Overview extends Component {
                   </div>
                   <div className="col-8 bg-light px-4 py-2">
                     <h2>Assets vs Debt</h2>
-                    <LineChart height={350} />
+                    <LineChart
+                      height={350}
+                      title1={"Assests"}
+                      title2={"Debts"}
+                      data1={this.state.assetsDebts.assets}
+                      data2={this.state.assetsDebts.debts}
+                    />
                   </div>
                 </div>
               </section>
