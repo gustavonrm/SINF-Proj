@@ -178,11 +178,11 @@ module.exports = {
               let productCode = line.ProductCode[0];
               let quantity = parseInt(line.Quantity[0]);
               let creditAmount = Number(line.CreditAmount[0]);
+              const product =  module.exports.jsonDB.products.find((obj) => (obj.key === productCode));
+              if(product === undefined) return;
 
-              module.exports.jsonDB.products[productCode].unitsSold += quantity;
-              module.exports.jsonDB.products[productCode].sales[
-                periodIndex
-              ] += creditAmount;
+              product.unitsSold += quantity;
+              product.sales[periodIndex] += creditAmount;
             });
         });
     }
@@ -200,11 +200,11 @@ module.exports = {
               let productCode = line.ProductCode[0];
               let quantity = parseInt(line.Quantity[0]);
               let creditAmount = Number(line.CreditAmount[0]);
+              const product =  module.exports.jsonDB.products.find((obj) => (obj.key === productCode));
+              if(product === undefined) return;
 
-              module.exports.jsonDB.products[productCode].unitsSold += quantity;
-              module.exports.jsonDB.products[productCode].sales[
-                periodIndex
-              ] += creditAmount;
+              product.unitsSold += quantity;
+              product.sales[periodIndex] += creditAmount;
             });
         });
     }
