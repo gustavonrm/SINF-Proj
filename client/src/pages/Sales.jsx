@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import api from "../api";
-import { LineChart, PieChart, InfoBox, NavBar, SideNav } from "../components";
+import {
+  LineChartSales,
+  PieChart,
+  InfoBox,
+  NavBar,
+  SideNav,
+} from "../components";
 import "../style/App.css";
 
 class Sales extends Component {
@@ -25,6 +31,7 @@ class Sales extends Component {
     fetch("http://localhost:3000/api/sales/topProducts")
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         this.setState({
           topProducts: json,
         });
@@ -138,7 +145,7 @@ class Sales extends Component {
                 </div>
                 <article className="bg-light px-4 py-3 mx-3 mt-4">
                   <h2>Total Sales Volume</h2>
-                  <LineChart height={300} />
+                  <LineChartSales height={300} data={this.state.top} />
                 </article>
               </section>
             </main>

@@ -3,7 +3,7 @@ import api from "../api";
 
 import "../style/App.css";
 
-import { LineChart, InfoBox, NavBar, SideNav } from "../components";
+import { LineChartOverview, InfoBox, NavBar, SideNav } from "../components";
 
 class Overview extends Component {
   constructor(props) {
@@ -119,7 +119,7 @@ class Overview extends Component {
               <section className="mx-3">
                 <div className="bg-light px-4 py-2 mb-4">
                   <h2>Sales vs Expenses</h2>
-                  <LineChart
+                  <LineChartOverview
                     height={260}
                     title1={"Sales"}
                     title2={"Expenses"}
@@ -144,7 +144,7 @@ class Overview extends Component {
                   </div>
                   <div className="col-8 bg-light px-4 py-2">
                     <h2>Assets vs Debt</h2>
-                    <LineChart
+                    <LineChartOverview
                       height={350}
                       title1={"Assests"}
                       title2={"Debts"}
