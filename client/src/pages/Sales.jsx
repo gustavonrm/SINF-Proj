@@ -108,8 +108,9 @@ class Sales extends Component {
                               </tr>
                             </thead>
                             <tbody>
-                              {Object.entries(this.state.topProducts).map(
-                                ([key, value]) => (
+                              {Object.entries(this.state.topProducts)
+                                .slice(0, 5)
+                                .map(([key, value]) => (
                                   <tr>
                                     <th scope="row">{value.key}</th>
                                     <td>{value.name}</td>
@@ -122,8 +123,7 @@ class Sales extends Component {
                                       €
                                     </td>
                                   </tr>
-                                )
-                              )}
+                                ))}
                             </tbody>
                           </table>
                           <PieChart
