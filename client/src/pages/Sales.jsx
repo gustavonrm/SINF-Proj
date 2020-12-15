@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import {
   LineChartSales,
   PieChart,
@@ -18,6 +23,7 @@ class Sales extends Component {
       loading: false,
       otherUnitsSold: 0.0,
       otherSales: [],
+      currentYear: 2020,
     };
   }
 
@@ -71,6 +77,23 @@ class Sales extends Component {
     this.setState({ loading: true });
   }
 
+  changeYear(year) {
+    //todo process routes like in purchases
+    if (year !== 2020) {
+      this.setState({
+        profit: 0,
+        //topProducts: {},
+        //loading: false,
+        otherUnitsSold: 0.0,
+        otherSales: [],
+        currentYear: 2020,
+      });
+    } else {
+      this.componentDidMount();
+    }
+    this.setState({ currentYear: year });
+  }
+
   render() {
     if (this.state.loading)
       return (
@@ -97,6 +120,37 @@ class Sales extends Component {
                 ></div>
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                   <h1 className="h2">Sales</h1>
+                  <div className="dropdown show">
+                    <a
+                      className="btn btn-secondary dropdown-toggle"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                      {this.state.currentYear}
+                    </a>
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuLink"
+                    >
+                      <button
+                        className="dropdown-item"
+                        onClick={() => this.changeYear(2020)}
+                      >
+                        2020
+                      </button>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => this.changeYear(2019)}
+                      >
+                        2019
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <section>
                   <div className="px-4">

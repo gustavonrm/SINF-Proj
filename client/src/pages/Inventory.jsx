@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { NavBar, SideNav, InfoBox } from "../components";
 import "../style/App.css";
 
@@ -8,12 +13,10 @@ class Inventory extends Component {
 
     this.state = {
       inventory: 0,
-      inventoryGrowth: 0.0,
       period: 0,
-      periodGrowth: 0.0,
       turnover: 0,
-      turnoverGrowth: 0.0,
       capacity: [],
+      currentYear: 2020,
     };
   }
 
@@ -51,6 +54,21 @@ class Inventory extends Component {
       });
   }
 
+  changeYear(year) {
+    if (year !== 2020) {
+      this.setState({
+        inventory: 0,
+        period: 0,
+        turnover: 0,
+        capacity: [],
+        currentYear: 2020,
+      });
+    } else {
+      this.componentDidMount();
+    }
+    this.setState({ currentYear: year });
+  }
+
   render() {
     return (
       <>
@@ -76,6 +94,37 @@ class Inventory extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Inventory</h1>
+                <div className="dropdown show">
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                    {this.state.currentYear}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2020)}
+                    >
+                      2020
+                    </button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2019)}
+                    >
+                      2019
+                    </button>
+                  </div>
+                </div>
               </div>
               <div className="d-flex">
                 <section className="col-4 d-flex flex-column mr-2">
@@ -84,7 +133,6 @@ class Inventory extends Component {
                       title="Inventory in Stock"
                       description="Inventory in Stock and relation to last month"
                       value={this.state.inventory}
-                      growth={this.state.inventoryGrowth}
                     />
                   </div>
                   <div className="mb-4">
@@ -92,7 +140,6 @@ class Inventory extends Component {
                       title="Inventory Period"
                       description="Average time period in inventory"
                       value={this.state.period}
-                      growth={this.state.periodGrowth}
                     />
                   </div>
                   <div className="">
@@ -100,7 +147,6 @@ class Inventory extends Component {
                       title="Turnover"
                       description="Inventory replacement ratio"
                       value={this.state.turnover}
-                      growth={this.state.turnoverGrowth}
                     />
                   </div>
                 </section>

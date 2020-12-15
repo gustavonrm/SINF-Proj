@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { InfoBox, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
@@ -13,6 +18,7 @@ class Purchase extends Component {
       totalDebts: 0,
       totalPurchasesItems: 0,
       totalDebtsItems: 0,
+      currentYear: 2020,
     };
   }
 
@@ -59,6 +65,53 @@ class Purchase extends Component {
         });
       });
   }
+
+  changeYear(year) {
+    fetch("http://localhost:3000/api/purchases/purchases/" + year)
+      .then((res) => res.json())
+      .then((json) => {
+        let purchase = 0;
+        for (let i = 0; i < json.length; i++) {
+          purchase += json[i].totalCost;
+        }
+        this.setState({
+          purchases: json,
+          totalPurchasesItems: purchase.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/purchases/debts/" + year)
+      .then((res) => res.json())
+      .then((json) => {
+        let debt = 0;
+        for (let i = 0; i < json.length; i++) {
+          debt += json[i].totalCost;
+        }
+        this.setState({
+          debts: json,
+          totalDebtsItems: debt.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/purchases/totalPurchases/" + year)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          totalPurchases: json.value.toFixed(2),
+        });
+      });
+
+    fetch("http://localhost:3000/api/purchases/totalDebts/" + year)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          totalDebts: json.value.toFixed(2),
+        });
+      });
+
+    this.setState({ currentYear: year });
+  }
+
   render() {
     return (
       <>
@@ -84,6 +137,37 @@ class Purchase extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Purchases</h1>
+                <div className="dropdown show">
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                    {this.state.currentYear}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2020)}
+                    >
+                      2020
+                    </button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2019)}
+                    >
+                      2019
+                    </button>
+                  </div>
+                </div>
               </div>
               <section>
                 <div className="d-flex mx-3 mb-4">
