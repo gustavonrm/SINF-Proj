@@ -16,6 +16,8 @@ class Sales extends Component {
       profit: 0,
       topProducts: {},
       loading: false,
+      otherUnitsSold: 0.0,
+      otherSales: [],
     };
   }
 
@@ -38,6 +40,24 @@ class Sales extends Component {
         });
       });
 
+    //Process other products calculations
+    let others = 0;
+    let othersArray = [];
+
+    for (let i = 0; i < this.state.topProducts.length; i++) {
+      if (i > 4) {
+        others += this.state.topProducts[i].unitsSold;
+
+        for (let j = 0; j < this.state.topProducts[i].sales.length; j++) {
+          othersArray[j] += this.state.topProducts[i].sales[j];
+        }
+      }
+    }
+
+    this.setState({
+      otherUnitsSold: others,
+      otherSales: othersArray,
+    });
     this.setState({ loading: true });
   }
 
@@ -107,7 +127,22 @@ class Sales extends Component {
                             </tbody>
                           </table>
                           <PieChart
-                            prodLabels={[this.state.topProducts[0], "OTHERS"]}
+                            prodLabels={[
+                              this.state.topProducts[0].key,
+                              this.state.topProducts[1].key,
+                              this.state.topProducts[2].key,
+                              this.state.topProducts[3].key,
+                              this.state.topProducts[4].key,
+                              "OTHERS",
+                            ]}
+                            prodUnits={[
+                              this.state.topProducts[0].unitsSold,
+                              this.state.topProducts[1].unitsSold,
+                              this.state.topProducts[2].unitsSold,
+                              this.state.topProducts[3].unitsSold,
+                              this.state.topProducts[4].unitsSold,
+                              this.state.otherUnitsSold,
+                            ]}
                           />
                         </div>
                       </article>
@@ -115,7 +150,21 @@ class Sales extends Component {
                   </div>
                   <article className="bg-light px-4 py-3 mx-3 mt-4">
                     <h2>Total Sales Volume</h2>
-                    <LineChartSales height={300} data={this.state.top} />
+                    <LineChartSales
+                      height={300}
+                      title1={this.state.topProducts[0].key}
+                      title2={this.state.topProducts[1].key}
+                      title3={this.state.topProducts[2].key}
+                      title4={this.state.topProducts[3].key}
+                      title5={this.state.topProducts[4].key}
+                      title6={"OTHERS"}
+                      data1={this.state.topProducts[0].sales}
+                      data2={this.state.topProducts[1].sales}
+                      data3={this.state.topProducts[2].sales}
+                      data4={this.state.topProducts[3].sales}
+                      data5={this.state.topProducts[4].sales}
+                      data6={this.state.otherSales}
+                    />
                   </article>
                 </section>
               </main>
