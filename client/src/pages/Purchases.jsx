@@ -88,6 +88,12 @@ class Purchase extends Component {
                           <td>the Bird</td>
                           <td>1000</td>
                         </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>1000</td>
+                        </tr>
                       </tbody>
                       <tfoot>
                         <tr>
@@ -95,12 +101,6 @@ class Purchase extends Component {
                           <th scope="col"></th>
                           <th scope="col"></th>
                           <th scope="col">Total Amount</th>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>1000</td>
                         </tr>
                       </tfoot>
                     </table>
