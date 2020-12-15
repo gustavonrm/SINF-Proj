@@ -7,8 +7,8 @@ class Purchase extends Component {
     super(props);
 
     this.state = {
-      totalPurchases: 0,
-      totalDebts: 0,
+      totalPurchases: [],
+      totalDebts: [],
     };
   }
 
@@ -16,16 +16,18 @@ class Purchase extends Component {
     fetch("http://localhost:3000/api/purchases/totalPurchases")
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         this.setState({
-          totalPurchases: json.value.toFixed(2),
+          //totalPurchases: json,
         });
       });
 
     fetch("http://localhost:3000/api/purchases/totalDebts")
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         this.setState({
-          totalDebts: json.value.toFixed(2),
+          //totalDebts: json,
         });
       });
   }
