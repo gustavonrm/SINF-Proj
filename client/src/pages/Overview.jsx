@@ -90,7 +90,7 @@ class Overview extends Component {
                   />
                 </div>
                 <div className="d-flex justify-content-around">
-                  <div>
+                  <div className="flex-fill mr-4">
                     <div className="pb-4">
                       <InfoBox
                         title="Total Assets"
