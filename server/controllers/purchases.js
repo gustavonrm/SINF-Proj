@@ -68,7 +68,7 @@ Controller.debts = (req, res) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
         if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
-        const dueDate = getTimestamp(item.dueDate);
+        const dueDate = getTimestamp(invoice.dueDate);
         const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
           const name = item.purchasesItem;

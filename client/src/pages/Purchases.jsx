@@ -138,42 +138,29 @@ class Purchase extends Component {
                         <tr>
                           <th scope="col">Purchase</th>
                           <th scope="col">Supplier</th>
-                          <th scope="col">Date</th>
+                          <th scope="col">Due Date</th>
                           <th scope="col">Total Cost</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">ID_65421</th>
-                          <td>Ream of paper (Grade A)</td>
-                          <td>@mdo</td>
-                          <td>1000</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>1000</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>1000</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>1000</td>
-                        </tr>
+                        {this.state.debts.map((item) => (
+                          <tr>
+                            <th scope="row">{item.name}</th>
+                            <td>{item.supplier}</td>
+                            <td>
+                              {item.dueDate.year}-{item.dueDate.month}-
+                              {item.dueDate.day}
+                            </td>
+                            <td>{item.totalCost.toFixed(2)}</td>
+                          </tr>
+                        ))}
                       </tbody>
                       <tfoot>
                         <tr>
                           <th scope="col">Total</th>
                           <th scope="col"></th>
                           <th scope="col"></th>
-                          <th scope="col">Total Amount</th>
+                          <th scope="col">{this.state.totalDebtsItems}</th>
                         </tr>
                       </tfoot>
                     </table>
