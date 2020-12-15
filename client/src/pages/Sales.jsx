@@ -91,12 +91,12 @@ class Sales extends Component {
                 <section>
                   <div className="px-4">
                     <div className="row px-2">
-                      <InfoBox
-                        title="Profit"
-                        description="Average profit per sale"
-                        value={this.state.profit}
-                      />
-                      <article className="flex-fill bg-light pl-4 pt-4 ml-4">
+                        <InfoBox
+                          title="Profit"
+                          description="Average profit per sale"
+                          value={this.state.profit}
+                        />                      
+                      <article className="bg-light pl-4 pt-4 ml-4">
                         <h2>Top Sold Products</h2>
                         <div className="row justify-content-around p-2">
                           <table className="col-7 table">
