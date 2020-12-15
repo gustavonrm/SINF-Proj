@@ -107,7 +107,7 @@ class Purchase extends Component {
                             <td>
                               {item.date.year}-{item.date.month}-{item.date.day}
                             </td>
-                            <td>{item.totalCost.toFixed(2)}</td>
+                            <td>{item.totalCost.toFixed(2)}€</td>
                           </tr>
                         ))}
                       </tbody>
@@ -116,7 +116,7 @@ class Purchase extends Component {
                           <th scope="col">Total</th>
                           <th scope="col"></th>
                           <th scope="col"></th>
-                          <th scope="col">{this.state.totalPurchasesItems}</th>
+                          <th scope="col">{this.state.totalPurchasesItems}€</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -151,7 +151,7 @@ class Purchase extends Component {
                               {item.dueDate.year}-{item.dueDate.month}-
                               {item.dueDate.day}
                             </td>
-                            <td>{item.totalCost.toFixed(2)}</td>
+                            <td>{item.totalCost.toFixed(2)}€</td>
                           </tr>
                         ))}
                       </tbody>
@@ -160,7 +160,7 @@ class Purchase extends Component {
                           <th scope="col">Total</th>
                           <th scope="col"></th>
                           <th scope="col"></th>
-                          <th scope="col">{this.state.totalDebtsItems}</th>
+                          <th scope="col">{this.state.totalDebtsItems}€</th>
                         </tr>
                       </tfoot>
                     </table>

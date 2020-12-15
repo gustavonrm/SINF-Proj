@@ -38,8 +38,21 @@ class Overview extends Component {
     fetch("http://localhost:3000/api/overview/assetsDebts")
       .then((res) => res.json())
       .then((json) => {
+        //process debts
+        let currentMonth = new Date().getMonth();
+        let previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+        let aGrowth =
+          ((json.assets[currentMonth] - json.assets[previousMonth]) /
+            json.assets[currentMonth]) *
+          100;
+        let dGrowth =
+          ((json.debts[currentMonth] - json.debts[previousMonth]) /
+            json.debts[currentMonth]) *
+          100;
         this.setState({
           assetsDebts: json,
+          assetsGrowth: aGrowth.toFixed(2),
+          debtsGrowth: dGrowth.toFixed(2),
         });
       });
 

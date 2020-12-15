@@ -58,9 +58,9 @@ class Account extends Component {
                   <td>
                     {item.dueDate.year}-{item.dueDate.month}-{item.dueDate.day}
                   </td>
-                  <td>{item.unitCost.toFixed(2)}</td>
+                  <td>{item.unitCost.toFixed(2)}€</td>
                   <td>sei la</td>
-                  <td>{item.totalCost.toFixed(2)}</td>
+                  <td>{item.totalCost.toFixed(2)}€</td>
                 </tr>
               ))}
             </tbody>
@@ -68,9 +68,9 @@ class Account extends Component {
               <tr>
                 <th scope="col">Total</th>
                 <th scope="col"></th>
-                <th scope="col">{totalCost.toFixed(2)}</th>
+                <th scope="col">{totalCost.toFixed(2)}€</th>
                 <th scope="col"></th>
-                <th scope="col">{totalAmmount.toFixed(2)}</th>
+                <th scope="col">{totalAmmount.toFixed(2)}€</th>
               </tr>
             </tfoot>
           </table>
