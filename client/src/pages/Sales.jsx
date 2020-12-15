@@ -35,29 +35,39 @@ class Sales extends Component {
       .then((json) => {
         this.setState({
           topProducts: json.sort((a, b) =>
-            a.unitsSold > b.unitsSold ? -1 : 1
+            a.sales.reduce(function (a, b) {
+              return a + b;
+            }, 0) >
+            b.sales.reduce(function (a, b) {
+              return a + b;
+            }, 0)
+              ? -1
+              : 1
           ),
         });
       });
 
     //Process other products calculations
     let others = 0;
-    let othersArray = [];
+    let othersArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     for (let i = 0; i < this.state.topProducts.length; i++) {
       if (i > 4) {
-        others += this.state.topProducts[i].unitsSold;
+        others += this.state.topProducts[i].sales.reduce(function (a, b) {
+          return a + b;
+        }, 0);
 
         for (let j = 0; j < this.state.topProducts[i].sales.length; j++) {
           othersArray[j] += this.state.topProducts[i].sales[j];
         }
       }
     }
-
+    console.log(othersArray);
     this.setState({
-      otherUnitsSold: others,
+      otherUnitsSold: others.toFixed(2),
       otherSales: othersArray,
     });
+
     this.setState({ loading: true });
   }
 
@@ -91,11 +101,11 @@ class Sales extends Component {
                 <section>
                   <div className="px-4">
                     <div className="row px-2">
-                        <InfoBox
-                          title="Profit"
-                          description="Average profit per sale"
-                          value={this.state.profit}
-                        />                      
+                      <InfoBox
+                        title="Profit"
+                        description="Average profit per sale"
+                        value={this.state.profit}
+                      />
                       <article className="bg-light pl-4 pt-4 ml-4">
                         <h2>Top Sold Products</h2>
                         <div className="row justify-content-around p-2">
@@ -136,11 +146,41 @@ class Sales extends Component {
                               "OTHERS",
                             ]}
                             prodUnits={[
-                              this.state.topProducts[0].unitsSold,
-                              this.state.topProducts[1].unitsSold,
-                              this.state.topProducts[2].unitsSold,
-                              this.state.topProducts[3].unitsSold,
-                              this.state.topProducts[4].unitsSold,
+                              this.state.topProducts[0].sales.reduce(function (
+                                a,
+                                b
+                              ) {
+                                return a + b;
+                              },
+                              0),
+                              this.state.topProducts[1].sales.reduce(function (
+                                a,
+                                b
+                              ) {
+                                return a + b;
+                              },
+                              0),
+                              this.state.topProducts[2].sales.reduce(function (
+                                a,
+                                b
+                              ) {
+                                return a + b;
+                              },
+                              0),
+                              this.state.topProducts[3].sales.reduce(function (
+                                a,
+                                b
+                              ) {
+                                return a + b;
+                              },
+                              0),
+                              this.state.topProducts[4].sales.reduce(function (
+                                a,
+                                b
+                              ) {
+                                return a + b;
+                              },
+                              0),
                               this.state.otherUnitsSold,
                             ]}
                           />
