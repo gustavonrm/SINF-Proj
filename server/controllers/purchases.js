@@ -5,9 +5,11 @@ const Controller = {};
 
 Controller.purchases = (req, res) => {
   const response = [];
+  const year = req.params.year;
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
         const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
           const name = item.purchasesItem;
@@ -39,10 +41,12 @@ Controller.purchases = (req, res) => {
 
 Controller.totalPurchases = (req, res) => {
   const response = { value: 0 };
+  const year = req.params.year;
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        response.value += invoice.payableAmount;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
+        response.value += invoice.payableAmount.amount;
       });
       res.json(response);
     })
@@ -58,11 +62,13 @@ Controller.totalPurchases = (req, res) => {
 
 Controller.debts = (req, res) => {
   const response = [];
+  const year = req.params.year;
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
-        const dueDate = getTimestamp(item.dueDate);
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
+        const dueDate = getTimestamp(invoice.dueDate);
         const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
           const name = item.purchasesItem;
@@ -93,11 +99,13 @@ Controller.debts = (req, res) => {
 
 Controller.totalDebts = (req, res) => {
   const response = { value: 0 };
+  const year = req.params.year;
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
-      data.forEach((invoice) => {
+      data.forEach((invoice) => { 
         if (invoice.cashInvoice) return;
-        response.value += invoice.payableAmount;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
+        response.value += invoice.payableAmount.amount;
       });
       res.json(response);
     })

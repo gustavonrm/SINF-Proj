@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import api from "../api";
-import { Content, NavBar, SideNav } from "../components";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { NavBar, SideNav } from "../components";
 import Account from "../components/Account";
 import "../style/App.css";
 
@@ -15,6 +19,7 @@ class Accounts extends Component {
       payableGrowth: 0,
       receivableTable: [],
       payableTable: [],
+      currentYear: 2020,
     };
   }
 
@@ -54,6 +59,23 @@ class Accounts extends Component {
       });
   }
 
+  changeYear(year) {
+    if (year !== 2020) {
+      this.setState({
+        receivable: 0,
+        receivableGrowth: 0,
+        payable: 0,
+        payableGrowth: 0,
+        receivableTable: [],
+        payableTable: [],
+        currentYear: 2020,
+      });
+    } else {
+      this.componentDidMount();
+    }
+    this.setState({ currentYear: year });
+  }
+
   render() {
     return (
       <>
@@ -79,42 +101,36 @@ class Accounts extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Accounts</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group mr-2">
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Share
+                <div className="dropdown show">
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                    {this.state.currentYear}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2020)}
+                    >
+                      2020
                     </button>
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Export
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2019)}
+                    >
+                      2019
                     </button>
                   </div>
-                  <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      className="feather feather-calendar"
-                    >
-                      <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="18"
-                        rx="2"
-                        ry="2"
-                      ></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    This week
-                  </button>
                 </div>
               </div>
               <div className="d-flex mx-3">

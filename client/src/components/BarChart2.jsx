@@ -75,6 +75,25 @@ const BarChart = (props) => {
                 "#00AB11",
               ],
             },
+            {
+              label: props.title4,
+              data: props.data4,
+              backgroundColor: [
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+                "#ABA400",
+              ],
+            },
           ],
         }}
         height={280}
@@ -84,10 +103,6 @@ const BarChart = (props) => {
           scales: {
             yAxes: [
               {
-                scaleLabel: {
-                  display: true,
-                  labelString: "probability",
-                },
                 ticks: {
                   beginAtZero: true,
                 },

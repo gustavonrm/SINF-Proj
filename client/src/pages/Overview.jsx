@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import api from "../api";
-
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import "../style/App.css";
 
 import { LineChartOverview, InfoBox, NavBar, SideNav } from "../components";
@@ -16,6 +19,7 @@ class Overview extends Component {
       debtsGrowth: 0.0,
       salesExpenses: {},
       assetsDebts: {},
+      currentYear: 2020,
     };
   }
 
@@ -39,8 +43,21 @@ class Overview extends Component {
     fetch("http://localhost:3000/api/overview/assetsDebts")
       .then((res) => res.json())
       .then((json) => {
+        //process debts
+        let currentMonth = new Date().getMonth();
+        let previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+        let aGrowth =
+          ((json.assets[currentMonth] - json.assets[previousMonth]) /
+            json.assets[currentMonth]) *
+          100;
+        let dGrowth =
+          ((json.debts[currentMonth] - json.debts[previousMonth]) /
+            json.debts[currentMonth]) *
+          100;
         this.setState({
           assetsDebts: json,
+          assetsGrowth: aGrowth.toFixed(2),
+          debtsGrowth: dGrowth.toFixed(2),
         });
       });
 
@@ -51,6 +68,24 @@ class Overview extends Component {
           salesExpenses: json,
         });
       });
+  }
+
+  changeYear(year) {
+    //todo process routes like in purchases
+    if (year !== 2020) {
+      this.setState({
+        totalAssets: 0,
+        totalDebts: 0,
+        assetsGrowth: 0.0,
+        debtsGrowth: 0.0,
+        salesExpenses: {},
+        assetsDebts: {},
+        currentYear: 2020,
+      });
+    } else {
+      this.componentDidMount();
+    }
+    this.setState({ currentYear: year });
   }
 
   render() {
@@ -78,42 +113,37 @@ class Overview extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Purchases</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group mr-2">
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Share
+
+                <div className="dropdown show">
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                    {this.state.currentYear}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2020)}
+                    >
+                      2020
                     </button>
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Export
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2019)}
+                    >
+                      2019
                     </button>
                   </div>
-                  <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      className="feather feather-calendar"
-                    >
-                      <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="18"
-                        rx="2"
-                        ry="2"
-                      ></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    This week
-                  </button>
                 </div>
               </div>
               <section className="mx-3">
@@ -128,7 +158,7 @@ class Overview extends Component {
                   />
                 </div>
                 <div className="d-flex justify-content-around">
-                  <div>
+                  <div className="flex-fill mr-4">
                     <div className="pb-4">
                       <InfoBox
                         title="Total Assets"

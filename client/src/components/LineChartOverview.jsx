@@ -71,6 +71,19 @@ const LineChartOverview = (props) => {
         width={props.width}
         options={{
           maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Euros",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
         }}
       />
     </div>

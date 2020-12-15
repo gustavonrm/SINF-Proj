@@ -1,14 +1,73 @@
 import React, { Component } from "react";
-import api from "../api";
-import { BarChart, Content, NavBar, SideNav } from "../components";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { BarChart, BarChart2, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
 class Financial extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      returnRatios: [],
+      growthRatios: [],
+      liquidity: [],
+      financialStability: [],
+      currentYear: 2020,
+    };
   }
+  componentDidMount() {
+    fetch("http://localhost:3000/api/financial/liquidity")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          liquidity: json,
+        });
+      });
+
+    fetch("http://localhost:3000/api/financial/growthRatios")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          growthRatios: json,
+        });
+      });
+
+    fetch("http://localhost:3000/api/financial/returnRatios")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          returnRatios: json,
+        });
+      });
+
+    fetch("http://localhost:3000/api/financial/financialStability")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          financialStability: json,
+        });
+      });
+  }
+
+  changeYear(year) {
+    if (year !== 2020) {
+      this.setState({
+        returnRatios: [],
+        growthRatios: [],
+        liquidity: [],
+        financialStability: [],
+        currentYear: 2020,
+      });
+    } else {
+      this.componentDidMount();
+    }
+    this.setState({ currentYear: year });
+  }
+
   render() {
     return (
       <>
@@ -16,7 +75,11 @@ class Financial extends Component {
         <div className="container-fluid">
           <div className="row">
             <SideNav page={"Financial"} />
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4" style={{ minHeight: "100vh" }}>
+            <main
+              role="main"
+              className="col-md-9 ml-sm-auto col-lg-10 px-4"
+              style={{ minHeight: "100vh" }}
+            >
               <div
                 style={{
                   position: "absolute",
@@ -30,60 +93,95 @@ class Financial extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Financial</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group mr-2">
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Share
+                <div className="dropdown show">
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                    {this.state.currentYear}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2020)}
+                    >
+                      2020
                     </button>
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Export
+                    <button
+                      className="dropdown-item"
+                      onClick={() => this.changeYear(2019)}
+                    >
+                      2019
                     </button>
                   </div>
-                  <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      className="feather feather-calendar"
-                    >
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    This week
-                  </button>
                 </div>
               </div>
               <section>
                 <div className="row justify-content-around mx-3">
                   <article className="bg-light p-3 mb-4">
                     <h2>Return Ratios</h2>
-                    <h5 className="text-muted">Return on sales, assets and equity</h5>
-                    <BarChart />
+                    <h5 className="text-muted">
+                      Return on sales, assets and equity
+                    </h5>
+                    <BarChart
+                      title1={"Return on Sales"}
+                      title2={"Return on Assests"}
+                      title3={"Return on Equity"}
+                      data1={this.state.returnRatios.returnOnSales}
+                      data2={this.state.returnRatios.returnOnAssets}
+                      data3={this.state.returnRatios.returnOnEquity}
+                    />
                   </article>
                   <article className="bg-light p-3 mb-4">
                     <h2>Financial Stability</h2>
                     <h5 className="text-muted">description</h5>
-                    <BarChart />
+                    <BarChart2
+                      title1={"Equity to Assets"}
+                      title2={"Debt to Equity"}
+                      title3={"COverage on fixed investments"}
+                      title4={"Interest Coverage"}
+                      data1={this.state.financialStability.equityToAssets}
+                      data2={this.state.financialStability.debtToEquity}
+                      data3={
+                        this.state.financialStability.coverageOnFixedInvestments
+                      }
+                      data4={this.state.financialStability.interestCoverage}
+                    />
                   </article>
                 </div>
                 <div className="row justify-content-around mx-3">
                   <article className="bg-light p-3 mb-4">
                     <h2>Liquidity</h2>
                     <h5 className="text-muted">description</h5>
-                    <BarChart />
+                    <BarChart
+                      title1={"Current Ratio"}
+                      title2={"Quick Ratio"}
+                      title3={"Cash Ratio"}
+                      data1={this.state.liquidity.current}
+                      data2={this.state.liquidity.quick}
+                      data3={this.state.liquidity.cash}
+                    />
                   </article>
                   <article className="bg-light p-3 mb-4">
                     <h2>Growth Ratios</h2>
                     <h5 className="text-muted">description</h5>
-                    <BarChart />
+                    <BarChart
+                      title1={"Profit"}
+                      title2={"Debt"}
+                      title3={"Equity"}
+                      data1={this.state.growthRatios.profit}
+                      data2={this.state.growthRatios.debt}
+                      data3={this.state.growthRatios.equity}
+                    />
                   </article>
                 </div>
               </section>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "whatwg-fetch";
 
 import { getFromStorage, setInStorage } from "../app/utils/storage";
@@ -106,7 +105,6 @@ class Auth extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("json", json);
         if (json.success) {
           this.setState({
             signUpError: json.message,
@@ -144,7 +142,6 @@ class Auth extends Component {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("json", json);
         if (json.success) {
           setInStorage("the_main_app", { token: json.token });
           this.setState({
@@ -217,14 +214,14 @@ class Auth extends Component {
       return (
         <>
           <div>
-            <div class="form-signin">
+            <div className="form-signin">
               {signInError ? <p>{signInError}</p> : null}
-              <div class="text-center mb-4"></div>
+              <div className="text-center mb-4"></div>
               <p>Username</p>
-              <div class="form-label-group">
+              <div className="form-label-group">
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   placeholder="User"
                   value={signInEmail}
                   onChange={this.onTextboxChangeSignInEmail}
@@ -233,10 +230,10 @@ class Auth extends Component {
                 />
               </div>
               <p>Password</p>
-              <div class="form-label-group">
+              <div className="form-label-group">
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Password"
                   required=""
                   value={signInPassword}
@@ -246,7 +243,7 @@ class Auth extends Component {
 
               <button
                 onClick={this.onSignIn}
-                class="btn btn-lg btn-primary btn-block login-btn"
+                className="btn btn-lg btn-primary btn-block login-btn"
               >
                 Sign in
               </button>

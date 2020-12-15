@@ -14,3 +14,7 @@ main {
 .logout-btn:hover {
   color: #1b4d81 !important;
 }
+
+.dropdown-menu {
+  min-width: 6.5em !important;
+}
