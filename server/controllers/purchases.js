@@ -46,7 +46,7 @@ Controller.totalPurchases = (req, res) => {
     .then((data) => {
       data.forEach((invoice) => {
         if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
-        response.value += invoice.payableAmount;
+        response.value += invoice.payableAmount.amount;
       });
       res.json(response);
     })
@@ -105,7 +105,7 @@ Controller.totalDebts = (req, res) => {
       data.forEach((invoice) => { 
         if (invoice.cashInvoice) return;
         if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
-        response.value += invoice.payableAmount;
+        response.value += invoice.payableAmount.amount;
       });
       res.json(response);
     })
