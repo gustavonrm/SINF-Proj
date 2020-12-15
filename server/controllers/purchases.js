@@ -9,7 +9,7 @@ Controller.purchases = (req, res) => {
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        if (year !== undefined && getTimestamp(invoice.dueDate).year !== year) return;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
         const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
           const name = item.purchasesItem;
@@ -45,7 +45,7 @@ Controller.totalPurchases = (req, res) => {
   jasminReq('get', '/invoiceReceipt/invoices')
     .then((data) => {
       data.forEach((invoice) => {
-        if (year !== undefined && getTimestamp(invoice.dueDate).year !== year) return;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
         response.value += invoice.payableAmount;
       });
       res.json(response);
@@ -67,7 +67,7 @@ Controller.debts = (req, res) => {
     .then((data) => {
       data.forEach((invoice) => {
         if (invoice.cashInvoice) return;
-        if (year !== undefined && getTimestamp(invoice.dueDate).year !== year) return;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
         const dueDate = getTimestamp(item.dueDate);
         const supplier = invoice.sellerSupplierPartyName;
         invoice.documentLines.forEach((item) => {
@@ -104,7 +104,7 @@ Controller.totalDebts = (req, res) => {
     .then((data) => {
       data.forEach((invoice) => { 
         if (invoice.cashInvoice) return;
-        if (year !== undefined && getTimestamp(invoice.dueDate).year !== year) return;
+        if (year !== undefined && getTimestamp(invoice.documentDate).year !== year) return;
         response.value += invoice.payableAmount;
       });
       res.json(response);
