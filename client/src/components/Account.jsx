@@ -59,9 +59,9 @@ class Account extends Component {
                         {item.dueDate.year}-{item.dueDate.month}-
                         {item.dueDate.day}
                       </td>
-                      <td>{item.unitCost}</td>
+                      <td>{item.unitCost.toFixed(2)}</td>
                       <td>sei la</td>
-                      <td>{item.totalCost}</td>
+                      <td>{item.totalCost.toFixed(2)}</td>
                     </tr>
                   )
                 )
