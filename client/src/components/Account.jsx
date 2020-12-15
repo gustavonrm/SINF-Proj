@@ -15,7 +15,7 @@ class Account extends Component {
           <Value value={this.props.value} growth={this.props.growth} />
         </article>
         <article>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Account</th>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import api from "../api";
-import { Content, InfoBox, NavBar, SideNav } from "../components";
+import { InfoBox, NavBar, SideNav } from "../components";
 import "../style/App.css";
 
 class Purchase extends Component {
@@ -55,50 +54,13 @@ class Purchase extends Component {
               ></div>
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">Purchases</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group mr-2">
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Share
-                    </button>
-                    <button className="btn btn-sm btn-outline-secondary">
-                      Export
-                    </button>
-                  </div>
-                  <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      className="feather feather-calendar"
-                    >
-                      <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="18"
-                        rx="2"
-                        ry="2"
-                      ></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    This week
-                  </button>
-                </div>
               </div>
               <section>
                 <div className="d-flex mx-3 mb-4">
                   <article className="col-8 bg-light pt-4 px-4 mr-4">
                     <h2>Purchases</h2>
-                    <h5 className="text-muted">{this.props.description}</h5>
-                    <table class="table">
+                    <h5 className="text-muted">Recent purchases</h5>
+                    <table className="table">
                       <thead>
                         <tr>
                           <th scope="col">Purchase</th>
@@ -152,8 +114,10 @@ class Purchase extends Component {
                 <div className="d-flex mx-3">
                   <article className="col-8 bg-light pt-4 px-4 mr-4">
                     <h2>Debt to suppliers</h2>
-                    <h5 className="text-muted"></h5>
-                    <table class="table">
+                    <h5 className="text-muted">
+                      Debt to suppliers from purchases
+                    </h5>
+                    <table className="table">
                       <thead>
                         <tr>
                           <th scope="col">Purchase</th>

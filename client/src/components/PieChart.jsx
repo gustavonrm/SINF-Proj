@@ -1,9 +1,9 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 
-const PieChart = () => {
+const PieChart = (props) => {
   const data = {
-    labels: ["Red", "Blue", "Yellow", "Red", "Blue", "Yellow"],
+    labels: props.prodLabels,
     datasets: [
       {
         data: [60, 60, 60, 60, 60, 60],

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { getFromStorage } from './utils/storage'
 
 function App() {
-    console.log(getFromStorage('the_main_app')); 
+  
     return (
         <Router>
             <Switch>
