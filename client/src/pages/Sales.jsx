@@ -23,6 +23,7 @@ class Sales extends Component {
       loading: false,
       otherUnitsSold: 0.0,
       otherSales: [],
+      totalSales: [],
       currentYear: 2020,
     };
   }
@@ -56,6 +57,8 @@ class Sales extends Component {
     //Process other products calculations
     let others = 0;
     let othersArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let totalArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
     for (let i = 0; i < this.state.topProducts.length; i++) {
       if (i > 4) {
@@ -67,11 +70,17 @@ class Sales extends Component {
           othersArray[j] += this.state.topProducts[i].sales[j];
         }
       }
+      for (let j = 0; j < this.state.topProducts[i].sales.length; j++) {
+        totalArray[j] += this.state.topProducts[i].sales[j];
+      }
     }
+
+
     console.log(othersArray);
     this.setState({
       otherUnitsSold: others.toFixed(2),
       otherSales: othersArray,
+      totalSales: totalArray,
     });
 
     this.setState({ loading: true });
@@ -168,7 +177,9 @@ class Sales extends Component {
                               <tr>
                                 <th scope="col">Item</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Units</th>
                                 <th scope="col">Average Cost per Item</th>
+                                <th scope="col">Total</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -177,12 +188,22 @@ class Sales extends Component {
                                 .map(([key, value]) => (
                                   <tr>
                                     <th scope="row">{value.key}</th>
-                                    <td>{value.name}</td>
+                                    <td>{(value.name.slice(0, 30) + "...")}
+                                    </td>
+                                    <td>{value.unitsSold}</td>
                                     <td>
                                       {(
                                         value.sales.reduce(function (a, b) {
                                           return a + b;
                                         }, 0) / value.unitsSold
+                                      ).toFixed(2)}
+                                      €
+                                    </td>
+                                    <td>
+                                      {(
+                                        value.sales.reduce(function (a, b) {
+                                          return a + b;
+                                        }, 0)
                                       ).toFixed(2)}
                                       €
                                     </td>
@@ -246,12 +267,14 @@ class Sales extends Component {
                     <h2>Total Sales Volume</h2>
                     <LineChartSales
                       height={300}
+                      title0={"Total"}
                       title1={this.state.topProducts[0].key}
                       title2={this.state.topProducts[1].key}
                       title3={this.state.topProducts[2].key}
                       title4={this.state.topProducts[3].key}
                       title5={this.state.topProducts[4].key}
                       title6={"OTHERS"}
+                      data0={this.state.totalSales}
                       data1={this.state.topProducts[0].sales}
                       data2={this.state.topProducts[1].sales}
                       data3={this.state.topProducts[2].sales}
