@@ -84,6 +84,10 @@ const BarChart = (props) => {
           scales: {
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: "probability",
+                },
                 ticks: {
                   beginAtZero: true,
                 },
