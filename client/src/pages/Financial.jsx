@@ -17,6 +17,8 @@ class Financial extends Component {
       liquidity: [],
       financialStability: [],
       currentYear: 2020,
+      balanceSheet: {},
+      loading: false,
     };
   }
   componentDidMount() {
@@ -51,6 +53,15 @@ class Financial extends Component {
           financialStability: json,
         });
       });
+
+    fetch("http://localhost:3000/api/financial/balanceSheet")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          balanceSheet: json,
+          loading: true,
+        });
+      });
   }
 
   changeYear(year) {
@@ -69,7 +80,8 @@ class Financial extends Component {
   }
 
   render() {
-    return (
+    if (this.state.loading)
+      return (
       <>
         <NavBar />
         <div className="container-fluid">
@@ -115,20 +127,19 @@ class Financial extends Component {
                     <button
                       className="dropdown-item"
                       onClick={() => this.changeYear(2020)}
-                    >
-                      2020
-                    </button>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => this.changeYear(2019)}
-                    >
-                      2019
-                    </button>
+                      >
+                        2020
+                      </button>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => this.changeYear(2019)}
+                      >
+                        2019
+                      </button>
+                    </div>
                   </div>
                 </div>
                 </div>
-
-              </div>
               <section>
                 <div className="row justify-content-around mx-3">
                   <article className="bg-light p-3 mb-4">
@@ -191,9 +202,10 @@ class Financial extends Component {
               </section>
             </main>
           </div>
-        </div>
-      </>
-    );
+          </div>
+        </>
+      );
+    else return <> </>;
   }
 }
 

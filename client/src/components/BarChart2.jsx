@@ -103,6 +103,10 @@ const BarChart = (props) => {
           scales: {
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Ratio",
+                },
                 ticks: {
                   beginAtZero: true,
                 },
