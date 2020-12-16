@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<AuditFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:OECD:StandardAuditFile-Tax:PT_1.04_01">
+  <Header>
+    <AuditFileVersion>1.04_01</AuditFileVersion>
+    <CompanyID>242588352</CompanyID>
+    <TaxRegistrationNumber>242588352</TaxRegistrationNumber>
+    <TaxAccountingBasis>F</TaxAccountingBasis>
+    <CompanyName>SINF2021_GROUP_H</CompanyName>
+    <CompanyAddress>
+      <BuildingNumber>0</BuildingNumber>
+      <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+      <AddressDetail>Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+      <City>Porto</City>
+      <PostalCode>4200-602</PostalCode>
+      <Region>Desconhecido</Region>
+      <Country xsi:type="xsd:string">PT</Country>
+    </CompanyAddress>
+    <FiscalYear>2020</FiscalYear>
+    <StartDate>2020-12-01</StartDate>
+    <EndDate>2020-12-31</EndDate>
+    <CurrencyCode xsi:type="xsd:string">EUR</CurrencyCode>
+    <DateCreated>2020-12-16</DateCreated>
+    <TaxEntity>GLOBAL</TaxEntity>
+    <ProductCompanyTaxID>503140600</ProductCompanyTaxID>
+    <SoftwareCertificateNumber>2616</SoftwareCertificateNumber>
+    <ProductID>PRIMAVERA JASMIN/PRIMAVERA Business Software Solutions</ProductID>
+    <ProductVersion>1.00</ProductVersion>
+  </Header>
+  <MasterFiles>
+    <Customer>
+      <CustomerID>0001.4</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Dwight Schrute</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Dwight Schrute</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0005.1</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Angela Martin</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Angela Martin</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0008.1</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Pam Beesly</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Pam Beesly</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0013.4</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Andy Bernard</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Andy Bernard</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0014.5</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Michael Scott</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Michael Scott</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0014.6</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Michael Scott</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Desconhecido</StreetName>
+        <AddressDetail>Michael Scott</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>Desconhecido</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL4</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane  0,70x10m Verde</ProductDescription>
+      <ProductNumberCode>CEL4</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>RESMACOR2</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma de Papel Colorido A4 80g/m2 Verde</ProductDescription>
+      <ProductNumberCode>RESMACOR2</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>RESMACOR3</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma de Papel Colorido A4 80g/m2 Vermelho</ProductDescription>
+      <ProductNumberCode>RESMACOR3</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL2</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane 0,70x10m Azul</ProductDescription>
+      <ProductNumberCode>CEL2</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>BLOCO2</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Bloco Papel Aguarela  50x65cm 300g 20F</ProductDescription>
+      <ProductNumberCode>BLOCO2</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>RESMACOR1</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma de Papel Colorido A4 80g/m2 Azul</ProductDescription>
+      <ProductNumberCode>RESMACOR1</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL5</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane  0,70x10m Rosa</ProductDescription>
+      <ProductNumberCode>CEL5</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>RESMAA4</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma Papel A4 75g/m2 500folhas</ProductDescription>
+      <ProductNumberCode>RESMAA4</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL3</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane 0,70x10m Vermelho</ProductDescription>
+      <ProductNumberCode>CEL3</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>FOTO1</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma Papel Fotográfico 25 Folhas</ProductDescription>
+      <ProductNumberCode>FOTO1</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>RESMAA3</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Resma de Papel A3 80g/m2 500 folhas</ProductDescription>
+      <ProductNumberCode>RESMAA3</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL6</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane  0,70x10m Incolor</ProductDescription>
+      <ProductNumberCode>CEL6</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>CEL1</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Celofane 0,70x10m Amarelo</ProductDescription>
+      <ProductNumberCode>CEL1</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>ROLO1</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Rolo Papel Térmico 80x30x11mm 10UN</ProductDescription>
+      <ProductNumberCode>ROLO1</ProductNumberCode>
+    </Product>
+    <TaxTable>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT</TaxCountryRegion>
+        <TaxCode>INT</TaxCode>
+        <Description>Taxa Intermédia</Description>
+        <TaxPercentage>13.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT</TaxCountryRegion>
+        <TaxCode>ISE</TaxCode>
+        <Description>Isento</Description>
+        <TaxPercentage>0.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT</TaxCountryRegion>
+        <TaxCode>NOR</TaxCode>
+        <Description>Taxa Normal</Description>
+        <TaxPercentage>23.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT</TaxCountryRegion>
+        <TaxCode>RED</TaxCode>
+        <Description>Taxa Reduzida</Description>
+        <TaxPercentage>6.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-AC</TaxCountryRegion>
+        <TaxCode>INT</TaxCode>
+        <Description>Taxa Intermédia</Description>
+        <TaxPercentage>9.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-AC</TaxCountryRegion>
+        <TaxCode>ISE</TaxCode>
+        <Description>Isento</Description>
+        <TaxPercentage>0.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-AC</TaxCountryRegion>
+        <TaxCode>NOR</TaxCode>
+        <Description>Taxa Normal</Description>
+        <TaxPercentage>18.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-AC</TaxCountryRegion>
+        <TaxCode>RED</TaxCode>
+        <Description>Taxa Reduzida</Description>
+        <TaxPercentage>4.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-MA</TaxCountryRegion>
+        <TaxCode>INT</TaxCode>
+        <Description>Taxa Intermédia</Description>
+        <TaxPercentage>12.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-MA</TaxCountryRegion>
+        <TaxCode>ISE</TaxCode>
+        <Description>Isento</Description>
+        <TaxPercentage>0.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-MA</TaxCountryRegion>
+        <TaxCode>NOR</TaxCode>
+        <Description>Taxa Normal</Description>
+        <TaxPercentage>22.000000</TaxPercentage>
+      </TaxTableEntry>
+      <TaxTableEntry>
+        <TaxType>IVA</TaxType>
+        <TaxCountryRegion>PT-MA</TaxCountryRegion>
+        <TaxCode>RED</TaxCode>
+        <Description>Taxa Reduzida</Description>
+        <TaxPercentage>5.000000</TaxPercentage>
+      </TaxTableEntry>
+    </TaxTable>
+  </MasterFiles>
+  <SourceDocuments>
+    <SalesInvoices>
+      <NumberOfEntries>6</NumberOfEntries>
+      <TotalDebit>0</TotalDebit>
+      <TotalCredit>728.950000</TotalCredit>
+      <Invoice>
+        <InvoiceNo>FA 2020/3</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-15T18:25:29</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>iTGz1gWtybPss9UtWKHXvQT7hLaSE7sRqbHeUdHQ2zk58x1BGE2H+NB7GfkMYZ1XjVdon9l0fekPmfXUlmWquuwRLTv+/AEz3jWyeuVZaR658njDd/zsmcsuDONSdlzmpegObikantj9aX6Dg2K0zKCR5ay9qbsLUrBTH8tphwU=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-15</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-15T18:25:29</SystemEntryDate>
+        <CustomerID>0008.1</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-15T18:26:34</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <ProductCode>BLOCO2</ProductCode>
+          <ProductDescription>Bloco Papel Aguarela  50x65cm 300g 20F</ProductDescription>
+          <Quantity>5.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>40.340000</UnitPrice>
+          <TaxPointDate>2020-12-15</TaxPointDate>
+          <Description>Bloco Papel Aguarela  50x65cm 300g 20F</Description>
+          <CreditAmount>201.700000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>46.39</TaxPayable>
+          <NetTotal>201.70</NetTotal>
+          <GrossTotal>248.09</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2020/4</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-16T00:07:55</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>kXIItZvDOgyd6HSahXc0/izwp6S4J8a9xBj/+C9TyVo3bIZSGQltKmE+Vwn5r1EhK3alNikkpaxPARKUV30j0Y0/lxMAYUu/z5oeCsQSDawyEGVqXjsWSoOvdSxAtgDRRahFEFWUbaF0IsjPYiI/c42bJ194aNCF4G4XTNZzMgo=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-16</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-16T00:07:55</SystemEntryDate>
+        <CustomerID>0014.5</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-16T00:09:35</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/1</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMAA4</ProductCode>
+          <ProductDescription>Resma Papel A4 75g/m2 500folhas</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>3.790000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma Papel A4 75g/m2 500folhas</Description>
+          <CreditAmount>37.900000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>8.72</TaxPayable>
+          <NetTotal>37.90</NetTotal>
+          <GrossTotal>46.62</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2020/5</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-16T00:11:19</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>K4pL7Id24MPgB4L3e8ArGhAcJh36N9D1lw7iBd0wmcX2uwhgdLjSH9KTGTE57CDzHFYR8hg5EwUZSCtNl3WMeVi1ElJ3njtzCMfahc/KcH0qvfTLfU7i9Yt39eAbtDIrjq0UpMsqWS8Yx72nfzv3JrjsOlPNMaR9te1gMfHrZAs=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-16</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-16T00:11:19</SystemEntryDate>
+        <CustomerID>0013.4</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-16T00:13:06</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/2</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMAA4</ProductCode>
+          <ProductDescription>Resma Papel A4 75g/m2 500folhas</ProductDescription>
+          <Quantity>5.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>3.790000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma Papel A4 75g/m2 500folhas</Description>
+          <CreditAmount>18.950000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/2</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMAA3</ProductCode>
+          <ProductDescription>Resma de Papel A3 80g/m2 500 folhas</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>7.790000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma de Papel A3 80g/m2 500 folhas</Description>
+          <CreditAmount>7.790000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>6.15</TaxPayable>
+          <NetTotal>26.74</NetTotal>
+          <GrossTotal>32.89</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2020/6</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-16T00:11:52</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>eeG7+0Om3wHf/BbdfTV1oqx0v5AYqqn8d3ZOs7UYwI8Yry3bbJEsdjiV7ngilw+b4cJ/lATpR2k/YIqhta88Oujlh+3LVhLbYGDlQ33b0/eHnEGNdYO7WW8UO214eih2/DKkZNMwL9zTJ+z5qpOxHAUXLUHlODctyj4H2XkrmoA=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-16</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-16T00:11:52</SystemEntryDate>
+        <CustomerID>0005.1</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-16T00:13:38</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/3</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMACOR1</ProductCode>
+          <ProductDescription>Resma de Papel Colorido A4 80g/m2 Azul</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>8.990000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma de Papel Colorido A4 80g/m2 Azul</Description>
+          <CreditAmount>8.990000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/3</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMACOR2</ProductCode>
+          <ProductDescription>Resma de Papel Colorido A4 80g/m2 Verde</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>8.990000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma de Papel Colorido A4 80g/m2 Verde</Description>
+          <CreditAmount>8.990000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>3</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/3</OriginatingON>
+          </OrderReferences>
+          <ProductCode>FOTO1</ProductCode>
+          <ProductDescription>Resma Papel Fotográfico 25 Folhas</ProductDescription>
+          <Quantity>3.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>10.490000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma Papel Fotográfico 25 Folhas</Description>
+          <CreditAmount>31.470000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>4</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/3</OriginatingON>
+          </OrderReferences>
+          <ProductCode>RESMACOR3</ProductCode>
+          <ProductDescription>Resma de Papel Colorido A4 80g/m2 Vermelho</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>8.990000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Resma de Papel Colorido A4 80g/m2 Vermelho</Description>
+          <CreditAmount>8.990000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>13.44</TaxPayable>
+          <NetTotal>58.44</NetTotal>
+          <GrossTotal>71.88</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2020/7</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-16T00:12:32</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>YzyBg/86GlYVlrIj4v+QLUgD1ZRoSqQpEMostOU6Z4Lz0IeCQpw9Ax0FziRmXW78gT7nVQ/IiTXJ3gVFMeIw7tCvYEQOooUkRs372ABaA+jVNDbTOD3KYXBkj7P2tzf6C8/zdqsGDZYBNdJEt96WVYIjg5XoQ1VTxHKM/VU4R+8=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-16</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-16T00:12:32</SystemEntryDate>
+        <CustomerID>0001.4</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-16T00:14:18</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/4</OriginatingON>
+          </OrderReferences>
+          <ProductCode>ROLO1</ProductCode>
+          <ProductDescription>Rolo Papel Térmico 80x30x11mm 10UN</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>5.170000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Rolo Papel Térmico 80x30x11mm 10UN</Description>
+          <CreditAmount>5.170000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>1.19</TaxPayable>
+          <NetTotal>5.17</NetTotal>
+          <GrossTotal>6.36</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2020/8</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2020-12-16T00:29:14</InvoiceStatusDate>
+          <SourceID>up201705072@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>eKY/KSlFLrUyDpS6tbDn+DgK4ccUzC3gKxQec31x9e6wU0R+nQFmjMpREY/82RLi1FDlVX40EGPlVpz1J8dJjYFTC+piGpB9MVHTa++uE09jXhx3YR87QnAlFUz4xGt9sdAnmZJdAAhv7MtyYxFPT1nB48dxi9B8+4WhCLMlVuo=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2020-12-16</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201705072@fe.up.pt</SourceID>
+        <SystemEntryDate>2020-12-16T00:29:14</SystemEntryDate>
+        <CustomerID>0014.6</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua Académico Futebol Club, n 293</StreetName>
+            <AddressDetail>O Nosso Endereço Rua Académico Futebol Club, n 293   4200-602 Porto</AddressDetail>
+            <City>Porto</City>
+            <PostalCode>4200-602</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2020-12-16T00:31:04</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL1</ProductCode>
+          <ProductDescription>Papel Celofane 0,70x10m Amarelo</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane 0,70x10m Amarelo</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL2</ProductCode>
+          <ProductDescription>Papel Celofane 0,70x10m Azul</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane 0,70x10m Azul</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>3</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL3</ProductCode>
+          <ProductDescription>Papel Celofane 0,70x10m Vermelho</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane 0,70x10m Vermelho</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>4</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL4</ProductCode>
+          <ProductDescription>Papel Celofane  0,70x10m Verde</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane  0,70x10m Verde</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>5</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL5</ProductCode>
+          <ProductDescription>Papel Celofane  0,70x10m Rosa</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane  0,70x10m Rosa</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>6</LineNumber>
+          <OrderReferences>
+            <OriginatingON>GR 2020/5</OriginatingON>
+          </OrderReferences>
+          <ProductCode>CEL6</ProductCode>
+          <ProductDescription>Papel Celofane  0,70x10m Incolor</ProductDescription>
+          <Quantity>10.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>6.650000</UnitPrice>
+          <TaxPointDate>2020-12-16</TaxPointDate>
+          <Description>Papel Celofane  0,70x10m Incolor</Description>
+          <CreditAmount>66.500000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>91.77</TaxPayable>
+          <NetTotal>399.00</NetTotal>
+          <GrossTotal>490.77</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+    </SalesInvoices>
+  </SourceDocuments>
+</AuditFile>
