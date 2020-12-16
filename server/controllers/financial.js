@@ -62,7 +62,7 @@ Controller.growthRatios = (req, res) => {
     });
 };
 
-Controller.growthRatios = (req, res) => {
+Controller.balanceSheet = (req, res) => {
   saftReq('/balanceSheet')
     .then((data) => {
       res.json(data);
