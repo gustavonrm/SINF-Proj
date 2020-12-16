@@ -127,7 +127,7 @@ class BalanceSheet extends Component {
                             ]["Inventários"].toFixed(2)}
                             €
                           </td>
-                          <td>Capital Subscrito</td>
+                          <td>Subscribed Capital</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -146,7 +146,7 @@ class BalanceSheet extends Component {
                             ]["Ativos Biológicos"].toFixed(2)}
                             €
                           </td>
-                          <td>Ações Próprias</td>
+                          <td>Own Shares</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -163,7 +163,7 @@ class BalanceSheet extends Component {
                             ]["Clientes"].toFixed(2)}
                             €
                           </td>
-                          <td> Outros Instrumentos de Capital Próprio</td>
+                          <td>Other Equity Instruments</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -175,14 +175,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Estado e Outros Entes Públicos</td>
+                          <td scope="row">State and Other Public Entities</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
                             ]["Estado e Outros Entes Públicos"].toFixed(2)}
                             €
                           </td>
-                          <td>Prémios de Emissão</td>
+                          <td>Emission Rewards</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -194,14 +194,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Capital Subscrito e Não Realizado</td>
+                          <td scope="row">Subscribed and unpaid capital</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
                             ]["Capital Subscrito e Não Realizado"].toFixed(2)}
                             €
                           </td>
-                          <td>Reservas legais</td>
+                          <td>Legal reserves</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -211,14 +211,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Outros Créditos a Receber</td>
+                          <td scope="row">Other receivables</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
                             ]["Outros Créditos a Receber"].toFixed(2)}
                             €
                           </td>
-                          <td>Outras Reservas</td>
+                          <td>Other Reserves</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -228,14 +228,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Diferimentos</td>
+                          <td scope="row">Deferrals</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
                             ]["Diferimentos"].toFixed(2)}
                             €
                           </td>
-                          <td>Resultados Transitados</td>
+                          <td>Transited results</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -248,7 +248,7 @@ class BalanceSheet extends Component {
                         </tr>
                         <tr>
                           <td scope="row">
-                            Ativos Financeiros Detidos para Negociação
+                            Financial Liabilities Held for Trading
                           </td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
@@ -258,7 +258,7 @@ class BalanceSheet extends Component {
                             ].toFixed(2)}
                             €
                           </td>
-                          <td>Resultados Transitados</td>
+                          <td>Transited results</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -270,14 +270,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Outros Ativos Financeiros</td>
+                          <td scope="row">Other Financial Assets</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
                             ]["Outros Ativos Financeiros"].toFixed(2)}
                             €
                           </td>
-                          <td>Excedentes de Revalorização</td>
+                          <td>Revaluation surpluses</td>
                           <td>
                             {" "}
                             {this.state.balanceSheet[
@@ -290,7 +290,7 @@ class BalanceSheet extends Component {
                         </tr>
                         <tr>
                           <td scope="row">
-                            Ativos Não Correntes Detidos para Venda
+                            Non-current assets held for sale
                           </td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
@@ -300,7 +300,7 @@ class BalanceSheet extends Component {
                             ].toFixed(2)}
                             €
                           </td>
-                          <td>Ajustamentos</td>
+                          <td>Adjustments</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -309,7 +309,7 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Caixa e Depósitos Bancários</td>
+                          <td scope="row">Cash and Bank Deposits</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Corrente"
@@ -331,25 +331,25 @@ class BalanceSheet extends Component {
                           <td></td>
                         </tr>
                         <tr>
-                          <td scope="row">Ativos fixos tangíveis</td>
+                          <td scope="row">Tangible fixed assets</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Ativos fixos tangíveis"].toFixed(2)}
                             €
                           </td>
-                          <th>Passivo Corrente</th>
+                          <th>Current Liabilities</th>
                           <td></td>
                         </tr>
                         <tr>
-                          <td scope="row">Propriedades de Investimento</td>
+                          <td scope="row">Investment properties</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Propriedades de Investimento"].toFixed(2)}
                             €
                           </td>
-                          <td>Fornecedores</td>
+                          <td>Suppliers</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -367,7 +367,7 @@ class BalanceSheet extends Component {
                             ]["Goodwill"].toFixed(2)}
                             €
                           </td>
-                          <td>Adiantamentos de Clientes</td>
+                          <td>Clients' Advanced Payments</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -378,14 +378,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row"> Ativos intangíveis</td>
+                          <td scope="row"> Intangible assets</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Ativos intangíveis"].toFixed(2)}
                             €
                           </td>
-                          <td>Estado e Outros Entes Públicos</td>
+                          <td>State and Other Public Entities</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -396,14 +396,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row"> Ativos Biológicos</td>
+                          <td scope="row"> Biological Assets</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Ativos Biológicos"].toFixed(2)}
                             €
                           </td>
-                          <td>Financiamentos Obtidos</td>
+                          <td>Obtained Financing</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -414,14 +414,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Participações Financeiras</td>
+                          <td scope="row">Financial Holdings</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Participações Financeiras"].toFixed(2)}
                             €
                           </td>
-                          <td>Outras Dívidas a Pagar</td>
+                          <td>Other Payable Debts</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -432,14 +432,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Outros Investimentos Financeiros</td>
+                          <td scope="row">Other Financial Investments</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Outros Investimentos Financeiros"].toFixed(2)}
                             €
                           </td>
-                          <td>Diferimentos</td>
+                          <td>Deferrals</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -450,14 +450,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Créditos a Receber</td>
+                          <td scope="row">Credits Receivable</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Créditos a Receber"].toFixed(2)}
                             €
                           </td>
-                          <td>Passivos Financeiros Detidos para Negociação</td>
+                          <td>Financial Liabilities Held for Trading</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -468,14 +468,14 @@ class BalanceSheet extends Component {
                           </td>
                         </tr>
                         <tr>
-                          <td scope="row">Ativos por Impostos Diferidos</td>
+                          <td scope="row">Deferred Tax Assets</td>
                           <td>
                             {this.state.balanceSheet["Ativos"][
                               "Ativo Não Corrente"
                             ]["Ativos por Impostos Diferidos"].toFixed(2)}
                             €
                           </td>
-                          <td>Outros Passivos Financeiros</td>
+                          <td>Other Financial Liabilities</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -488,7 +488,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Passivos Não Correntes Detidos para Venda</td>
+                          <td>Non-current liabilities held for sale</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -501,13 +501,13 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <th>Passivo Não Corrente</th>
+                          <th>Non-current liabilities</th>
                           <td></td>
                         </tr>
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Provisões</td>
+                          <td>Provisions</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -520,7 +520,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Financiamentos Obtidos</td>
+                          <td>Obtained Financing</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -533,7 +533,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Responsabilidades por benefícios pós-emprego</td>
+                          <td>Liabilities for post-employment benefits</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -546,7 +546,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Passivos por Impostos Diferidos</td>
+                          <td>Deferred Tax Liabilities</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -559,7 +559,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <td>Outras Dívidas a Pagar</td>
+                          <td>Other Payable Debts</td>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
@@ -572,7 +572,7 @@ class BalanceSheet extends Component {
                         <tr>
                           <td scope="row"></td>
                           <td></td>
-                          <th>Passivo Total</th>
+                          <th>Total Liabilities</th>
                           <td>
                             {this.state.balanceSheet[
                               "Capital Próprio e Passivo"
