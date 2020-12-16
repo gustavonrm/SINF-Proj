@@ -249,7 +249,7 @@ class Auth extends Component {
               </button>
             </div>
           </div>
-
+          {/*
           <div>
             {signUpError ? <p>{signUpError}</p> : null}
             <p>Username</p>
@@ -269,6 +269,7 @@ class Auth extends Component {
             <br />
             <button onClick={this.onSignUp}>Sign Up</button>
           </div>
+          */}
         </>
       );
     }
