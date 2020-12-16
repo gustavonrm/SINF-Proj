@@ -157,7 +157,7 @@ class Sales extends Component {
                     <div className="row px-2">
                       <InfoBox
                         title="Profit"
-                        description="Average profit per sale"
+                      description="Total profit in selected period"
                         value={this.state.profit}
                       />
                       <article className="bg-light pl-4 pt-4 ml-4">
