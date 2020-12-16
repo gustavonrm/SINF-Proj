@@ -56,8 +56,8 @@ class Overview extends Component {
           100;
         this.setState({
           assetsDebts: json,
-          assetsGrowth: aGrowth.toFixed(2),
-          debtsGrowth: dGrowth.toFixed(2),
+          assetsGrowth: aGrowth.toFixed(0),
+          debtsGrowth: dGrowth.toFixed(0),
         });
       });
 
