@@ -212,28 +212,74 @@ module.exports = {
 
   generateAuxValues: (req, res, next) => {
     let auxValues = {
-      Inventory: [0].concat(module.exports.makeMonthlyArray()),
-      CashEquivalents: [0].concat(module.exports.makeMonthlyArray()),
-      AccountsReceivable: [0].concat(module.exports.makeMonthlyArray()),
-      CurrentAssets: [0].concat(module.exports.makeMonthlyArray()),
-      NonCurrentAssets: [0].concat(module.exports.makeMonthlyArray()),
-      Equity: [0].concat(module.exports.makeMonthlyArray()),
-      AccountsPayable: [0].concat(module.exports.makeMonthlyArray()),
-      CurrentLiabilities: [0].concat(module.exports.makeMonthlyArray()),
-      NonCurrentLiabilities: [0].concat(module.exports.makeMonthlyArray()),
-      Taxes: [0].concat(module.exports.makeMonthlyArray()),
-      Interest: [0].concat(module.exports.makeMonthlyArray()),
-      Revenue: [0].concat(module.exports.makeMonthlyArray()),
-      Expenses: [0].concat(module.exports.makeMonthlyArray())
+      Inventory: [0,0].concat(module.exports.makeMonthlyArray()),
+      CashEquivalents: [0,0].concat(module.exports.makeMonthlyArray()),
+      AccountsReceivable: [0,0].concat(module.exports.makeMonthlyArray()),
+      CurrentAssets: [0,0].concat(module.exports.makeMonthlyArray()),
+      NonCurrentAssets: [0,0].concat(module.exports.makeMonthlyArray()),
+      Equity: [0,0].concat(module.exports.makeMonthlyArray()),
+      AccountsPayable: [0,0].concat(module.exports.makeMonthlyArray()),
+      CurrentLiabilities: [0,0].concat(module.exports.makeMonthlyArray()),
+      NonCurrentLiabilities: [0,0].concat(module.exports.makeMonthlyArray()),
+      Taxes: [0,0].concat(module.exports.makeMonthlyArray()),
+      Interest: [0,0].concat(module.exports.makeMonthlyArray()),
+      Revenue: [0,0].concat(module.exports.makeMonthlyArray()),
+      Expenses: [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosBiologicosCorrentes: [0,0].concat(module.exports.makeMonthlyArray()),  
+      Clientes: [0,0].concat(module.exports.makeMonthlyArray()),  
+      EstadoEOutrosEntesAtivos: [0,0].concat(module.exports.makeMonthlyArray()), 
+      CapitalSubscritoNaoRealizado:  [0,0].concat(module.exports.makeMonthlyArray()), 
+      DiferimentosAtivos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosFinanceirosDetidos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrosAtivos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosNaoCorrentesDetidos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      CaixaEDepositos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosFixosTangiveis: [0,0].concat(module.exports.makeMonthlyArray()),  
+      PropriedadesDeInvestimento: [0,0].concat(module.exports.makeMonthlyArray()),  
+      Goodwill: [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosIntangiveis: [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosBiologicosNaoCorrentes:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      ParticipacoesFinanceiras: [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrosInvestimentos:    [0,0].concat(module.exports.makeMonthlyArray()),  
+      CreditosAReceber:    [0,0].concat(module.exports.makeMonthlyArray()),  
+      AtivosPorImpostosDiferidos:     [0,0].concat(module.exports.makeMonthlyArray()),  
+      CapitalSubscrito:       [0,0].concat(module.exports.makeMonthlyArray()),  
+      AcoesProprias:        [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrosInstrumentosDeCapital:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      PremiosDeEmissao:       [0,0].concat(module.exports.makeMonthlyArray()),  
+      ReservasLegais: [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrasReservas: [0,0].concat(module.exports.makeMonthlyArray()),  
+      ResultadosTransitados:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      ExcedentesDeRevalorizacao:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      Ajustamentos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      ResultadoLiquidoDoPeriodo:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      DividendosAntecipados:     [0,0].concat(module.exports.makeMonthlyArray()),  
+      Fornecedores:       [0,0].concat(module.exports.makeMonthlyArray()),  
+      AdiantamentosDeClientes:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      EstadoEOutrosEntesPassivos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      FinanciamentosObtidosAtivos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrasDividas: [0,0].concat(module.exports.makeMonthlyArray()),  
+      DiferimentosPassivos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      PassivosFinanceirosDetidos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrosPassivosFinanceiros:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      PassivosNaoCorrentesDetidos: [0,0].concat(module.exports.makeMonthlyArray()),  
+      Provisoes:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      FinanciamentosObtidosPassivos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      Responsabilidades:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      PassivosPorImpostosDiferidos:  [0,0].concat(module.exports.makeMonthlyArray()),  
+      OutrasDividasNaoCorrentes:  [0,0].concat(module.exports.makeMonthlyArray())
     }
 
     for(accountID in module.exports.auxDB.accounts){
       let account = module.exports.auxDB.accounts[accountID]
       let balance = account.openingDebit - account.openingCredit
       
-      for(let i = -1; i < 12; ++i){
+      for(let i = -1; i <= 12; ++i){
         if(i >= 0){
           balance = account.monthlyDebit[i] - account.monthlyCredit[i]
+          if(i == 12){
+            balance = account.closingDebit - account.closingCredit;
+          }
         }
 
         let accountTypes = taxonomy.getAccountTypes(account.taxonomyCode, balance)
@@ -257,21 +303,103 @@ module.exports = {
       }
     }
 
-    auxValues.Inventory = module.exports.flattenArray(auxValues.Inventory);
-    auxValues.CashEquivalents = module.exports.flattenArray(auxValues.CashEquivalents);
-    auxValues.AccountsReceivable = module.exports.flattenArray(auxValues.AccountsReceivable);
-    auxValues.CurrentAssets = module.exports.flattenArray(auxValues.CurrentAssets);
-    auxValues.NonCurrentAssets = module.exports.flattenArray(auxValues.NonCurrentAssets);
-    auxValues.Equity = module.exports.flattenArray(auxValues.Equity);
-    auxValues.AccountsPayable = module.exports.flattenArray(auxValues.AccountsPayable);
-    auxValues.CurrentLiabilities = module.exports.flattenArray(auxValues.CurrentLiabilities);
-    auxValues.NonCurrentLiabilities = module.exports.flattenArray(auxValues.NonCurrentLiabilities);
-    auxValues.Taxes = module.exports.flattenArray(auxValues.Taxes);
-    auxValues.Interest = module.exports.flattenArray(auxValues.Interest);
-    auxValues.Revenue = module.exports.flattenArray(auxValues.Revenue);
-    auxValues.Expenses = module.exports.flattenArray(auxValues.Expenses);
+    for(let auxType in auxValues){
+      auxValues[auxType] = module.exports.flattenArray(auxValues[auxType]);
+    }
 
     return auxValues;
+  },
+
+  generateBalanceSheet: (req, res, next) => {
+    let sheet = {
+      "Ativos":{
+        "Ativo Não Corrente":{
+          "Ativos fixos tangíveis":  module.exports.auxDB.auxValues.AtivosFixosTangiveis[13],
+          "Propriedades de Investimento":  module.exports.auxDB.auxValues.PropriedadesDeInvestimento[13],
+          "Goodwill":  module.exports.auxDB.auxValues.Goodwill[13],
+          "Ativos intangíveis":  module.exports.auxDB.auxValues.AtivosIntangiveis[13],
+          "Ativos Biológicos":  module.exports.auxDB.auxValues.AtivosBiologicosNaoCorrentes[13],
+          "Participações Financeiras":  module.exports.auxDB.auxValues.ParticipacoesFinanceiras[13],
+          "Outros Investimentos Financeiros":  module.exports.auxDB.auxValues.OutrosInvestimentos[13],
+          "Créditos a Receber":  module.exports.auxDB.auxValues.CreditosAReceber[13],
+          "Ativos por Impostos Diferidos":  module.exports.auxDB.auxValues.AtivosPorImpostosDiferidos[13]
+        },
+        "Ativo Corrente":{
+          "Inventários":  module.exports.auxDB.auxValues.Inventory[13],
+          "Ativos Biológicos":  module.exports.auxDB.auxValues.AtivosBiologicosCorrentes[13],
+          "Clientes":  module.exports.auxDB.auxValues.Clientes[13],
+          "Estado e Outros Entes Públicos":  module.exports.auxDB.auxValues.EstadoEOutrosEntesAtivos[13],
+          "Capital Subscrito e Não Realizado":  module.exports.auxDB.auxValues.CapitalSubscritoNaoRealizado[13],
+          "Outros Créditos a Receber":  module.exports.auxDB.auxValues.AccountsReceivable[13],
+          "Diferimentos":  module.exports.auxDB.auxValues.DiferimentosAtivos[13],
+          "Ativos Financeiros Detidos para Negociação":  module.exports.auxDB.auxValues.AtivosFinanceirosDetidos[13],
+          "Outros Ativos Financeiros":  module.exports.auxDB.auxValues.OutrosAtivos[13],
+          "Ativos Não Correntes Detidos para Venda":  module.exports.auxDB.auxValues.AtivosNaoCorrentesDetidos[13],
+          "Caixa e Depósitos Bancários":  module.exports.auxDB.auxValues.CaixaEDepositos[13]
+        },
+        total: 0
+      },
+      "Capital Próprio e Passivo":{
+        "Capital Próprio":{
+          "Capital Subscrito":  module.exports.auxDB.auxValues.CapitalSubscrito[13],
+          "Ações Próprias":  module.exports.auxDB.auxValues.AcoesProprias[13],
+          "Outros Instrumentos de Capital Próprio":  module.exports.auxDB.auxValues.OutrosInstrumentosDeCapital[13],
+          "Prémios de Emissão":  module.exports.auxDB.auxValues.PremiosDeEmissao[13],
+          "Reservas legais":  module.exports.auxDB.auxValues.ReservasLegais[13],
+          "Outras Reservas":  module.exports.auxDB.auxValues.OutrasReservas[13],
+          "Resultados Transitados":  module.exports.auxDB.auxValues.ResultadosTransitados[13],
+          "Excedentes de Revalorização":  module.exports.auxDB.auxValues.ExcedentesDeRevalorizacao[13],
+          "Ajustamentos":  module.exports.auxDB.auxValues.Ajustamentos[13],
+          total: 0
+        },
+        "Passivo":{
+          "Passivo Não Corrente":{
+            "Provisões":  module.exports.auxDB.auxValues.Provisoes[13],
+            "Financiamentos Obtidos":  module.exports.auxDB.auxValues.FinanciamentosObtidosPassivos[13],
+            "Responsabilidades por benefícios pós-emprego":  module.exports.auxDB.auxValues.Responsabilidades[13],
+            "Passivos por Impostos Diferidos":  module.exports.auxDB.auxValues.PassivosPorImpostosDiferidos[13],
+            "Outras Dívidas a Pagar":  module.exports.auxDB.auxValues.OutrasDividasNaoCorrentes[13]
+          },
+          "Passivo Corrente":{
+            "Fornecedores":  module.exports.auxDB.auxValues.Fornecedores[13],
+            "Adiantamentos de Clientes":  module.exports.auxDB.auxValues.AdiantamentosDeClientes[13],
+            "Estado e Outros Entes Públicos":  module.exports.auxDB.auxValues.EstadoEOutrosEntesPassivos[13],
+            "Financiamentos Obtidos":  module.exports.auxDB.auxValues.FinanciamentosObtidosPassivos[13],
+            "Outras Dívidas a Pagar":  module.exports.auxDB.auxValues.OutrasDividas[13],
+            "Diferimentos":  module.exports.auxDB.auxValues.DiferimentosPassivos[13],
+            "Passivos Financeiros Detidos para Negociação":  module.exports.auxDB.auxValues.PassivosFinanceirosDetidos[13],
+            "Outros Passivos Financeiros":  module.exports.auxDB.auxValues.OutrosPassivosFinanceiros[13],
+            "Passivos Não Correntes Detidos para Venda":  module.exports.auxDB.auxValues.PassivosNaoCorrentesDetidos[13]
+          },
+          total: 0
+        },
+        total: 0
+      }
+    }
+
+    for(element in sheet["Ativos"]["Ativo Não Corrente"]){
+      sheet["Ativos"].total += sheet["Ativos"]["Ativo Não Corrente"][element];
+    }
+    for(element in sheet["Ativos"]["Ativo Corrente"]){
+      sheet["Ativos"].total += sheet["Ativos"]["Ativo Corrente"][element];
+    }
+
+    for(element in sheet["Capital Próprio e Passivo"]["Capital Próprio"]){
+      if(element != "total"){
+        sheet["Capital Próprio e Passivo"]["Capital Próprio"].total += sheet["Capital Próprio e Passivo"]["Capital Próprio"][element];
+      }
+    }
+
+    for(element in sheet["Capital Próprio e Passivo"]["Passivo"]["Passivo Corrente"]){
+      sheet["Capital Próprio e Passivo"]["Passivo"].total += sheet["Capital Próprio e Passivo"]["Passivo"]["Passivo Corrente"][element];
+    }
+    for(element in sheet["Capital Próprio e Passivo"]["Passivo"]["Passivo Não Corrente"]){
+      sheet["Capital Próprio e Passivo"]["Passivo"].total += sheet["Capital Próprio e Passivo"]["Passivo"]["Passivo Não Corrente"][element];
+    }
+
+    sheet["Capital Próprio e Passivo"].total = sheet["Capital Próprio e Passivo"]["Passivo"].total + sheet["Capital Próprio e Passivo"]["Capital Próprio"].total;
+
+    return sheet;
   },
 
   calculateFinancialData: (req, res, next) => {
@@ -363,6 +491,8 @@ module.exports = {
     }
 
     module.exports.jsonDB.salesProfit.value = netProfit
+
+    module.exports.jsonDB.balanceSheet = module.exports.generateBalanceSheet();
   },
 
   parseSAFTAccounting: (req, res, next) => {

@@ -6,5 +6,6 @@ router.get('/returnRatios', ctrl.returnRatios);
 router.get('/financialStability', ctrl.financialStability);
 router.get('/liquidity', ctrl.liquidity);
 router.get('/growthRatios', ctrl.growthRatios);
+router.get('/balanceSheet', ctrl.balanceSheet);
 
 module.exports = router;
