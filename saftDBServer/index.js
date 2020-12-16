@@ -23,7 +23,7 @@ fs.readFile('saft/saft_accounting.xml', (err, data) => {
 
         parser.parseSAFTAccounting(auditFile);
 
-        fs.readFile('saft/saft_01-01-2020_31-12-2020.xml', (err, data) => {
+        fs.readFile('saft/saft_01-12-2020_31-12-2020.xml', (err, data) => {
           var data = data.toString().replace('\ufeff', '');
         
           validator.validateXML(data, 'saft/saftSchema2.xsd', (err, result) => {
