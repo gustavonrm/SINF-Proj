@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Value from "./Value";
+import ValueTurnover from "./ValueTurnover";
 
 class InfoBox extends Component {
   formatNumber(number, decimals = 1) {
@@ -24,6 +25,20 @@ class InfoBox extends Component {
       if (number === undefined) {
         number = 0;
       }
+    }
+    if (this.props.title === "Turnover") {
+      return (
+        <article
+          className="bg-light d-flex flex-column p-4 flex-fill"
+          style={{ maxHeight: "50vh" }}
+        >
+          <h2>{this.props.title}</h2>
+          <h5 className="text-muted">{this.props.description}</h5>
+          <div className="d-flex align-content-center flex-fill">
+            <ValueTurnover value={number} growth={this.props.growth} />
+          </div>
+        </article>
+      );
     }
 
     return (

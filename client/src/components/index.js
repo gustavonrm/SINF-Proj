@@ -11,7 +11,8 @@ import PieChart from './PieChart'
 import LineChartOverview from './LineChartOverview'
 import LineChartSales from './LineChartSales'
 import Value from './Value'
+import ValueTurnover from './ValueTurnover'
 import InfoBox from './InfoBox'
 import Auth from './Auth'
 
-export { Links, Logo, NavBarExample, NavBar, SideNav, BarChart, BarChart2, PieChart, LineChartOverview,LineChartSales, Value, InfoBox, Auth }
+export { Links, Logo, NavBarExample, NavBar, SideNav, BarChart, BarChart2, PieChart, LineChartOverview,LineChartSales, Value, ValueTurnover, InfoBox, Auth }

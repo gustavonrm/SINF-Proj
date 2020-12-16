@@ -176,8 +176,8 @@ class Overview extends Component {
                     <h2>Assets vs Debt</h2>
                     <LineChartOverview
                       height={350}
-                      title1={"Assests"}
-                      title2={"Debts"}
+                      title1={"Assets"}
+                      title2={"Debt"}
                       data1={this.state.assetsDebts.assets}
                       data2={this.state.assetsDebts.debts}
                     />

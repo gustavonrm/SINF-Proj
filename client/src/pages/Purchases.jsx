@@ -250,7 +250,7 @@ class Purchase extends Component {
                     </table>
                   </article>
                   <InfoBox
-                    title="Total Debts"
+                    title="Total Debt"
                     description="Value of debt in selected period"
                     value={this.state.totalDebts}
                   />

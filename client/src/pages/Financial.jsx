@@ -143,11 +143,11 @@ class Financial extends Component {
                   </article>
                   <article className="bg-light p-3 mb-4">
                     <h2>Financial Stability</h2>
-                    <h5 className="text-muted">description</h5>
+                    <h5 className="text-muted">Financial stability and leverage factors</h5>
                     <BarChart2
                       title1={"Equity to Assets"}
                       title2={"Debt to Equity"}
-                      title3={"COverage on fixed investments"}
+                      title3={"Coverage on fixed investments"}
                       title4={"Interest Coverage"}
                       data1={this.state.financialStability.equityToAssets}
                       data2={this.state.financialStability.debtToEquity}
@@ -161,7 +161,7 @@ class Financial extends Component {
                 <div className="row justify-content-around mx-3">
                   <article className="bg-light p-3 mb-4">
                     <h2>Liquidity</h2>
-                    <h5 className="text-muted">description</h5>
+                    <h5 className="text-muted">Liquidity ratios</h5>
                     <BarChart
                       title1={"Current Ratio"}
                       title2={"Quick Ratio"}
@@ -173,7 +173,7 @@ class Financial extends Component {
                   </article>
                   <article className="bg-light p-3 mb-4">
                     <h2>Growth Ratios</h2>
-                    <h5 className="text-muted">description</h5>
+                    <h5 className="text-muted">Growth ratios on profit, debt and equity</h5>
                     <BarChart
                       title1={"Profit"}
                       title2={"Debt"}
