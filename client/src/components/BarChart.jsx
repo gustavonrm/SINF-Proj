@@ -86,7 +86,7 @@ const BarChart = (props) => {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: "probability",
+                  labelString: "Ratio",
                 },
                 ticks: {
                   beginAtZero: true,
