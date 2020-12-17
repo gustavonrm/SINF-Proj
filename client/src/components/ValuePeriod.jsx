@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-class Value extends Component {
+class ValuePeriod extends Component {
   render() {
     if (typeof this.props.growth !== "undefined") {
       let icon;
@@ -30,7 +30,7 @@ class Value extends Component {
           style={{ fontSize: "4em" }}
         >
           <div>
-            {"€ "}
+            {"Days "}
             {this.props.value}
           </div>
           <div
@@ -49,10 +49,10 @@ class Value extends Component {
 
     return (
       <div className="font-weight-bold p-2 pl-4" style={{ fontSize: "4em" }}>
-        € {this.props.value}
+        {this.props.value} Days
       </div>
     );
   }
 }
 
-export default Value;
+export default ValuePeriod;
