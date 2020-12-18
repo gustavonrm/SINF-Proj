@@ -159,7 +159,7 @@ class Financial extends Component {
                   <article className="bg-light p-3 mb-4">
                     <h2>Financial Stability</h2>
                     <h5 className="text-muted">Financial stability and leverage factors</h5>
-                    <BarChart2
+                    <BarChart
                       title1={"Equity to Assets"}
                       title2={"Debt to Equity"}
                       data1={this.state.financialStability.equityToAssets}
