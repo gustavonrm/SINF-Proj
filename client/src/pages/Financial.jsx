@@ -162,14 +162,8 @@ class Financial extends Component {
                     <BarChart2
                       title1={"Equity to Assets"}
                       title2={"Debt to Equity"}
-                      title3={"Coverage on fixed investments"}
-                      title4={"Interest Coverage"}
                       data1={this.state.financialStability.equityToAssets}
                       data2={this.state.financialStability.debtToEquity}
-                      data3={
-                        this.state.financialStability.coverageOnFixedInvestments
-                      }
-                      data4={this.state.financialStability.interestCoverage}
                     />
                   </article>
                 </div>
