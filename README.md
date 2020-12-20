@@ -32,17 +32,47 @@
     > use sinf
     ```
 ---
-### Project Running
-
-1. Run the Server side 
+### Project Configuration
+All comands are performed inside the root of the project
+1. Client
     ```
-   $ nodemon index.js
+   $ cd client
+   $ npm install
     ```
-2. Run the Client
+2. Server 
     ```
-   $ npm start
+    $ cd server
+    $ npm install
+    ```
+2. SAF-T Database Server
+    ```
+    $ cd saftDBServer
+   $ npm install
     ```
 ---
+### Project Running
+All comands are performed inside the root of the project
+1. Run the Client Side 
+    ```
+   $ cd client
+   $ npm start
+    ```
+2. Run the Server
+    ```
+    $ cd server
+    $ nodemon
+    ```
+2. Run the SAF-T Database Server
+     ```
+    $ cd saftDBServer
+   $ nodemon --ignore db.json
+    ```
+---
+#### Authentication Information 
+
+User: user
+Password: 1234
+
 #### Usefull links and software
 - [Configuration tutorial](https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66)
 - [Robo 3T - software to view the Db content](https://robomongo.org)
