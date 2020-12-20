@@ -398,6 +398,7 @@ module.exports = {
     }
 
     sheet["Capital Próprio e Passivo"].total = sheet["Capital Próprio e Passivo"]["Passivo"].total + sheet["Capital Próprio e Passivo"]["Capital Próprio"].total;
+    module.exports.jsonDB.totalDebt.value = sheet["Capital Próprio e Passivo"]["Passivo"].total;
 
     return sheet;
   },
@@ -488,7 +489,7 @@ module.exports = {
     }
     
     module.exports.jsonDB.totalAssets.value += module.exports.jsonDB.assets[11];
-    module.exports.jsonDB.totalDebt.value += module.exports.jsonDB.debt[11];
+    module.exports.jsonDB.totalDebt.value += module.exports.auxDB.auxValues.totalLiabilities;
 
     module.exports.jsonDB.salesProfit.value = netProfit
 
